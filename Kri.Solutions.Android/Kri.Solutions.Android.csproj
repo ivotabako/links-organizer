@@ -72,7 +72,7 @@
     <AndroidResource Include="Resources\drawable\check2x.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Todo\LinkOrganizer.csproj">
+    <ProjectReference Include="..\LinksOrganizer\LinkOrganizer.csproj">
       <Project>{5f610ea1-9e35-4870-ae9b-5e18b4b4d5b8}</Project>
       <Name>LinkOrganizer</Name>
     </ProjectReference>
