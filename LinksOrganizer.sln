@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinksOrganizer", "LinksOrganizer\LinkOrganizer.csproj", "{5F610EA1-9E35-4870-AE9B-5E18B4B4D5B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinksOrganizer", "LinksOrganizer\LinksOrganizer.csproj", "{5F610EA1-9E35-4870-AE9B-5E18B4B4D5B8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{205F34F1-DBEC-46B8-A6E5-7C2BAB70DD0C}"
 EndProject
