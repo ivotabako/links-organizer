@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Kri.Solutions.LinkItemPage" Title="{Binding Name}">
     <StackLayout Margin="20" VerticalOptions="StartAndExpand">
-        <Label Text="Name" />
+        <Label Text="Title" />
         <Entry Text="{Binding Name}" />
-        <Label Text="Notes" />
+        <Label Text="Info" />
         <Entry Text="{Binding Info}" />
         <Label Text="Link" />
         <Entry Text="{Binding Link}" />
