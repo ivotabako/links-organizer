@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using SQLite;
 
-namespace Todo
+namespace Kri.Solutions
 {
-    public class TodoItemDatabase
+    public class LinkItemDatabase
     {
         static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
         {
@@ -16,7 +16,7 @@ namespace Todo
         static SQLiteAsyncConnection Database => lazyInitializer.Value;
         static bool initialized = false;
 
-        public TodoItemDatabase()
+        public LinkItemDatabase()
         {
             InitializeAsync().SafeFireAndForget(false);
         }
@@ -25,30 +25,30 @@ namespace Todo
         {
             if (!initialized)
             {
-                if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(TodoItem).Name))
+                if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(LinkItem).Name))
                 {
-                    await Database.CreateTablesAsync(CreateFlags.None, typeof(TodoItem)).ConfigureAwait(false);                    
+                    await Database.CreateTablesAsync(CreateFlags.None, typeof(LinkItem)).ConfigureAwait(false);                    
                 }
                 initialized = true;
             }
         }
 
-        public Task<List<TodoItem>> GetItemsAsync()
+        public Task<List<LinkItem>> GetItemsAsync()
         {
-            return Database.Table<TodoItem>().ToListAsync();
+            return Database.Table<LinkItem>().ToListAsync();
         }
 
-        public Task<List<TodoItem>> GetItemsNotDoneAsync()
+        public Task<List<LinkItem>> GetItemsNotDoneAsync()
         {
-            return Database.QueryAsync<TodoItem>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
+            return Database.QueryAsync<LinkItem>("SELECT * FROM [LinkItem] WHERE [Done] = 0");
         }
 
-        public Task<TodoItem> GetItemAsync(int id)
+        public Task<LinkItem> GetItemAsync(int id)
         {
-            return Database.Table<TodoItem>().Where(i => i.ID == id).FirstOrDefaultAsync();
+            return Database.Table<LinkItem>().Where(i => i.ID == id).FirstOrDefaultAsync();
         }
 
-        public Task<int> SaveItemAsync(TodoItem item)
+        public Task<int> SaveItemAsync(LinkItem item)
         {
             if (item.ID != 0)
             {
@@ -60,7 +60,7 @@ namespace Todo
             }
         }
 
-        public Task<int> DeleteItemAsync(TodoItem item)
+        public Task<int> DeleteItemAsync(LinkItem item)
         {
             return Database.DeleteAsync(item);
         }

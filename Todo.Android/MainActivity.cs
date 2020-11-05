@@ -2,9 +2,9 @@
 using Android.OS;
 using Android.Content.PM;
 
-namespace Todo
+namespace Kri.Solutions
 {
-    [Activity(Label = "Todo", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true,
+    [Activity(Label = "", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity :  global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {

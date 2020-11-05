@@ -14,13 +14,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\LinkItemPage.xaml.cs">
+      <DependentUpon>LinkItemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\LinkListPage.xaml.cs">
+      <DependentUpon>LinkListPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="App.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\TodoItemPage.xaml">
+    <EmbeddedResource Update="Views\LinkItemPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\TodoListPage.xaml">
+    <EmbeddedResource Update="Views\LinkListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -1,26 +1,26 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace Todo
+namespace Kri.Solutions
 {
-    public partial class TodoItemPage : ContentPage
+    public partial class LinkItemPage : ContentPage
     {
-        public TodoItemPage()
+        public LinkItemPage()
         {
             InitializeComponent();
         }
 
         async void OnSaveClicked(object sender, EventArgs e)
         {
-            var todoItem = (TodoItem)BindingContext;
-            await App.Database.SaveItemAsync(todoItem);
+            var linkItem = (LinkItem)BindingContext;
+            await App.Database.SaveItemAsync(linkItem);
             await Navigation.PopAsync();
         }
 
         async void OnDeleteClicked(object sender, EventArgs e)
         {
-            var todoItem = (TodoItem)BindingContext;
-            await App.Database.DeleteItemAsync(todoItem);
+            var linkItem = (LinkItem)BindingContext;
+            await App.Database.DeleteItemAsync(linkItem);
             await Navigation.PopAsync();
         }
 

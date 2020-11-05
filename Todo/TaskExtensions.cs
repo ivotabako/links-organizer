@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Todo
+namespace Kri.Solutions
 {
     public static class TaskExtensions
     {

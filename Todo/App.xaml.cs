@@ -2,30 +2,32 @@
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
-namespace Todo
+namespace Kri.Solutions
 {
     public partial class App : Application
     {
-        static TodoItemDatabase database;
+        static LinkItemDatabase database;
 
         public App()
         {
             InitializeComponent();
 
-            var nav = new NavigationPage(new TodoListPage());
-            nav.BarBackgroundColor = (Color)App.Current.Resources["primaryGreen"];
-            nav.BarTextColor = Color.White;
+            var nav = new NavigationPage(new LinkListPage())
+            {
+                BarBackgroundColor = (Color)App.Current.Resources["primaryGreen"],
+                BarTextColor = Color.White
+            };
 
             MainPage = nav;
         }
 
-        public static TodoItemDatabase Database
+        public static LinkItemDatabase Database
         {
             get
             {
                 if (database == null)
                 {
-                    database = new TodoItemDatabase();
+                    database = new LinkItemDatabase();
                 }
                 return database;
             }

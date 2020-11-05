@@ -1,11 +1,11 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace Todo
+namespace Kri.Solutions
 {
-    public partial class TodoListPage : ContentPage
+    public partial class LinkListPage : ContentPage
     {
-        public TodoListPage()
+        public LinkListPage()
         {
             InitializeComponent();
         }
@@ -19,9 +19,9 @@ namespace Todo
 
         async void OnItemAdded(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new TodoItemPage
+            await Navigation.PushAsync(new LinkItemPage
             {
-                BindingContext = new TodoItem()
+                BindingContext = new LinkItem()
             });
         }
 
@@ -29,9 +29,9 @@ namespace Todo
         {
             if (e.SelectedItem != null)
             {
-                await Navigation.PushAsync(new TodoItemPage
+                await Navigation.PushAsync(new LinkItemPage
                 {
-                    BindingContext = e.SelectedItem as TodoItem
+                    BindingContext = e.SelectedItem as LinkItem
                 });
             }
         }
