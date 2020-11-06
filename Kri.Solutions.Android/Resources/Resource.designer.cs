@@ -10,7 +10,7 @@
 
 [assembly: global::Android.Runtime.ResourceDesignerAttribute("LinksOrganizer.Resource", IsApplication=true)]
 
-namespace Todo
+namespace LinksOrganizer
 {
 	
 	
