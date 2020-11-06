@@ -25,6 +25,11 @@ namespace Kri.Solutions
             });
         }
 
+        async void OnSearchButtonClicked(object sender, EventArgs e)
+        {
+            
+        }
+
         async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
