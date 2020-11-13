@@ -9,6 +9,11 @@ namespace Kri.Solutions
         public string Name { get; set; }
         public string Info { get; set; }
         public string Link { get; set; }
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }
 

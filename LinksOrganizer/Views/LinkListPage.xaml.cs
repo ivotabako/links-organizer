@@ -25,7 +25,7 @@ namespace Kri.Solutions
             });
         }
 
-        async void OnSearchButtonClicked(object sender, EventArgs e)
+        void OnSearchButtonClicked(object sender, EventArgs e)
         {
             
         }

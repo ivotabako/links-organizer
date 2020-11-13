@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using LinksOrganizer.Views;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -12,12 +13,10 @@ namespace Kri.Solutions
         {
             InitializeComponent();
 
-            var nav = new NavigationPage(new LinkListPage())
-            {
-                BarBackgroundColor = (Color)App.Current.Resources["primaryGreen"],
-                BarTextColor = Color.White
-            };
+            
 
+            var nav = new NavigationPage(new SearchLinksPage() );
+            
             MainPage = nav;
         }
 
