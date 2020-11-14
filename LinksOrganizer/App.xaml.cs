@@ -15,7 +15,7 @@ namespace Kri.Solutions
 
             
 
-            var nav = new NavigationPage(new SearchLinksPage() );
+            var nav = new NavigationPage(new StartPage() );
             
             MainPage = nav;
         }
