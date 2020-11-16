@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -38,11 +38,18 @@ namespace LinksOrganizer.Views
             sender.Text = (args.SelectedItem as LinkItem).Name;
         }
 
-        private async void OnSearchButtonClicked(object sender, EventArgs e)
+        private async void OnAddButtonClicked(object sender, EventArgs e)
         {
+            var newLink = new LinkItem();
+
+            if (Clipboard.HasText)
+            {
+                var text = await Clipboard.GetTextAsync();
+                newLink.Link = text;
+            }
             await Navigation.PushAsync(new LinkItemPage
             {
-                BindingContext = new LinkItem()
+                BindingContext = newLink
             });
         }
 

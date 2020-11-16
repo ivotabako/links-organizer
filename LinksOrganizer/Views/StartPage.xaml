@@ -30,7 +30,7 @@
                     Padding="12"
                     Margin="10"
                     Source="plus.png" 
-                    Clicked="OnSearchButtonClicked" />
+                    Clicked="OnAddButtonClicked" />
             </Grid>
         </StackLayout>
     </ContentPage.Content>
