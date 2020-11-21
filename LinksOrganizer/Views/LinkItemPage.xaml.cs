@@ -28,5 +28,13 @@ namespace Kri.Solutions
         {
             await Navigation.PopAsync();
         }
+
+        private void Entry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var linkItem = (LinkItem)BindingContext;
+            
+            this.SaveButtonRumi.IsEnabled = !string.IsNullOrWhiteSpace(linkItem.Link) && !string.IsNullOrWhiteSpace(linkItem.Name);
+            
+        }
     }
 }

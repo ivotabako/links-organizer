@@ -6,8 +6,13 @@ namespace Kri.Solutions
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
-        public string Name { get; set; }
-        public string Info { get; set; }
+
+        [NotNull]
+        public string Name { get; set; } = string.Empty;
+
+        public string Info { get; set; } = string.Empty;
+
+        [NotNull]
         public string Link { get; set; }
 
         public override string ToString()

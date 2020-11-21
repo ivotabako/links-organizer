@@ -6,3 +6,16 @@
 https://www.youtube.com/watch?v=6teJvSCg6UA
 * To list it on play market https://www.youtube.com/watch?v=MlzniEeJYzg 
 https://www.youtube.com/watch?v=QDmcL6hRjFw
+
+/data/user/0/Kri.Solutions.Android/files/.local/share
+
+adb -d shell "run-as com.example.test cat /data/user/0/Kri.Solutions.Android/files/.local/share/LinksSQLite.db3"
+
+adb -s emulator-5556 shell "run-as Kri.Solutions.Android cat /data/user/0/Kri.Solutions.Android/files/.local/share/LinksSQLite.db3"
+
+parameter overload
+lambda functions
+delegate
+generic function
+Func Action Predicate
+msil

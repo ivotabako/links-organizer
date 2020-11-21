@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Kri.Solutions.LinkItemPage" Title="{Binding Name}">
     <StackLayout Margin="20" VerticalOptions="StartAndExpand">
         <Label Text="Title" />
-        <Entry Text="{Binding Name}" />
+        <Entry Text="{Binding Name}" TextChanged="Entry_TextChanged" />
         <Label Text="Info" />
         <Entry Text="{Binding Info}" />
         <Label Text="Link" />
-        <Entry Text="{Binding Link}" />
-        <Button Text="Save" Clicked="OnSaveClicked" />
+        <Entry Text="{Binding Link}" TextChanged="Entry_TextChanged" />
+        <Button x:Name="SaveButtonRumi" Text="Save" Clicked="OnSaveClicked" IsEnabled="False"  />
         <Button Text="Delete" Clicked="OnDeleteClicked" />
         <Button Text="Cancel" Clicked="OnCancelClicked" />
     </StackLayout>
