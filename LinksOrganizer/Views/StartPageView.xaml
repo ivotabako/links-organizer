@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:forms="clr-namespace:dotMorten.Xamarin.Forms;assembly=dotMorten.Xamarin.Forms.AutoSuggestBox"
-             x:Class="LinksOrganizer.Views.StartPage">
-    <ContentPage.Content>
+             xmlns:forms="clr-namespace:dotMorten.Xamarin.Forms;assembly=dotMorten.Xamarin.Forms.AutoSuggestBox" xmlns:viewmodels="clr-namespace:LinksOrganizer.ViewModels"
+             x:Class="LinksOrganizer.Views.StartPageView">
 
-        
+    <ContentPage.BindingContext>
+        <viewmodels:StartPageViewModel></viewmodels:StartPageViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
 
         <StackLayout 
             Orientation="Vertical"
@@ -24,13 +27,16 @@
                     QuerySubmitted="AutoSuggestBox_QuerySubmitted"
                     SuggestionChosen="AutoSuggestBox_SuggestionChosen"/>
                 <ImageButton 
+                    
                     Grid.Column="1"
                     BackgroundColor="Green"
                     HorizontalOptions="End"
                     Padding="12"
                     Margin="10"
                     Source="plus.png" 
-                    Clicked="OnAddButtonClicked" />
+                    Command="{Binding AddLinkItemCommand}">
+                   
+                </ImageButton>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

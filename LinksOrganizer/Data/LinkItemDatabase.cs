@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LinksOrganizer.Models;
 using SQLite;
 
-namespace Kri.Solutions
+namespace LinksOrganizer.Data
 {
     public class LinkItemDatabase
     {

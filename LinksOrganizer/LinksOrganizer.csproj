@@ -20,8 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\LinkItemPage.xaml.cs">
-      <DependentUpon>LinkItemPage.xaml</DependentUpon>
+    <Compile Update="Views\LinkItemView.xaml.cs">
+      <DependentUpon>LinkItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\StartPageView.xaml.cs">
+      <DependentUpon>StartPageView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -29,16 +32,12 @@
     <EmbeddedResource Update="App.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\LinkItemPage.xaml">
+    <EmbeddedResource Update="Views\LinkItemView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\StartPage.xaml">
+    <EmbeddedResource Update="Views\StartPageView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Kri.Solutions
+namespace LinksOrganizer
 {
     public static class TaskExtensions
     {

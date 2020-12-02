@@ -1,8 +1,9 @@
 ﻿using Android.App;
 using Android.OS;
 using Android.Content.PM;
+using LinksOrganizer;
 
-namespace Kri.Solutions
+namespace LinksOrganizer
 {
     [Activity(Label = "", Icon = "@drawable/icon",
         Theme = "@style/MainTheme",

@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace Kri.Solutions
+namespace LinksOrganizer.Models
 {
     public class LinkItem
     {

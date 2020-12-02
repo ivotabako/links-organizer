@@ -1,9 +1,13 @@
-﻿using LinksOrganizer.Views;
+﻿using LinksOrganizer.Data;
+using LinksOrganizer.Services.Navigation;
+using LinksOrganizer.ViewModels;
+using LinksOrganizer.Views;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
-namespace Kri.Solutions
+namespace LinksOrganizer
 {
     public partial class App : Application
     {
@@ -15,9 +19,28 @@ namespace Kri.Solutions
 
             
 
-            var nav = new NavigationPage(new StartPage() );
+            //var nav = new NavigationPage(new StartPage() );
             
-            MainPage = nav;
+            //MainPage = nav;
+        }
+
+        protected override async void OnStart()
+        {
+            base.OnStart();
+
+            if (Device.RuntimePlatform != Device.UWP)
+            {
+                await InitNavigation();
+            }
+            
+
+            base.OnResume();
+        }
+
+        private Task InitNavigation()
+        {
+            var navigationService = ViewModelLocator.Resolve<INavigationService>();
+            return navigationService.InitializeAsync();
         }
 
         public static LinkItemDatabase Database
@@ -32,10 +55,7 @@ namespace Kri.Solutions
             }
         }
 
-        protected override void OnStart()
-        {
-
-        }
+        
 
         protected override void OnSleep()
         {

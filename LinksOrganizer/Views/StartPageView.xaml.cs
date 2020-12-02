@@ -1,5 +1,6 @@
 ﻿using dotMorten.Xamarin.Forms;
 using Kri.Solutions;
+using LinksOrganizer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,9 @@ using Xamarin.Forms.Xaml;
 namespace LinksOrganizer.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class StartPage : ContentPage
+    public partial class StartPageView : ContentPage
     {
-        public StartPage()
+        public StartPageView()
         {
             InitializeComponent();
 
@@ -47,7 +48,7 @@ namespace LinksOrganizer.Views
                 var text = await Clipboard.GetTextAsync();
                 newLink.Link = text;
             }
-            await Navigation.PushAsync(new LinkItemPage
+            await Navigation.PushAsync(new LinkItemView
             {
                 BindingContext = newLink
             });
@@ -57,7 +58,7 @@ namespace LinksOrganizer.Views
         {
             if (args.ChosenSuggestion != null)
             {
-                await Navigation.PushAsync(new LinkItemPage
+                await Navigation.PushAsync(new LinkItemView
                 {
                     BindingContext = args.ChosenSuggestion as LinkItem
                 });               

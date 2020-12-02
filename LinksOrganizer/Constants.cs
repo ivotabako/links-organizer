@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Kri.Solutions
+namespace LinksOrganizer
 {
     public static class Constants
     {
