@@ -27,7 +27,6 @@
                     QuerySubmitted="AutoSuggestBox_QuerySubmitted"
                     SuggestionChosen="AutoSuggestBox_SuggestionChosen"/>
                 <ImageButton 
-                    
                     Grid.Column="1"
                     BackgroundColor="Green"
                     HorizontalOptions="End"
@@ -35,7 +34,6 @@
                     Margin="10"
                     Source="plus.png" 
                     Command="{Binding AddLinkItemCommand}">
-                   
                 </ImageButton>
             </Grid>
         </StackLayout>

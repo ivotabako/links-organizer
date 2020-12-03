@@ -27,8 +27,6 @@ namespace LinksOrganizer.ViewModels
         public ViewModelBase()
         {
             NavigationService = ViewModelLocator.Resolve<INavigationService>();
-
-
         }
 
         public virtual Task InitializeAsync(object navigationData)

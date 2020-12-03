@@ -11,6 +11,8 @@ namespace LinksOrganizer.ViewModels
     {
         public ICommand AddLinkItemCommand => new Command(async () => await AddLinkItemAsync());
 
+        public ICommand LoadLinkItemCommand => new Command(async (obj) => await LoadLinkItemAsync(obj) );
+
         private async Task AddLinkItemAsync()
         {
             var newLink = new LinkItem();
@@ -21,6 +23,11 @@ namespace LinksOrganizer.ViewModels
                 newLink.Link = text;
             }
             await NavigationService.NavigateToAsync<LinkItemViewModel>();
+        }
+
+        private async Task LoadLinkItemAsync(object obj)
+        {
+            await NavigationService.NavigateToAsync<LinkItemViewModel>(obj);
         }
     }
 }

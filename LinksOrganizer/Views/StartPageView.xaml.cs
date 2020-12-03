@@ -1,6 +1,7 @@
 ﻿using dotMorten.Xamarin.Forms;
 using Kri.Solutions;
 using LinksOrganizer.Models;
+using LinksOrganizer.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace LinksOrganizer.Views
         {
             InitializeComponent();
 
-            NavigationPage.SetHasNavigationBar(this, false);
+            //NavigationPage.SetHasNavigationBar(this, false);
         }
 
         private async void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -29,7 +30,10 @@ namespace LinksOrganizer.Views
                 var items = await App.Database.GetItemsAsync();
 
                 sender.ItemsSource = items
-                    .Where(item => item.Name.Contains(sender.Text) && !string.IsNullOrWhiteSpace(sender.Text))
+                    .Where(item => item
+                        .Name
+                        .ToUpperInvariant()
+                        .Contains(sender.Text.ToUpperInvariant() ) && !string.IsNullOrWhiteSpace(sender.Text))
                     .ToList();
             }
         }
@@ -39,29 +43,12 @@ namespace LinksOrganizer.Views
             sender.Text = (args.SelectedItem as LinkItem).Name;
         }
 
-        private async void OnAddButtonClicked(object sender, EventArgs e)
-        {
-            var newLink = new LinkItem();
-
-            if (Clipboard.HasText)
-            {
-                var text = await Clipboard.GetTextAsync();
-                newLink.Link = text;
-            }
-            await Navigation.PushAsync(new LinkItemView
-            {
-                BindingContext = newLink
-            });
-        }
-
-        private async void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
             if (args.ChosenSuggestion != null)
             {
-                await Navigation.PushAsync(new LinkItemView
-                {
-                    BindingContext = args.ChosenSuggestion as LinkItem
-                });               
+                var vm = this.BindingContext as StartPageViewModel;
+                vm.LoadLinkItemCommand.Execute(args.ChosenSuggestion as LinkItem);             
             }
         }
     }
