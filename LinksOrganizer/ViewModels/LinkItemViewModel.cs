@@ -7,6 +7,11 @@ namespace LinksOrganizer.ViewModels
 {
     public class LinkItemViewModel : ViewModelBase
     {
+        public bool CanSave
+        {
+            get { return !string.IsNullOrWhiteSpace(this.Link) && !string.IsNullOrWhiteSpace(this.Name); }
+        }
+
         private int _id;
         public int Id
         {
@@ -26,6 +31,7 @@ namespace LinksOrganizer.ViewModels
             {
                 _name = value;
                 RaisePropertyChanged(() => Name);
+                RaisePropertyChanged(() => CanSave);
             }
         }
 
@@ -37,6 +43,7 @@ namespace LinksOrganizer.ViewModels
             {
                 _link = value;
                 RaisePropertyChanged(() => Link);
+                RaisePropertyChanged(() => CanSave);
             }
         }
 

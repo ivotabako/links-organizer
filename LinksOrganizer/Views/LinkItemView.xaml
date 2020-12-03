@@ -16,7 +16,7 @@
         <Entry Text="{Binding Info}" />
         <Label Text="Link" />
         <Entry Text="{Binding Link}"  />
-        <Button Text="Save" Command="{Binding SaveLinkItemCommand}" IsEnabled="False"  />
+        <Button Text="Save" Command="{Binding SaveLinkItemCommand}" IsEnabled="{Binding CanSave}"  />
         <Button Text="Delete" Command="{Binding DeleteLinkItemCommand}" />
         <Button Text="Cancel" Command="{Binding CancelLinkItemCommand}" />
     </StackLayout>
