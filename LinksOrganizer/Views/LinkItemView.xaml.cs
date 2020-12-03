@@ -11,18 +11,6 @@ namespace LinksOrganizer.Views
             InitializeComponent();
         }
 
-        //async void OnDeleteClicked(object sender, EventArgs e)
-        //{
-        //    var linkItem = (LinkItem)BindingContext;
-        //    await App.Database.DeleteItemAsync(linkItem);
-        //    await Navigation.PopAsync();
-        //}
-
-        //async void OnCancelClicked(object sender, EventArgs e)
-        //{
-        //    await Navigation.PopAsync();
-        //}
-
         //private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         //{
         //    var linkItem = (LinkItem)BindingContext;

@@ -1,5 +1,4 @@
-﻿using Kri.Solutions;
-using LinksOrganizer.Models;
+﻿using LinksOrganizer.Models;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;

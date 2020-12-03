@@ -1,5 +1,4 @@
-﻿using Kri.Solutions;
-using LinksOrganizer.Models;
+﻿using LinksOrganizer.Models;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -91,11 +90,13 @@ namespace LinksOrganizer.ViewModels
 
         public override Task InitializeAsync(object navigationData)
         {
-            var data = navigationData as LinkItem;
-            this.Name = data.Name;
-            this.Link = data.Link;
-            this.Info = data.Info;
-            this.Id = data.ID;
+            if (navigationData is LinkItem data)
+            {
+                this.Name = data.Name;
+                this.Link = data.Link;
+                this.Info = data.Info;
+                this.Id = data.ID;
+            }
 
             return Task.FromResult(false);
         }

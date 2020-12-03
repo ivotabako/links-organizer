@@ -1,5 +1,5 @@
-﻿using Kri.Solutions;
-using LinksOrganizer.ViewModels;
+﻿using LinksOrganizer.ViewModels;
+using LinksOrganizer.Views;
 using System;
 using System.Globalization;
 using System.Reflection;

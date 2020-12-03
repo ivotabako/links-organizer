@@ -1,13 +1,7 @@
 ﻿using dotMorten.Xamarin.Forms;
-using Kri.Solutions;
 using LinksOrganizer.Models;
 using LinksOrganizer.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,8 +13,6 @@ namespace LinksOrganizer.Views
         public StartPageView()
         {
             InitializeComponent();
-
-            //NavigationPage.SetHasNavigationBar(this, false);
         }
 
         private async void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)

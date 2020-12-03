@@ -16,12 +16,6 @@ namespace LinksOrganizer
         public App()
         {
             InitializeComponent();
-
-            
-
-            //var nav = new NavigationPage(new StartPage() );
-            
-            //MainPage = nav;
         }
 
         protected override async void OnStart()
@@ -33,7 +27,6 @@ namespace LinksOrganizer
                 await InitNavigation();
             }
             
-
             base.OnResume();
         }
 
@@ -53,18 +46,6 @@ namespace LinksOrganizer
                 }
                 return database;
             }
-        }
-
-        
-
-        protected override void OnSleep()
-        {
-
-        }
-
-        protected override void OnResume()
-        {
-
         }
     }
 }

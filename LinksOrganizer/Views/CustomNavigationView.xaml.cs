@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace Kri.Solutions
+namespace LinksOrganizer.Views
 {
     public partial class CustomNavigationView : NavigationPage
     {
