@@ -12,9 +12,9 @@ namespace LinksOrganizer.ViewModels
     {
         public ICommand AddLinkItemCommand => new Command(async () => await AddLinkItemAsync());
 
-        public ICommand LoadLinkItemCommand => new Command(async (obj) => await LoadLinkItemAsync(obj));
+        public ICommand LoadLinkItemCommand => new Command<LinkItem>(async (item) => await LoadLinkItemAsync(item));
 
-        public ICommand SetSearchedLinkItemsCommand => new Command(async (obj) => await SetSearchedLinkItemNamesCommandAsync(obj));
+        public ICommand SetSearchedLinkItemsCommand => new Command(async (item) => await SetSearchedLinkItemNamesCommandAsync(item));
 
         public List<LinkItem> SearchedLinks { get; private set; }
 
@@ -27,12 +27,12 @@ namespace LinksOrganizer.ViewModels
                 var text = await Clipboard.GetTextAsync();
                 newLink.Link = text;
             }
-            await NavigationService.NavigateToAsync<LinkItemViewModel>();
+            await NavigationService.NavigateToAsync<LinkItemViewModel>(newLink);
         }
 
-        private async Task LoadLinkItemAsync(object obj)
+        private async Task LoadLinkItemAsync(LinkItem item)
         {
-            await NavigationService.NavigateToAsync<LinkItemViewModel>(obj);
+            await NavigationService.NavigateToAsync<LinkItemViewModel>(item);
         }
 
         private async Task SetSearchedLinkItemNamesCommandAsync(object obj)
