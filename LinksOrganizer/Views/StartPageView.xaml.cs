@@ -15,18 +15,13 @@ namespace LinksOrganizer.Views
             InitializeComponent();
         }
 
-        private async void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                var items = await App.Database.GetItemsAsync();
-
-                sender.ItemsSource = items
-                    .Where(item => item
-                        .Name
-                        .ToUpperInvariant()
-                        .Contains(sender.Text.ToUpperInvariant() ) && !string.IsNullOrWhiteSpace(sender.Text))
-                    .ToList();
+                var vm = this.BindingContext as StartPageViewModel;
+                vm.SetSearchedLinkItemsCommand.Execute(sender.Text);
+                sender.ItemsSource = vm.SearchedLinks;
             }
         }
 
