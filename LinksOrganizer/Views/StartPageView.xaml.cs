@@ -21,7 +21,6 @@ namespace LinksOrganizer.Views
             {
                 var vm = this.BindingContext as StartPageViewModel;
                 vm.SetSearchedLinkItemsCommand.Execute(sender.Text);
-                sender.ItemsSource = vm.SearchedLinks;
             }
         }
 

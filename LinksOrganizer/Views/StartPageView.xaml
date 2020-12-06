@@ -19,8 +19,8 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                
-                <forms:AutoSuggestBox
+
+                <forms:AutoSuggestBox ItemsSource="{Binding SearchedLinks}"
                    Grid.Column="0"
                     PlaceholderText="Search" 
                     TextChanged="AutoSuggestBox_TextChanged"
