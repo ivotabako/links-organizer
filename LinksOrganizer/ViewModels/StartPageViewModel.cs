@@ -14,7 +14,7 @@ namespace LinksOrganizer.ViewModels
 
         public ICommand LoadLinkItemCommand => new Command<LinkItem>(async (item) => await LoadLinkItemAsync(item));
 
-        public ICommand SetSearchedLinkItemsCommand => new Command(async (item) => await SetSearchedLinkItemNamesCommandAsync(item));
+        public ICommand SetSearchedLinkItemsCommand => new Command<string> (async (item) => await SetSearchedLinkItemNamesCommandAsync(item));
 
         public List<LinkItem> SearchedLinks { get; private set; }
 
@@ -35,9 +35,9 @@ namespace LinksOrganizer.ViewModels
             await NavigationService.NavigateToAsync<LinkItemViewModel>(item);
         }
 
-        private async Task SetSearchedLinkItemNamesCommandAsync(object obj)
+        private async Task SetSearchedLinkItemNamesCommandAsync(string searchedText)
         {
-            if (!(obj is string text) || string.IsNullOrWhiteSpace(text))
+            if (string.IsNullOrWhiteSpace(searchedText))
             {
                 SearchedLinks = null;
                 RaisePropertyChanged(() => SearchedLinks);
@@ -45,7 +45,7 @@ namespace LinksOrganizer.ViewModels
             }
 
             var items = await App.Database.GetItemsAsync();
-            SearchedLinks = items.Where(item => item.Name.ToUpperInvariant().Contains(text.ToUpperInvariant())).ToList();
+            SearchedLinks = items.Where(item => item.Name.ToUpperInvariant().Contains(searchedText.ToUpperInvariant())).ToList();
             RaisePropertyChanged(() => SearchedLinks);
         }
     }

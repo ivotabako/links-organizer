@@ -24,8 +24,7 @@
                    Grid.Column="0"
                     PlaceholderText="Search" 
                     TextChanged="AutoSuggestBox_TextChanged"
-                    QuerySubmitted="AutoSuggestBox_QuerySubmitted"
-                    SuggestionChosen="AutoSuggestBox_SuggestionChosen"/>
+                    QuerySubmitted="AutoSuggestBox_QuerySubmitted"/>
                 <ImageButton 
                     Grid.Column="1"
                     BackgroundColor="Green"
