@@ -28,6 +28,9 @@
                     <forms:AutoSuggestBox.Behaviors>
                         <behaviors:AutoSuggestBoxBehavior/>
                     </forms:AutoSuggestBox.Behaviors>
+                    <forms:AutoSuggestBox.BindingContext>
+                        <viewmodels:StartPageViewModel></viewmodels:StartPageViewModel>
+                    </forms:AutoSuggestBox.BindingContext>
                 </forms:AutoSuggestBox>
                 <ImageButton 
                     Grid.Column="1"

@@ -16,22 +16,18 @@ namespace LinksOrganizer.Behaviors
 
         private void AutoSuggestBox_TextChanged(object sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
-            {
-                var vm = this.BindingContext as StartPageViewModel;
-
-                if (sender is AutoSuggestBox box)
-                {
-                    vm.SetSearchedLinkItemsCommand.Execute(box.Text);
-                }
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput && sender is AutoSuggestBox box)
+            {             
+                var vm = box.BindingContext as StartPageViewModel;
+                vm.SetSearchedLinkItemsCommand.Execute(box.Text);              
             }
         }
 
         private void AutoSuggestBox_QuerySubmitted(object sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            if (args.ChosenSuggestion != null)
+            if (args.ChosenSuggestion != null && sender is AutoSuggestBox box)
             {
-                var vm = this.BindingContext as StartPageViewModel;
+                var vm = box.BindingContext as StartPageViewModel;
                 vm.LoadLinkItemCommand.Execute(args.ChosenSuggestion as LinkItem);
             }
         }
