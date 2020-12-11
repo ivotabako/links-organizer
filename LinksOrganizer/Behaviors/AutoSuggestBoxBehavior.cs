@@ -20,7 +20,10 @@ namespace LinksOrganizer.Behaviors
             {
                 var vm = this.BindingContext as StartPageViewModel;
 
-                vm.SetSearchedLinkItemsCommand.Execute(((AutoSuggestBox)sender).Text);
+                if (sender is AutoSuggestBox box)
+                {
+                    vm.SetSearchedLinkItemsCommand.Execute(box.Text);
+                }
             }
         }
 
