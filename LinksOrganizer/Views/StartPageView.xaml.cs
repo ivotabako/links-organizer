@@ -14,23 +14,5 @@ namespace LinksOrganizer.Views
         {
             InitializeComponent();
         }
-
-        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-        {
-            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
-            {
-                var vm = this.BindingContext as StartPageViewModel;
-                vm.SetSearchedLinkItemsCommand.Execute(sender.Text);
-            }
-        }
-
-        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
-        {
-            if (args.ChosenSuggestion != null)
-            {
-                var vm = this.BindingContext as StartPageViewModel;
-                vm.LoadLinkItemCommand.Execute(args.ChosenSuggestion as LinkItem);             
-            }
-        }
     }
 }

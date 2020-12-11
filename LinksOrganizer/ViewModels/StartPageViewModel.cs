@@ -45,7 +45,10 @@ namespace LinksOrganizer.ViewModels
             }
 
             var items = await App.Database.GetItemsAsync();
-            SearchedLinks = items.Where(item => item.Name.ToUpperInvariant().Contains(searchedText.ToUpperInvariant())).ToList();
+            SearchedLinks = items.Where(item => 
+                item.Name.ToUpperInvariant().Contains(searchedText.ToUpperInvariant()) ||
+                item.Info.ToUpperInvariant().Contains(searchedText.ToUpperInvariant())
+            ).ToList();
             RaisePropertyChanged(() => SearchedLinks);
         }
     }
