@@ -23,6 +23,17 @@ namespace LinksOrganizer.ViewModels
             }
         }
 
+        private int _rank;
+        public int Rank
+        {
+            get { return _rank; }
+            set
+            {
+                _rank = value;
+                RaisePropertyChanged(() => Rank);
+            }
+        }
+
         private string _name;
         public string Name
         {
@@ -71,7 +82,8 @@ namespace LinksOrganizer.ViewModels
                 Info = this.Info,
                 Link = this.Link,
                 Name = this.Name,
-                ID = this.Id
+                ID = this.Id,
+                Rank = this.Rank
             };
             await App.Database.SaveItemAsync(linkItem);
             await NavigationService.NavigateToAsync<StartPageViewModel>();
@@ -84,7 +96,8 @@ namespace LinksOrganizer.ViewModels
                 Info = this.Info,
                 Link = this.Link,
                 Name = this.Name,
-                ID = this.Id
+                ID = this.Id,
+                Rank = this.Rank
             };
             await App.Database.DeleteItemAsync(linkItem);
             await NavigationService.NavigateToAsync<StartPageViewModel>();
@@ -95,17 +108,22 @@ namespace LinksOrganizer.ViewModels
             await NavigationService.NavigateToAsync<StartPageViewModel>();
         }
 
-        public override Task InitializeAsync(object navigationData)
+        public async override Task InitializeAsync(object navigationData)
         {
             if (navigationData is LinkItem data)
             {
+                if (data.ID > 0)
+                {
+                    data.Rank++;
+                    await App.Database.SaveItemAsync(data);
+                }
+
                 this.Name = data.Name;
                 this.Link = data.Link;
                 this.Info = data.Info;
                 this.Id = data.ID;
+                this.Rank = data.Rank;
             }
-
-            return Task.FromResult(false);
         }
     }
 }

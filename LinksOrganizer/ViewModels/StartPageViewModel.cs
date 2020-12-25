@@ -1,5 +1,6 @@
 ﻿using LinksOrganizer.Models;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -18,6 +19,8 @@ namespace LinksOrganizer.ViewModels
 
         public List<LinkItem> SearchedLinks { get; private set; }
 
+        public List<LinkItem> FavoriteLinks { get; private set; }
+        
         private async Task AddLinkItemAsync()
         {
             var newLink = new LinkItem();
@@ -45,11 +48,18 @@ namespace LinksOrganizer.ViewModels
             }
 
             var items = await App.Database.GetItemsAsync();
-            SearchedLinks = items.Where(item => 
+            SearchedLinks =  items.Where(item =>
                 item.Name.ToUpperInvariant().Contains(searchedText.ToUpperInvariant()) ||
                 item.Info.ToUpperInvariant().Contains(searchedText.ToUpperInvariant())
             ).ToList();
             RaisePropertyChanged(() => SearchedLinks);
+        }
+
+        public async override Task InitializeAsync(object navigationData)
+        {
+            var items = await App.Database.GetItemsAsync();
+            this.FavoriteLinks = items.OrderByDescending(link => link.Rank).ToList();
+            RaisePropertyChanged(() => FavoriteLinks);
         }
     }
 }

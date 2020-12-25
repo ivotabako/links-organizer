@@ -21,9 +21,15 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-
-                <forms:AutoSuggestBox ItemsSource="{Binding SearchedLinks}"
-                   Grid.Column="0"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+                
+                <forms:AutoSuggestBox 
+                    ItemsSource="{Binding SearchedLinks}"
+                    Grid.Column="0"
+                    Grid.Row="0"
                     PlaceholderText="Search" >
                     <forms:AutoSuggestBox.Behaviors>
                         <behaviors:AutoSuggestBoxBehavior/>
@@ -34,6 +40,7 @@
                 </forms:AutoSuggestBox>
                 <ImageButton 
                     Grid.Column="1"
+                    Grid.Row="0"
                     BackgroundColor="Green"
                     HorizontalOptions="End"
                     Padding="12"
@@ -41,6 +48,16 @@
                     Source="plus.png" 
                     Command="{Binding AddLinkItemCommand}">
                 </ImageButton>
+
+                <ListView 
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    ItemsSource="{Binding FavoriteLinks}">
+                    <ListView.Behaviors>
+                        <behaviors:ListViewBehavior/>
+                    </ListView.Behaviors>
+                </ListView>
             </Grid>
         </StackLayout>
     </ContentPage.Content>
