@@ -1,4 +1,5 @@
 ﻿using LinksOrganizer.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,22 +16,36 @@ namespace LinksOrganizer.ViewModels
 
         public ICommand LoadLinkItemCommand => new Command<LinkItem>(async (item) => await LoadLinkItemAsync(item));
 
-        public ICommand SetSearchedLinkItemsCommand => new Command<string> (async (item) => await SetSearchedLinkItemNamesCommandAsync(item));
+        public ICommand SetSearchedLinkItemsCommand => new Command<string>(async (item) => await SetSearchedLinkItemNamesCommandAsync(item));
 
         public List<LinkItem> SearchedLinks { get; private set; }
 
         public List<LinkItem> FavoriteLinks { get; private set; }
-        
+
         private async Task AddLinkItemAsync()
         {
             var newLink = new LinkItem();
 
+            (bool isUrl, string url) = await CheckClipboard();
+            if (isUrl)
+            {
+                newLink.Link = url;
+            }
+            
+            await NavigationService.NavigateToAsync<LinkItemViewModel>(newLink);
+        }
+
+        private async Task<(bool isUrl, string url)> CheckClipboard()
+        {
             if (Clipboard.HasText)
             {
-                var text = await Clipboard.GetTextAsync();
-                newLink.Link = text;
+                string uriName = await Clipboard.GetTextAsync();
+                bool result = Uri.TryCreate(uriName, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+
+                return (result, uriName);
             }
-            await NavigationService.NavigateToAsync<LinkItemViewModel>(newLink);
+
+            return (false, string.Empty);
         }
 
         private async Task LoadLinkItemAsync(LinkItem item)
@@ -48,9 +63,9 @@ namespace LinksOrganizer.ViewModels
             }
 
             var items = await App.Database.GetItemsAsync();
-            SearchedLinks =  items.Where(item =>
-                item.Name.ToUpperInvariant().Contains(searchedText.ToUpperInvariant()) ||
-                item.Info.ToUpperInvariant().Contains(searchedText.ToUpperInvariant())
+            SearchedLinks = items.Where(item =>
+               item.Name.ToUpperInvariant().Contains(searchedText.ToUpperInvariant()) ||
+               item.Info.ToUpperInvariant().Contains(searchedText.ToUpperInvariant())
             ).ToList();
             RaisePropertyChanged(() => SearchedLinks);
         }

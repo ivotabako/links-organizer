@@ -1,4 +1,5 @@
 ﻿using LinksOrganizer.Models;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -9,7 +10,7 @@ namespace LinksOrganizer.ViewModels
     {
         public bool CanSave
         {
-            get { return !string.IsNullOrWhiteSpace(this.Link) && !string.IsNullOrWhiteSpace(this.Name); }
+            get { return !string.IsNullOrWhiteSpace(this.Link) && !string.IsNullOrWhiteSpace(this.Name) && IsUrl(this.Link); }
         }
 
         private int _id;
@@ -87,6 +88,11 @@ namespace LinksOrganizer.ViewModels
             };
             await App.Database.SaveItemAsync(linkItem);
             await NavigationService.NavigateToAsync<StartPageViewModel>();
+        }
+
+        private bool IsUrl(string uriName)
+        {
+            return Uri.TryCreate(uriName, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
         }
 
         async private void DeleteLinkItem()
