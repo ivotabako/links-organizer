@@ -37,9 +37,7 @@ namespace LinksOrganizer.Services.Navigation
 
         public Task RemoveLastFromBackStackAsync()
         {
-            var mainPage = Application.Current.MainPage as CustomNavigationView;
-
-            if (mainPage != null)
+            if (Application.Current.MainPage is CustomNavigationView mainPage)
             {
                 mainPage.Navigation.RemovePage(
                     mainPage.Navigation.NavigationStack[mainPage.Navigation.NavigationStack.Count - 2]);
@@ -50,9 +48,7 @@ namespace LinksOrganizer.Services.Navigation
 
         public Task RemoveBackStackAsync()
         {
-            var mainPage = Application.Current.MainPage as CustomNavigationView;
-
-            if (mainPage != null)
+            if (Application.Current.MainPage is CustomNavigationView mainPage)
             {
                 for (int i = 0; i < mainPage.Navigation.NavigationStack.Count - 1; i++)
                 {
@@ -66,11 +62,9 @@ namespace LinksOrganizer.Services.Navigation
 
         private async Task InternalNavigateToAsync(Type viewModelType, object parameter)
         {
-            Page page = CreatePage(viewModelType, parameter);
+            Page page = CreatePage(viewModelType);
 
-
-            var navigationPage = Application.Current.MainPage as CustomNavigationView;
-            if (navigationPage != null)
+            if (Application.Current.MainPage is CustomNavigationView navigationPage)
             {
                 await navigationPage.PushAsync(page);
             }
@@ -83,7 +77,7 @@ namespace LinksOrganizer.Services.Navigation
             await (page.BindingContext as ViewModelBase).InitializeAsync(parameter);
         }
 
-        private Page CreatePage(Type viewModelType, object parameter)
+        private Page CreatePage(Type viewModelType)
         {
             Type pageType = GetPageTypeForViewModel(viewModelType);
             if (pageType == null)

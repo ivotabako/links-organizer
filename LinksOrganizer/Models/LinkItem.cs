@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 
 namespace LinksOrganizer.Models
 {
@@ -13,6 +14,8 @@ namespace LinksOrganizer.Models
         public string Info { get; set; } = string.Empty;
 
         public int Rank { get; set; }
+
+        public DateTime CreateDate { get; set; }
 
         [NotNull]
         public string Link { get; set; }

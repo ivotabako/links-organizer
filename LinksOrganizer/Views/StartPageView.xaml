@@ -22,8 +22,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="12*"/>
                 </Grid.RowDefinitions>
                 
                 <forms:AutoSuggestBox 
@@ -43,15 +44,23 @@
                     Grid.Row="0"
                     BackgroundColor="Green"
                     HorizontalOptions="End"
-                    Padding="12"
-                    Margin="10"
+                    Padding="14"
+                    Margin="14"
                     Source="plus.png" 
                     Command="{Binding AddLinkItemCommand}">
                 </ImageButton>
-
-                <ListView 
+                <Switch 
                     Grid.Column="0"
                     Grid.Row="1"
+                    Grid.ColumnSpan="2" IsToggled="{Binding IsOrderedByRank}">
+                    <Switch.Behaviors>
+                        <behaviors:SwitchBehavior/>
+                    </Switch.Behaviors>
+                </Switch>
+                <ListView 
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    Grid.RowSpan="2"
                     Grid.ColumnSpan="2"
                     ItemsSource="{Binding FavoriteLinks}">
                     <ListView.Behaviors>

@@ -9,7 +9,7 @@ using Android.App;
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("")]
 [assembly: AssemblyProduct ("")]
-[assembly: AssemblyCopyright ("craigdunn")]
+[assembly: AssemblyCopyright ("Ivaylo Tabakov")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".

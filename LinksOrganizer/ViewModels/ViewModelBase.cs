@@ -1,11 +1,12 @@
 ﻿using LinksOrganizer.Services.Navigation;
+using Microsoft.Extensions.Caching.Memory;
 using System.Threading.Tasks;
 
 namespace LinksOrganizer.ViewModels
 {
     public abstract class ViewModelBase : ExtendedBindableObject
     {
-
+        protected readonly IMemoryCache Cache;
         protected readonly INavigationService NavigationService;
 
         private bool _isBusy;
@@ -27,6 +28,7 @@ namespace LinksOrganizer.ViewModels
         public ViewModelBase()
         {
             NavigationService = ViewModelLocator.Resolve<INavigationService>();
+            Cache = ViewModelLocator.Resolve<IMemoryCache>();
         }
 
         public virtual Task InitializeAsync(object navigationData)

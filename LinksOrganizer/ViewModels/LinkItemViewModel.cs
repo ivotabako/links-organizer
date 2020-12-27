@@ -35,6 +35,17 @@ namespace LinksOrganizer.ViewModels
             }
         }
 
+        private DateTime _createDate;
+        public DateTime CreateDate
+        {
+            get { return _createDate; }
+            set
+            {
+                _createDate = value;
+                RaisePropertyChanged(() => CreateDate);
+            }
+        }
+
         private string _name;
         public string Name
         {
@@ -84,8 +95,11 @@ namespace LinksOrganizer.ViewModels
                 Link = this.Link,
                 Name = this.Name,
                 ID = this.Id,
-                Rank = this.Rank
+                Rank = this.Rank,
+                CreateDate = this.CreateDate
             };
+
+
             await App.Database.SaveItemAsync(linkItem);
             await NavigationService.NavigateToAsync<StartPageViewModel>();
         }
@@ -103,7 +117,8 @@ namespace LinksOrganizer.ViewModels
                 Link = this.Link,
                 Name = this.Name,
                 ID = this.Id,
-                Rank = this.Rank
+                Rank = this.Rank,
+                CreateDate = this.CreateDate
             };
             await App.Database.DeleteItemAsync(linkItem);
             await NavigationService.NavigateToAsync<StartPageViewModel>();
@@ -123,12 +138,17 @@ namespace LinksOrganizer.ViewModels
                     data.Rank++;
                     await App.Database.SaveItemAsync(data);
                 }
+                else
+                {
+                    data.CreateDate = DateTime.UtcNow;
+                }
 
                 this.Name = data.Name;
                 this.Link = data.Link;
                 this.Info = data.Info;
                 this.Id = data.ID;
                 this.Rank = data.Rank;
+                this.CreateDate = data.CreateDate;
             }
         }
     }

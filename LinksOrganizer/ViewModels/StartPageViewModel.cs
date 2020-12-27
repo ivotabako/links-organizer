@@ -22,6 +22,8 @@ namespace LinksOrganizer.ViewModels
 
         public List<LinkItem> FavoriteLinks { get; private set; }
 
+        public bool IsOrderedByRank { get; private set; }
+
         private async Task AddLinkItemAsync()
         {
             var newLink = new LinkItem();
@@ -31,7 +33,7 @@ namespace LinksOrganizer.ViewModels
             {
                 newLink.Link = url;
             }
-            
+
             await NavigationService.NavigateToAsync<LinkItemViewModel>(newLink);
         }
 
@@ -73,7 +75,30 @@ namespace LinksOrganizer.ViewModels
         public async override Task InitializeAsync(object navigationData)
         {
             var items = await App.Database.GetItemsAsync();
-            this.FavoriteLinks = items.OrderByDescending(link => link.Rank).ToList();
+
+            if (navigationData is bool isToggled)
+            {
+                using (var key = Cache.CreateEntry("IsToggled"))
+                {
+                    key.Value = isToggled;
+                }
+            }
+
+            if(Cache.TryGetValue("IsToggled", out object isToggledFromCache) && (bool)isToggledFromCache == true )
+            {
+                IsOrderedByRank = (bool)isToggledFromCache;
+                RaisePropertyChanged(() => IsOrderedByRank);
+
+                this.FavoriteLinks = items.OrderByDescending(link => link.Rank).ToList();
+            }
+            else
+            {
+                IsOrderedByRank = false;
+                RaisePropertyChanged(() => IsOrderedByRank);
+
+                this.FavoriteLinks = items.OrderByDescending(link => link.CreateDate.Ticks).ToList();
+            }
+
             RaisePropertyChanged(() => FavoriteLinks);
         }
     }
