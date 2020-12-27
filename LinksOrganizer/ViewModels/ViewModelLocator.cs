@@ -10,7 +10,7 @@ namespace LinksOrganizer.ViewModels
 {
     public static class ViewModelLocator
     {
-        private static TinyIoCContainer _container;
+        private static readonly TinyIoCContainer _container;
 
         public static readonly BindableProperty AutoWireViewModelProperty =
             BindableProperty.CreateAttached("AutoWireViewModel", typeof(bool), typeof(ViewModelLocator), default(bool), propertyChanged: OnAutoWireViewModelChanged);
@@ -71,8 +71,7 @@ namespace LinksOrganizer.ViewModels
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var view = bindable as Element;
-            if (view == null)
+            if (!(bindable is Element view))
             {
                 return;
             }

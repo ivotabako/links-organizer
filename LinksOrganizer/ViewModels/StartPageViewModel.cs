@@ -96,7 +96,7 @@ namespace LinksOrganizer.ViewModels
                 IsOrderedByRank = false;
                 RaisePropertyChanged(() => IsOrderedByRank);
 
-                this.FavoriteLinks = items.OrderByDescending(link => link.CreateDate.Ticks).ToList();
+                this.FavoriteLinks = items.OrderByDescending(link => link.LastUpdatedOn.Ticks).ToList();
             }
 
             RaisePropertyChanged(() => FavoriteLinks);

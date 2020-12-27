@@ -15,7 +15,7 @@ namespace LinksOrganizer.Models
 
         public int Rank { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTime LastUpdatedOn { get; set; }
 
         [NotNull]
         public string Link { get; set; }

@@ -35,14 +35,14 @@ namespace LinksOrganizer.ViewModels
             }
         }
 
-        private DateTime _createDate;
-        public DateTime CreateDate
+        private DateTime _lastUpdatedOn;
+        public DateTime LastUpdatedOn
         {
-            get { return _createDate; }
+            get { return _lastUpdatedOn; }
             set
             {
-                _createDate = value;
-                RaisePropertyChanged(() => CreateDate);
+                _lastUpdatedOn = value;
+                RaisePropertyChanged(() => LastUpdatedOn);
             }
         }
 
@@ -96,8 +96,8 @@ namespace LinksOrganizer.ViewModels
                 Name = this.Name,
                 ID = this.Id,
                 Rank = this.Rank,
-                CreateDate = this.CreateDate
-            };
+                LastUpdatedOn = DateTime.UtcNow
+        };
 
 
             await App.Database.SaveItemAsync(linkItem);
@@ -118,7 +118,7 @@ namespace LinksOrganizer.ViewModels
                 Name = this.Name,
                 ID = this.Id,
                 Rank = this.Rank,
-                CreateDate = this.CreateDate
+                LastUpdatedOn = this.LastUpdatedOn
             };
             await App.Database.DeleteItemAsync(linkItem);
             await NavigationService.NavigateToAsync<StartPageViewModel>();
@@ -140,7 +140,7 @@ namespace LinksOrganizer.ViewModels
                 }
                 else
                 {
-                    data.CreateDate = DateTime.UtcNow;
+                    data.LastUpdatedOn = DateTime.UtcNow;
                 }
 
                 this.Name = data.Name;
@@ -148,7 +148,7 @@ namespace LinksOrganizer.ViewModels
                 this.Info = data.Info;
                 this.Id = data.ID;
                 this.Rank = data.Rank;
-                this.CreateDate = data.CreateDate;
+                this.LastUpdatedOn = data.LastUpdatedOn;
             }
         }
     }
