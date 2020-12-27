@@ -19,7 +19,7 @@
         <Button Text="Copy" Command="{Binding CopyLinkItemCommand}" />
         <Button Text="Open" Command="{Binding OpenLinkItemCommand}" />
         <Button Text="Save" Command="{Binding SaveLinkItemCommand}" IsEnabled="{Binding CanSave}"  />
-        <Button Text="Delete" Command="{Binding DeleteLinkItemCommand}" />
-        <Button Text="Cancel" Command="{Binding CancelLinkItemCommand}" />
+        <Button Text="Cancel" Command="{Binding CancelLinkItemCommand}"/>
+        <Button Text="Delete" Command="{Binding DeleteLinkItemCommand}"/>
     </StackLayout>
 </ContentPage>
