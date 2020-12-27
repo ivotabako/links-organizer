@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LinksOrganizer.ViewModels
@@ -87,6 +88,10 @@ namespace LinksOrganizer.ViewModels
 
         public ICommand CancelLinkItemCommand => new Command(CancelLinkItem);
 
+        public ICommand CopyLinkItemCommand => new Command(async () => await CopyLinkItem());
+
+        public ICommand OpenLinkItemCommand => new Command(async () => await OpenLinkItem());
+
         async private void SaveLinkItem()
         {
             var linkItem = new LinkItem()
@@ -127,6 +132,22 @@ namespace LinksOrganizer.ViewModels
         async private void CancelLinkItem()
         {
             await NavigationService.NavigateToAsync<StartPageViewModel>();
+        }
+
+        private async Task CopyLinkItem()
+        {
+            await Clipboard.SetTextAsync(this.Link);
+        }
+
+        private async Task OpenLinkItem()
+        {
+            await Browser.OpenAsync(this.Link, new BrowserLaunchOptions
+            {
+                LaunchMode = BrowserLaunchMode.SystemPreferred,
+                TitleMode = BrowserTitleMode.Show,
+                PreferredToolbarColor = Color.AliceBlue,
+                PreferredControlColor = Color.Violet
+            });
         }
 
         public async override Task InitializeAsync(object navigationData)
