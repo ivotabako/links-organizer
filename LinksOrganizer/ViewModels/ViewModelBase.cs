@@ -25,10 +25,10 @@ namespace LinksOrganizer.ViewModels
             }
         }
 
-        public ViewModelBase()
+        public ViewModelBase(INavigationService navigationService, IMemoryCache memoryCache)
         {
-            NavigationService = ViewModelLocator.Resolve<INavigationService>();
-            Cache = ViewModelLocator.Resolve<IMemoryCache>();
+            NavigationService = navigationService;
+            Cache = memoryCache;
         }
 
         public virtual Task InitializeAsync(object navigationData)

@@ -1,4 +1,6 @@
 ﻿using LinksOrganizer.Models;
+using LinksOrganizer.Services.Navigation;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -91,6 +93,11 @@ namespace LinksOrganizer.ViewModels
         public ICommand CopyLinkItemCommand => new Command(async () => await CopyLinkItem());
 
         public ICommand OpenLinkItemCommand => new Command(async () => await OpenLinkItem());
+
+        public LinkItemViewModel(INavigationService navigationService, IMemoryCache memoryCache)
+            : base(navigationService, memoryCache)
+        {
+        }
 
         async private void SaveLinkItem()
         {

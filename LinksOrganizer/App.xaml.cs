@@ -4,9 +4,7 @@ using LinksOrganizer.ViewModels;
 using LinksOrganizer.Views;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace LinksOrganizer
 {
     public partial class App : Application

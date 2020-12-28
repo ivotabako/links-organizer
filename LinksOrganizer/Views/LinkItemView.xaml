@@ -5,10 +5,6 @@
     xmlns:viewmodels="clr-namespace:LinksOrganizer.ViewModels"
     x:Class="LinksOrganizer.Views.LinkItemView" >
 
-    <ContentPage.BindingContext>
-        <viewmodels:LinkItemViewModel></viewmodels:LinkItemViewModel>
-    </ContentPage.BindingContext>
-    
     <StackLayout Margin="20" VerticalOptions="StartAndExpand">
         <Label Text="Title" />
         <Entry Text="{Binding Name}"  />

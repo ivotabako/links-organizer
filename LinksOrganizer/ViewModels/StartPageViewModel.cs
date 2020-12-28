@@ -1,17 +1,20 @@
 ﻿using LinksOrganizer.Models;
+using LinksOrganizer.Services.Navigation;
+using LinksOrganizer.Utils.ClipboardInfo;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LinksOrganizer.ViewModels
 {
     public class StartPageViewModel : ViewModelBase
     {
+        private readonly IClipboardInfo clipboardInfo;
+
         public ICommand AddLinkItemCommand => new Command(async () => await AddLinkItemAsync());
 
         public ICommand LoadLinkItemCommand => new Command<LinkItem>(async (item) => await LoadLinkItemAsync(item));
@@ -23,6 +26,12 @@ namespace LinksOrganizer.ViewModels
         public List<LinkItem> FavoriteLinks { get; private set; }
 
         public bool IsOrderedByRank { get; private set; }
+
+        public StartPageViewModel(IClipboardInfo clipboardInfo, INavigationService navigationService, IMemoryCache memoryCache)
+            : base(navigationService, memoryCache)
+        {
+            this.clipboardInfo = clipboardInfo;
+        }
 
         private async Task AddLinkItemAsync()
         {
@@ -39,9 +48,9 @@ namespace LinksOrganizer.ViewModels
 
         private async Task<(bool isUrl, string url)> CheckClipboard()
         {
-            if (Clipboard.HasText)
+            if (clipboardInfo.HasText)
             {
-                string uriName = await Clipboard.GetTextAsync();
+                string uriName = await clipboardInfo.GetTextAsync();
                 bool result = Uri.TryCreate(uriName, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
 
                 return (result, uriName);

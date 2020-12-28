@@ -6,10 +6,6 @@
              xmlns:behaviors="clr-namespace:LinksOrganizer.Behaviors"
              x:Class="LinksOrganizer.Views.StartPageView">
 
-    <ContentPage.BindingContext>
-        <viewmodels:StartPageViewModel></viewmodels:StartPageViewModel>
-    </ContentPage.BindingContext>
-
     <ContentPage.Content>
 
         <StackLayout 
@@ -31,13 +27,11 @@
                     ItemsSource="{Binding SearchedLinks}"
                     Grid.Column="0"
                     Grid.Row="0"
-                    PlaceholderText="Search" >
+                    PlaceholderText="Search"
+                    x:Name="autoSuggest">
                     <forms:AutoSuggestBox.Behaviors>
                         <behaviors:AutoSuggestBoxBehavior/>
                     </forms:AutoSuggestBox.Behaviors>
-                    <forms:AutoSuggestBox.BindingContext>
-                        <viewmodels:StartPageViewModel></viewmodels:StartPageViewModel>
-                    </forms:AutoSuggestBox.BindingContext>
                 </forms:AutoSuggestBox>
                 <ImageButton 
                     Grid.Column="1"

@@ -1,5 +1,4 @@
-﻿using LinksOrganizer.Models;
-using System;
+﻿using LinksOrganizer.ViewModels;
 using Xamarin.Forms;
 
 namespace LinksOrganizer.Views
@@ -9,6 +8,8 @@ namespace LinksOrganizer.Views
         public LinkItemView()
         {
             InitializeComponent();
+            var linkItemViewModel = ViewModelLocator.Resolve<LinkItemViewModel>();
+            BindingContext = linkItemViewModel;
         }
     }
 }
