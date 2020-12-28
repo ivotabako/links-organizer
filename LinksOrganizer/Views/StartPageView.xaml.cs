@@ -13,6 +13,9 @@ namespace LinksOrganizer.Views
         public StartPageView()
         {
             InitializeComponent();
+            var startPageViewModel = ViewModelLocator.Resolve<StartPageViewModel>();
+            BindingContext = startPageViewModel;
+            autoSuggest.BindingContext = startPageViewModel;
         }
     }
 }

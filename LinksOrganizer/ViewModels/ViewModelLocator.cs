@@ -1,4 +1,5 @@
 ﻿using LinksOrganizer.Services.Navigation;
+using LinksOrganizer.Utils.ClipboardInfo;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Globalization;
@@ -33,6 +34,7 @@ namespace LinksOrganizer.ViewModels
 
             // View models - by default, TinyIoC will register concrete classes as multi-instance.
 
+            _container.Register<StartPageViewModel>();
             _container.Register<LinkItemViewModel>();
 
 
@@ -40,6 +42,8 @@ namespace LinksOrganizer.ViewModels
             _container.Register<INavigationService, NavigationService>();
 
             _container.Register<IMemoryCache>(new MemoryCache(new MemoryCacheOptions() {}));
+
+            _container.Register<IClipboardInfo, ClipboardInfo>();
         }
 
         public static void UpdateDependencies(bool useMockServices)
