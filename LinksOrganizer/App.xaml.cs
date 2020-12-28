@@ -33,18 +33,6 @@ namespace LinksOrganizer
             var navigationService = ViewModelLocator.Resolve<INavigationService>();
             return navigationService.InitializeAsync();
         }
-
-        public static LinkItemDatabase Database
-        {
-            get
-            {
-                if (database == null)
-                {
-                    database = new LinkItemDatabase();
-                }
-                return database;
-            }
-        }
     }
 }
 

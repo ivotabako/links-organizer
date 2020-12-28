@@ -7,7 +7,7 @@ using SQLite;
 
 namespace LinksOrganizer.Data
 {
-    public class LinkItemDatabase
+    public class LinkItemDatabase : ILinkItemDatabase
     {
         static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
         {
@@ -28,7 +28,7 @@ namespace LinksOrganizer.Data
             {
                 if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(LinkItem).Name))
                 {
-                    await Database.CreateTablesAsync(CreateFlags.None, typeof(LinkItem)).ConfigureAwait(false);                    
+                    await Database.CreateTablesAsync(CreateFlags.None, typeof(LinkItem)).ConfigureAwait(false);
                 }
                 initialized = true;
             }

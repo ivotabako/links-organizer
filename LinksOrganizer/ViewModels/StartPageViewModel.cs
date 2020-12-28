@@ -1,12 +1,13 @@
-﻿using LinksOrganizer.Models;
-using LinksOrganizer.Services.Navigation;
-using LinksOrganizer.Utils.ClipboardInfo;
-using Microsoft.Extensions.Caching.Memory;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using LinksOrganizer.Data;
+using LinksOrganizer.Models;
+using LinksOrganizer.Services.Navigation;
+using LinksOrganizer.Utils.ClipboardInfo;
+using Microsoft.Extensions.Caching.Memory;
 using Xamarin.Forms;
 
 namespace LinksOrganizer.ViewModels
@@ -27,8 +28,12 @@ namespace LinksOrganizer.ViewModels
 
         public bool IsOrderedByRank { get; private set; }
 
-        public StartPageViewModel(IClipboardInfo clipboardInfo, INavigationService navigationService, IMemoryCache memoryCache)
-            : base(navigationService, memoryCache)
+        public StartPageViewModel(
+            IClipboardInfo clipboardInfo,
+            INavigationService navigationService,
+            IMemoryCache memoryCache,
+            ILinkItemDatabase linkItemDatabase)
+            : base(navigationService, memoryCache, linkItemDatabase)
         {
             this.clipboardInfo = clipboardInfo;
         }
@@ -73,7 +78,7 @@ namespace LinksOrganizer.ViewModels
                 return;
             }
 
-            var items = await App.Database.GetItemsAsync();
+            var items = await Database.GetItemsAsync();
             SearchedLinks = items.Where(item =>
                item.Name.ToUpperInvariant().Contains(searchedText.ToUpperInvariant()) ||
                item.Info.ToUpperInvariant().Contains(searchedText.ToUpperInvariant())
@@ -83,7 +88,7 @@ namespace LinksOrganizer.ViewModels
 
         public async override Task InitializeAsync(object navigationData)
         {
-            var items = await App.Database.GetItemsAsync();
+            var items = await Database.GetItemsAsync();
 
             if (navigationData is bool isToggled)
             {
