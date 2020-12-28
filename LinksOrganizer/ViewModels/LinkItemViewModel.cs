@@ -1,9 +1,10 @@
-﻿using LinksOrganizer.Models;
-using LinksOrganizer.Services.Navigation;
-using Microsoft.Extensions.Caching.Memory;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using LinksOrganizer.Data;
+using LinksOrganizer.Models;
+using LinksOrganizer.Services.Navigation;
+using Microsoft.Extensions.Caching.Memory;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -94,8 +95,11 @@ namespace LinksOrganizer.ViewModels
 
         public ICommand OpenLinkItemCommand => new Command(async () => await OpenLinkItem());
 
-        public LinkItemViewModel(INavigationService navigationService, IMemoryCache memoryCache)
-            : base(navigationService, memoryCache)
+        public LinkItemViewModel(
+            INavigationService navigationService,
+            IMemoryCache memoryCache,
+            ILinkItemDatabase linkItemDatabase)
+            : base(navigationService, memoryCache, linkItemDatabase)
         {
         }
 
@@ -112,7 +116,7 @@ namespace LinksOrganizer.ViewModels
         };
 
 
-            await App.Database.SaveItemAsync(linkItem);
+            await Database.SaveItemAsync(linkItem);
             await NavigationService.NavigateToAsync<StartPageViewModel>();
         }
 
@@ -132,7 +136,7 @@ namespace LinksOrganizer.ViewModels
                 Rank = this.Rank,
                 LastUpdatedOn = this.LastUpdatedOn
             };
-            await App.Database.DeleteItemAsync(linkItem);
+            await Database.DeleteItemAsync(linkItem);
             await NavigationService.NavigateToAsync<StartPageViewModel>();
         }
 
@@ -164,7 +168,7 @@ namespace LinksOrganizer.ViewModels
                 if (data.ID > 0)
                 {
                     data.Rank++;
-                    await App.Database.SaveItemAsync(data);
+                    await Database.SaveItemAsync(data);
                 }
                 else
                 {
