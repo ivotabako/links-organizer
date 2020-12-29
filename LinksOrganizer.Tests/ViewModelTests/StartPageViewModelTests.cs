@@ -2,6 +2,7 @@
 using LinksOrganizer.Data;
 using LinksOrganizer.Models;
 using LinksOrganizer.Services.Navigation;
+using LinksOrganizer.Tests.Utils;
 using LinksOrganizer.Utils.ClipboardInfo;
 using LinksOrganizer.ViewModels;
 using Moq;
@@ -97,11 +98,11 @@ namespace LinksOrganizer.Tests.ViewModelTests
         [InlineData(null)]
         [InlineData("")]
         [InlineData("     ")]
-        public void SetSearchedLinkItemsCommand_SearchedTextIsNullOrWhitespace_SearchedLlinksIsNull(string searchResult)
+        public void SetSearchedLinkItemsCommand_SearchedTextIsNullOrWhitespace_SearchedLlinksIsNull(string searchTerm)
         {
             var model = new StartPageViewModel(null, null, null, null);
 
-            model.SetSearchedLinkItemsCommand.Execute(searchResult);
+            model.SetSearchedLinkItemsCommand.Execute(searchTerm);
 
             Assert.Null(model.SearchedLinks);
         }
@@ -130,6 +131,25 @@ namespace LinksOrganizer.Tests.ViewModelTests
             {
                 Assert.Contains(model.SearchedLinks, l => l.ID == id);
             }
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("     ")]
+        [InlineData("test")]
+        public void SetSearchedLinkItemsCommand_ChangesSearchedLinksProperty(string searchTerm)
+        {
+            var database = new Mock<ILinkItemDatabase>();
+            database.Setup(d => d.GetItemsAsync()).ReturnsAsync(new List<LinkItem>());
+            var model = new StartPageViewModel(null, null, null, database.Object);
+            var harness = new NotifyPropertyChangedHarness(model);
+
+            model.SetSearchedLinkItemsCommand.Execute(searchTerm);
+
+            Assert.NotNull(harness.Changes);
+            Assert.Single(harness.Changes);
+            Assert.Equal(nameof(model.SearchedLinks), harness.Changes[0]);
         }
     }
 }
