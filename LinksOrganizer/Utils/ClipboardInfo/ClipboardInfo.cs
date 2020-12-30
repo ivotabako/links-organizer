@@ -9,5 +9,6 @@ namespace LinksOrganizer.Utils.ClipboardInfo
 
         public Task<string> GetTextAsync() => Clipboard.GetTextAsync();
 
+        public Task SetTextAsync(string text) => Clipboard.SetTextAsync(text);
     }
 }

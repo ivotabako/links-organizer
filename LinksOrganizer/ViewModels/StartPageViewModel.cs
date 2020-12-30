@@ -14,8 +14,6 @@ namespace LinksOrganizer.ViewModels
 {
     public class StartPageViewModel : ViewModelBase
     {
-        private readonly IClipboardInfo clipboardInfo;
-
         public ICommand AddLinkItemCommand => new Command(async () => await AddLinkItemAsync());
 
         public ICommand LoadLinkItemCommand => new Command<LinkItem>(async (item) => await LoadLinkItemAsync(item));
@@ -33,9 +31,8 @@ namespace LinksOrganizer.ViewModels
             INavigationService navigationService,
             IMemoryCache memoryCache,
             ILinkItemDatabase linkItemDatabase)
-            : base(navigationService, memoryCache, linkItemDatabase)
+            : base(navigationService, memoryCache, linkItemDatabase, clipboardInfo)
         {
-            this.clipboardInfo = clipboardInfo;
         }
 
         private async Task AddLinkItemAsync()
@@ -53,9 +50,9 @@ namespace LinksOrganizer.ViewModels
 
         private async Task<(bool isUrl, string url)> CheckClipboard()
         {
-            if (clipboardInfo.HasText)
+            if (ClipboardInfo.HasText)
             {
-                string uriName = await clipboardInfo.GetTextAsync();
+                string uriName = await ClipboardInfo.GetTextAsync();
                 bool result = Uri.TryCreate(uriName, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
 
                 return (result, uriName);

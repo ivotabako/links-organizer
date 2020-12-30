@@ -9,8 +9,6 @@ namespace LinksOrganizer
 {
     public partial class App : Application
     {
-        static LinkItemDatabase database;
-
         public App()
         {
             InitializeComponent();

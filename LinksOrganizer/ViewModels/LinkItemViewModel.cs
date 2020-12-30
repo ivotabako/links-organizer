@@ -4,6 +4,7 @@ using System.Windows.Input;
 using LinksOrganizer.Data;
 using LinksOrganizer.Models;
 using LinksOrganizer.Services.Navigation;
+using LinksOrganizer.Utils.ClipboardInfo;
 using Microsoft.Extensions.Caching.Memory;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -98,8 +99,8 @@ namespace LinksOrganizer.ViewModels
         public LinkItemViewModel(
             INavigationService navigationService,
             IMemoryCache memoryCache,
-            ILinkItemDatabase linkItemDatabase)
-            : base(navigationService, memoryCache, linkItemDatabase)
+            ILinkItemDatabase linkItemDatabase, IClipboardInfo clipboardInfo)
+            : base(navigationService, memoryCache, linkItemDatabase, clipboardInfo)
         {
         }
 
@@ -147,7 +148,7 @@ namespace LinksOrganizer.ViewModels
 
         private async Task CopyLinkItem()
         {
-            await Clipboard.SetTextAsync(this.Link);
+            await ClipboardInfo.SetTextAsync(this.Link);
         }
 
         private async Task OpenLinkItem()
