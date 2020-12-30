@@ -1,11 +1,11 @@
-﻿using LinksOrganizer.Models;
+﻿using LinksOrganizer.Utils;
 using LinksOrganizer.ViewModels;
 using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace LinksOrganizer.Behaviors
 {
-    public class SwitchBehavior : Behavior<Switch>
+    public class SwitchOrderBehavior : Behavior<Switch>
     {
         protected override void OnAttachedTo(Switch bindable)
         {
@@ -16,10 +16,9 @@ namespace LinksOrganizer.Behaviors
 
         private async void Bindable_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "IsToggled" && sender is Switch @switch)
+            if (e.PropertyName == "IsToggled" && sender is Switch @switch && @switch.BindingContext is StartPageViewModel vm && vm != null)
             {
-                var vm = @switch.BindingContext as StartPageViewModel;
-                await vm.InitializeAsync(@switch.IsToggled);
+                await vm.InitializeAsync((@switch.IsToggled, ChangeEvents.OrderChanged));
             }
         }
 

@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using LinksOrganizer.Data;
 using LinksOrganizer.Models;
+using LinksOrganizer.Utils;
 using LinksOrganizer.Services.Navigation;
 using LinksOrganizer.Utils.ClipboardInfo;
 using Microsoft.Extensions.Caching.Memory;
 using Xamarin.Forms;
+using LinksOrganizer.Themes;
 
 namespace LinksOrganizer.ViewModels
 {
@@ -25,6 +27,8 @@ namespace LinksOrganizer.ViewModels
         public List<LinkItem> FavoriteLinks { get; private set; }
 
         public bool IsOrderedByRank { get; private set; }
+
+        public bool ThemeSwitch { get; private set; }
 
         public StartPageViewModel(
             IClipboardInfo clipboardInfo,
@@ -85,31 +89,66 @@ namespace LinksOrganizer.ViewModels
 
         public async override Task InitializeAsync(object navigationData)
         {
-            var items = await Database.GetItemsAsync();
+            await RefreshFavoriteLinks(navigationData);
 
-            if (navigationData is bool isToggled)
+            ChangeTheme(navigationData);
+        }
+
+        private void ChangeTheme(object navigationData)
+        {
+            if (navigationData is ValueTuple<bool, ChangeEvents> toggleTupple && toggleTupple.Item2 == ChangeEvents.ThemeChanged)
             {
-                using (var key = Cache.CreateEntry("IsToggled"))
+                using var key = Cache.CreateEntry(ChangeEvents.ThemeChanged);
+                key.Value = toggleTupple.Item1;
+
+                ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+                if (mergedDictionaries != null)
                 {
-                    key.Value = isToggled;
+                    mergedDictionaries.Clear();
+
+                    if (toggleTupple.Item1)
+                        mergedDictionaries.Add(new DarkTheme());
+                    else
+                        mergedDictionaries.Add(new LightTheme());
                 }
             }
 
-            if(Cache.TryGetValue("IsToggled", out object isToggledFromCache) && (bool)isToggledFromCache == true )
+            if (Cache.TryGetValue(ChangeEvents.ThemeChanged, out object isToggledFromCache) && (bool)isToggledFromCache == true)
+            {
+                ThemeSwitch = (bool)isToggledFromCache;
+            }
+            else
+            {
+                ThemeSwitch = false;
+            }
+
+            RaisePropertyChanged(() => ThemeSwitch);
+        }
+
+        private async Task RefreshFavoriteLinks(object navigationData)
+        {
+            if (navigationData is ValueTuple<bool, ChangeEvents> toggleTupple && toggleTupple.Item2 == ChangeEvents.OrderChanged)
+            {
+                using var key = Cache.CreateEntry(ChangeEvents.OrderChanged);
+
+                key.Value = toggleTupple.Item1;
+            }
+
+            var items = await Database.GetItemsAsync();
+
+            if (Cache.TryGetValue(ChangeEvents.OrderChanged, out object isToggledFromCache) && (bool)isToggledFromCache == true)
             {
                 IsOrderedByRank = (bool)isToggledFromCache;
-                RaisePropertyChanged(() => IsOrderedByRank);
 
-                this.FavoriteLinks = items.OrderByDescending(link => link.Rank).ToList();
+                FavoriteLinks = items.OrderByDescending(link => link.Rank).ToList();
             }
             else
             {
                 IsOrderedByRank = false;
-                RaisePropertyChanged(() => IsOrderedByRank);
-
-                this.FavoriteLinks = items.OrderByDescending(link => link.LastUpdatedOn.Ticks).ToList();
+                FavoriteLinks = items.OrderByDescending(link => link.LastUpdatedOn.Ticks).ToList();
             }
 
+            RaisePropertyChanged(() => IsOrderedByRank);
             RaisePropertyChanged(() => FavoriteLinks);
         }
     }

@@ -4,7 +4,8 @@
              xmlns:forms="clr-namespace:dotMorten.Xamarin.Forms;assembly=dotMorten.Xamarin.Forms.AutoSuggestBox"
              xmlns:viewmodels="clr-namespace:LinksOrganizer.ViewModels"
              xmlns:behaviors="clr-namespace:LinksOrganizer.Behaviors"
-             x:Class="LinksOrganizer.Views.StartPageView">
+             x:Class="LinksOrganizer.Views.StartPageView"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ContentPage.Content>
 
@@ -12,7 +13,7 @@
             Orientation="Vertical"
             HorizontalOptions="Start">
 
-            <Grid>
+            <Grid BackgroundColor="{DynamicResource PrimaryColor}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="*"/>
@@ -22,16 +23,20 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="12*"/>
                 </Grid.RowDefinitions>
-                
+
                 <forms:AutoSuggestBox 
                     ItemsSource="{Binding SearchedLinks}"
                     Grid.Column="0"
                     Grid.Row="0"
-                    PlaceholderText="Search"
+                    PlaceholderText="Search"                  
+                    Style="{StaticResource SmallAutoSuggestBoxStyle}"
+                    
                     x:Name="autoSuggest">
                     <forms:AutoSuggestBox.Behaviors>
                         <behaviors:AutoSuggestBoxBehavior/>
                     </forms:AutoSuggestBox.Behaviors>
+
+                    
                 </forms:AutoSuggestBox>
                 <ImageButton 
                     Grid.Column="1"
@@ -43,20 +48,37 @@
                     Source="plus.png" 
                     Command="{Binding AddLinkItemCommand}">
                 </ImageButton>
-                <Switch 
-                    Grid.Column="0"
-                    Grid.Row="1"
-                    Grid.ColumnSpan="2" IsToggled="{Binding IsOrderedByRank}">
-                    <Switch.Behaviors>
-                        <behaviors:SwitchBehavior/>
-                    </Switch.Behaviors>
-                </Switch>
+                <StackLayout Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand"
+                    Grid.Row="1" Orientation="Horizontal"  HorizontalOptions="End" >
+                    <Label VerticalOptions="Center" Style="{StaticResource SmallLabelStyle}">Order</Label>
+                    <Switch 
+                        IsToggled="{Binding IsOrderedByRank}">
+                        <Switch.Behaviors>
+                            <behaviors:SwitchOrderBehavior/>
+                        </Switch.Behaviors>
+                    </Switch>
+
+                    <Label VerticalOptions="Center" Style="{StaticResource SmallLabelStyle}">Theme</Label>
+                    <Switch 
+                         IsToggled="{Binding ThemeSwitch}">
+                        <Switch.Behaviors>
+                            <behaviors:SwitchThemeBehavior/>
+                        </Switch.Behaviors>
+                    </Switch>
+                </StackLayout>
                 <ListView 
                     Grid.Column="0"
                     Grid.Row="2"
                     Grid.RowSpan="2"
-                    Grid.ColumnSpan="2"
+                    Grid.ColumnSpan="2"                   
                     ItemsSource="{Binding FavoriteLinks}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Label Text="{Binding Name}" Style="{StaticResource SmallLabelStyle}" />
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                     <ListView.Behaviors>
                         <behaviors:ListViewBehavior/>
                     </ListView.Behaviors>

@@ -3,15 +3,16 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:viewmodels="clr-namespace:LinksOrganizer.ViewModels"
-    x:Class="LinksOrganizer.Views.LinkItemView" >
+    x:Class="LinksOrganizer.Views.LinkItemView" 
+    BackgroundColor="{DynamicResource PageBackgroundColor}">
 
-    <StackLayout Margin="20" VerticalOptions="StartAndExpand">
-        <Label Text="Title" />
-        <Entry Text="{Binding Name}"  />
-        <Label Text="Info" />
-        <Entry Text="{Binding Info}" />
-        <Label Text="Link" />
-        <Entry Text="{Binding Link}"  />
+    <StackLayout Margin="20" VerticalOptions="StartAndExpand" BackgroundColor="{DynamicResource PrimaryColor}">
+        <Label Text="Title" Style="{StaticResource SmallLabelStyle}" />
+        <Entry Text="{Binding Name}" Style="{StaticResource SmallLabelStyle}" />
+        <Label Text="Info" Style="{StaticResource SmallLabelStyle}" />
+        <Entry Text="{Binding Info}" Style="{StaticResource SmallLabelStyle}" />
+        <Label Text="Link" Style="{StaticResource SmallLabelStyle}" />
+        <Entry Text="{Binding Link}" Style="{StaticResource SmallLabelStyle}" />
         <Button Text="Copy" Command="{Binding CopyLinkItemCommand}" />
         <Button Text="Open" Command="{Binding OpenLinkItemCommand}" />
         <Button Text="Save" Command="{Binding SaveLinkItemCommand}" IsEnabled="{Binding CanSave}"  />

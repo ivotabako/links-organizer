@@ -3,24 +3,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="LinksOrganizer.Views.CustomNavigationView"    
-    BarBackgroundColor="{StaticResource GreenColor}"
-    BarTextColor="{StaticResource WhiteColor}"
-    BackgroundColor="Transparent">
-
-    <NavigationPage.Resources>
-        <ResourceDictionary>
-
-            <OnPlatform x:Key="WhiteColor"
-                        x:TypeArguments="Color">
-                <On Platform="Android" Value="White" />
-            </OnPlatform>
-
-            <OnPlatform x:Key="GreenColor"
-                        x:TypeArguments="Color">
-                <On Platform="Android" Value="Green" />
-            </OnPlatform>
-
-        </ResourceDictionary>
-    </NavigationPage.Resources>
+    BackgroundColor="{DynamicResource PageBackgroundColor}"
+    BarTextColor="{DynamicResource SecondaryColor}"
+    >
 
 </NavigationPage>
