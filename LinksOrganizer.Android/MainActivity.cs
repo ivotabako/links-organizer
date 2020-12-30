@@ -1,11 +1,10 @@
 ﻿using Android.App;
 using Android.OS;
 using Android.Content.PM;
-using LinksOrganizer;
 
 namespace LinksOrganizer
 {
-    [Activity(Label = "", Icon = "@drawable/icon",
+    [Activity(Label = "LinksOrganizer", Icon = "@drawable/icon",
         Theme = "@style/MainTheme",
         MainLauncher = true,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
