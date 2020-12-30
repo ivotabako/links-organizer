@@ -16,6 +16,8 @@ namespace LinksOrganizer.Views
             var startPageViewModel = ViewModelLocator.Resolve<StartPageViewModel>();
             BindingContext = startPageViewModel;
             autoSuggest.BindingContext = startPageViewModel;
+
+            NavigationPage.SetHasBackButton(this, false);
         }
     }
 }

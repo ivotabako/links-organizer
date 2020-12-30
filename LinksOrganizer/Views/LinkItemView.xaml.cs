@@ -10,6 +10,8 @@ namespace LinksOrganizer.Views
             InitializeComponent();
             var linkItemViewModel = ViewModelLocator.Resolve<LinkItemViewModel>();
             BindingContext = linkItemViewModel;
+
+            NavigationPage.SetHasBackButton(this, false);
         }
     }
 }
