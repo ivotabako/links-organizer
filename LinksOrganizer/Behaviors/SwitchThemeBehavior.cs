@@ -21,7 +21,10 @@ namespace LinksOrganizer.Behaviors
         {
             if (e.PropertyName == "IsToggled" && sender is Switch @switch && @switch.BindingContext is StartPageViewModel vm && vm != null)
             {
-                await vm.InitializeAsync((@switch.IsToggled, ChangeEvents.ThemeChanged));
+                var theme = @switch.IsToggled
+                    ? Theme.DarkTheme
+                    : Theme.LightTheme;
+                await vm.InitializeAsync((theme, ChangeEvents.ThemeChanged));
             }
         }
 
