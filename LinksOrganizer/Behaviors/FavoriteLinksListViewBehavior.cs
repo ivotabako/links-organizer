@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace LinksOrganizer.Behaviors
 {
-    public class ListViewBehavior : Behavior<ListView>
+    public class FavoriteLinksListViewBehavior : Behavior<ListView>
     {
         protected override void OnAttachedTo(ListView bindable)
         {

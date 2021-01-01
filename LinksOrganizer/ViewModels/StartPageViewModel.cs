@@ -20,9 +20,7 @@ namespace LinksOrganizer.ViewModels
 
         public ICommand LoadLinkItemCommand => new Command<LinkItem>(async (item) => await LoadLinkItemAsync(item));
 
-        public ICommand SetSearchedLinkItemsCommand => new Command<string>(async (item) => await SetSearchedLinkItemNamesCommandAsync(item));
-
-        public List<LinkItem> SearchedLinks { get; private set; }
+        public ICommand SetFavoriteLinksItemsCommand => new Command<string>(async (item) => await SetFavoriteLinksItemsCommandAsync(item));
 
         public List<LinkItem> FavoriteLinks { get; private set; }
 
@@ -70,21 +68,21 @@ namespace LinksOrganizer.ViewModels
             await NavigationService.NavigateToAsync<LinkItemViewModel>(item);
         }
 
-        private async Task SetSearchedLinkItemNamesCommandAsync(string searchedText)
+        private async Task SetFavoriteLinksItemsCommandAsync(string searchedText)
         {
+            var items = await Database.GetItemsAsync();
             if (string.IsNullOrWhiteSpace(searchedText))
             {
-                SearchedLinks = null;
-                RaisePropertyChanged(() => SearchedLinks);
+                FavoriteLinks = items.ToList();
+                RaisePropertyChanged(() => FavoriteLinks);
                 return;
             }
 
-            var items = await Database.GetItemsAsync();
-            SearchedLinks = items.Where(item =>
+            FavoriteLinks = items.Where(item =>
                item.Name.ToUpperInvariant().Contains(searchedText.ToUpperInvariant()) ||
                item.Info.ToUpperInvariant().Contains(searchedText.ToUpperInvariant())
             ).ToList();
-            RaisePropertyChanged(() => SearchedLinks);
+            RaisePropertyChanged(() => FavoriteLinks);
         }
 
         public async override Task InitializeAsync(object navigationData)

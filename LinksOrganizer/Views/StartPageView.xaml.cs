@@ -1,7 +1,4 @@
-﻿using dotMorten.Xamarin.Forms;
-using LinksOrganizer.Models;
-using LinksOrganizer.ViewModels;
-using System.Linq;
+﻿using LinksOrganizer.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,7 +12,6 @@ namespace LinksOrganizer.Views
             InitializeComponent();
             var startPageViewModel = ViewModelLocator.Resolve<StartPageViewModel>();
             BindingContext = startPageViewModel;
-            autoSuggest.BindingContext = startPageViewModel;
 
             NavigationPage.SetHasBackButton(this, false);
         }

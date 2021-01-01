@@ -5,7 +5,7 @@
              xmlns:viewmodels="clr-namespace:LinksOrganizer.ViewModels"
              xmlns:behaviors="clr-namespace:LinksOrganizer.Behaviors"
              x:Class="LinksOrganizer.Views.StartPageView"
-             BackgroundColor="{DynamicResource PageBackgroundColor}">
+             BackgroundColor="{DynamicResource PrimaryColor}">
 
     <ContentPage.Content>
 
@@ -23,21 +23,13 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="12*"/>
                 </Grid.RowDefinitions>
-
-                <forms:AutoSuggestBox 
-                    ItemsSource="{Binding SearchedLinks}"
+                <Entry Placeholder="Search"                 
                     Grid.Column="0"
-                    Grid.Row="0"
-                    PlaceholderText="Search"                  
-                    Style="{StaticResource SmallAutoSuggestBoxStyle}"
-                    
-                    x:Name="autoSuggest">
-                    <forms:AutoSuggestBox.Behaviors>
-                        <behaviors:AutoSuggestBoxBehavior/>
-                    </forms:AutoSuggestBox.Behaviors>
-
-                    
-                </forms:AutoSuggestBox>
+                    Grid.Row="0" Style="{StaticResource SmallLabelStyle}" >
+                    <Entry.Behaviors>
+                        <behaviors:SearchEntryBehavior/>
+                    </Entry.Behaviors>
+                </Entry>
                 <ImageButton 
                     Grid.Column="1"
                     Grid.Row="0"
@@ -80,7 +72,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                     <ListView.Behaviors>
-                        <behaviors:ListViewBehavior/>
+                        <behaviors:FavoriteLinksListViewBehavior/>
                     </ListView.Behaviors>
                 </ListView>
             </Grid>

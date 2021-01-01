@@ -46,18 +46,13 @@
         <Style x:Key="SmallLabelStyle"
                TargetType="Label">
             <Setter Property="TextColor"
-                    Value="{DynamicResource TertiaryTextColor}" />
+                    Value="{DynamicResource PrimaryTextColor}" />
             <Setter Property="FontSize"
-                    Value="15" />
-        </Style>
-
-        <Style x:Key="SmallAutoSuggestBoxStyle"
-               TargetType="forms:AutoSuggestBox">
-            <Setter Property="PlaceholderTextColor"
-                    Value="{DynamicResource TertiaryTextColor}" />
-            <Setter Property="TextColor"
-                    Value="{DynamicResource TertiaryTextColor}" />
-            
+                    Value="20" />
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource PrimaryColor}" />
+            <Setter Property="FontFamily"
+                    Value="QuicksandBoldItalic" />
         </Style>
 
     </Application.Resources>

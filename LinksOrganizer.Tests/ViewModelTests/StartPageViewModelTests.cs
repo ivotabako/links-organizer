@@ -98,17 +98,33 @@ namespace LinksOrganizer.Tests.ViewModelTests
         [InlineData(null)]
         [InlineData("")]
         [InlineData("     ")]
-        public void SetSearchedLinkItemsCommand_SearchedTextIsNullOrWhitespace_SearchedLlinksIsNull(string searchTerm)
+        public void SetFavoriteLinksItemsCommand_SearchedTextIsNullOrWhitespace_FavoriteLinksIsNotFiltered(string searchTerm)
         {
-            var model = new StartPageViewModel(null, null, null, null);
+            var database = new Mock<ILinkItemDatabase>();
+            database.Setup(d => d.GetItemsAsync()).ReturnsAsync(new List<LinkItem>
+            {
+                new LinkItem{ ID = 0, Name = "Valid", Info = "", Link ="http://test.com" },
+                new LinkItem{ ID = 1, Name = "valid name", Info = "", Link ="http://test.com" },
+                new LinkItem{ ID = 2, Name = "Invalid name", Info = "", Link ="http://test.com" },
+                new LinkItem{ ID = 3, Name = "something else", Info = "", Link ="http://test.com" },
+                new LinkItem{ ID = 4, Name = "test", Info = "valid", Link ="http://test.com" },
+                new LinkItem{ ID = 5, Name = "test test", Info = "", Link ="http://test.com" },
+            });
 
-            model.SetSearchedLinkItemsCommand.Execute(searchTerm);
+            var model = new StartPageViewModel(null, null, null, database.Object);
+            var expectedIds = new List<int> { 0, 1, 2, 3, 4, 5 };
 
-            Assert.Null(model.SearchedLinks);
+            model.SetFavoriteLinksItemsCommand.Execute(searchTerm);
+
+            Assert.Equal(6, model.FavoriteLinks.Count);
+            foreach (var id in expectedIds)
+            {
+                Assert.Contains(model.FavoriteLinks, l => l.ID == id);
+            }
         }
 
         [Fact]
-        public void SetSearchedLinkItemsCommand_WithSearchedText_SearchedLlinksIsCorrect()
+        public void SetFavoriteLinksItemsCommand_WithSearchedText_FavoriteLinksIsCorrect()
         {
             var database = new Mock<ILinkItemDatabase>();
             database.Setup(d => d.GetItemsAsync()).ReturnsAsync(new List<LinkItem>
@@ -124,12 +140,12 @@ namespace LinksOrganizer.Tests.ViewModelTests
             var model = new StartPageViewModel(null, null, null, database.Object);
             var expectedIds = new List<int> { 0, 1, 2, 4 };
 
-            model.SetSearchedLinkItemsCommand.Execute("valid");
+            model.SetFavoriteLinksItemsCommand.Execute("valid");
 
-            Assert.Equal(4, model.SearchedLinks.Count);
+            Assert.Equal(4, model.FavoriteLinks.Count);
             foreach (var id in expectedIds)
             {
-                Assert.Contains(model.SearchedLinks, l => l.ID == id);
+                Assert.Contains(model.FavoriteLinks, l => l.ID == id);
             }
         }
 
@@ -138,18 +154,18 @@ namespace LinksOrganizer.Tests.ViewModelTests
         [InlineData("")]
         [InlineData("     ")]
         [InlineData("test")]
-        public void SetSearchedLinkItemsCommand_ChangesSearchedLinksProperty(string searchTerm)
+        public void SetFavoriteLinksItemsCommand_ChangesFavoriteLinksProperty(string searchTerm)
         {
             var database = new Mock<ILinkItemDatabase>();
             database.Setup(d => d.GetItemsAsync()).ReturnsAsync(new List<LinkItem>());
             var model = new StartPageViewModel(null, null, null, database.Object);
             var harness = new NotifyPropertyChangedHarness(model);
 
-            model.SetSearchedLinkItemsCommand.Execute(searchTerm);
+            model.SetFavoriteLinksItemsCommand.Execute(searchTerm);
 
             Assert.NotNull(harness.Changes);
             Assert.Single(harness.Changes);
-            Assert.Equal(nameof(model.SearchedLinks), harness.Changes[0]);
+            Assert.Equal(nameof(model.FavoriteLinks), harness.Changes[0]);
         }
     }
 }
