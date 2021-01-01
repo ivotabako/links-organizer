@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:forms="clr-namespace:dotMorten.Xamarin.Forms;assembly=dotMorten.Xamarin.Forms.AutoSuggestBox"
              xmlns:viewmodels="clr-namespace:LinksOrganizer.ViewModels"
              xmlns:behaviors="clr-namespace:LinksOrganizer.Behaviors"
              x:Class="LinksOrganizer.Views.StartPageView"
@@ -23,9 +22,11 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="12*"/>
                 </Grid.RowDefinitions>
-                <Entry Placeholder="Search"                 
+                <Entry Placeholder="Search"   
+                       
                     Grid.Column="0"
-                    Grid.Row="0" Style="{StaticResource SmallLabelStyle}" >
+                    Grid.Row="0" Style="{StaticResource SearchEntryStyle}" >
+                   
                     <Entry.Behaviors>
                         <behaviors:SearchEntryBehavior/>
                     </Entry.Behaviors>
@@ -42,7 +43,7 @@
                 </ImageButton>
                 <StackLayout Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand"
                     Grid.Row="1" Orientation="Horizontal"  HorizontalOptions="End" >
-                    <Label VerticalOptions="Center" Style="{StaticResource SmallLabelStyle}">Order</Label>
+                    <Label VerticalOptions="Center" Style="{StaticResource SwitchLabelStyle}">Order</Label>
                     <Switch 
                         IsToggled="{Binding IsOrderedByRank}">
                         <Switch.Behaviors>
@@ -50,7 +51,7 @@
                         </Switch.Behaviors>
                     </Switch>
 
-                    <Label VerticalOptions="Center" Style="{StaticResource SmallLabelStyle}">Theme</Label>
+                    <Label VerticalOptions="Center" Style="{StaticResource SwitchLabelStyle}">Theme</Label>
                     <Switch 
                          IsToggled="{Binding ThemeSwitch}">
                         <Switch.Behaviors>
