@@ -1,6 +1,7 @@
 ﻿using LinksOrganizer.Data;
 using LinksOrganizer.Services.Navigation;
 using LinksOrganizer.Utils.ClipboardInfo;
+using LinksOrganizer.Utils.ResourcesProvider;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Globalization;
@@ -47,6 +48,8 @@ namespace LinksOrganizer.ViewModels
             _container.Register<IClipboardInfo, ClipboardInfo>();
 
             _container.Register<ILinkItemDatabase, LinkItemDatabase>();
+
+            _container.Register<IResourcesProvider, ResourcesProvider>();
         }
 
         public static void UpdateDependencies(bool useMockServices)
