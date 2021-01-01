@@ -13,10 +13,58 @@
         <Entry Text="{Binding Info}" Style="{StaticResource SmallLabelStyle}" />
         <Label Text="Link" Style="{StaticResource SmallLabelStyle}" />
         <Entry Text="{Binding Link}" Style="{StaticResource SmallLabelStyle}" />
-        <Button Text="Copy" Command="{Binding CopyLinkItemCommand}" />
-        <Button Text="Open" Command="{Binding OpenLinkItemCommand}" />
-        <Button Text="Save" Command="{Binding SaveLinkItemCommand}" IsEnabled="{Binding CanSave}"  />
-        <Button Text="Cancel" Command="{Binding CancelLinkItemCommand}"/>
-        <Button Text="Delete" Command="{Binding DeleteLinkItemCommand}"/>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            
+        <ImageButton 
+                    
+                    BackgroundColor="Transparent"
+                    WidthRequest="55" HeightRequest="55"
+                    Padding="3"
+                    Margin="3"
+                    Source="copy.png" 
+                    Command="{Binding CopyLinkItemCommand}">
+        </ImageButton>
+
+        <ImageButton 
+                    
+                    BackgroundColor="Transparent"
+            WidthRequest="55" HeightRequest="55"
+                    Padding="3"
+                    Margin="3"
+                    Source="browse.png" 
+                    Command="{Binding OpenLinkItemCommand}">
+        </ImageButton>
+
+        <ImageButton 
+                    WidthRequest="55" HeightRequest="55"
+                    BackgroundColor="Transparent"
+                    IsEnabled="{Binding CanSave}"
+                    Padding="3"
+                    Margin="3"
+                    Source="save.png" 
+                    Command="{Binding SaveLinkItemCommand}">
+        </ImageButton>
+
+        <ImageButton 
+                    
+                    BackgroundColor="Transparent"
+                    WidthRequest="55" HeightRequest="55"
+                    Padding="3"
+                    Margin="3"
+                    Source="delete.png" 
+                    Command="{Binding DeleteLinkItemCommand}">
+        </ImageButton>
+
+        <ImageButton 
+                    
+                    BackgroundColor="Transparent"
+                    WidthRequest="55" HeightRequest="55"
+                    Padding="3"
+                    Margin="3"
+                    Source="close.png" 
+                    Command="{Binding CancelLinkItemCommand}">
+        </ImageButton>
+
+        </StackLayout>
     </StackLayout>
 </ContentPage>

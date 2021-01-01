@@ -10,23 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\font\Quicksand-Bold.otf" />
-    <None Remove="Resources\font\Quicksand-BoldItalic.otf" />
-    <None Remove="Resources\font\Quicksand-Italic.otf" />
-    <None Remove="Resources\font\Quicksand-Light.otf" />
-    <None Remove="Resources\font\Quicksand-LightItalic.otf" />
-    <None Remove="Resources\font\Quicksand-Regular.otf" />
-    <None Remove="Resources\font\Quicksand_Dash.otf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\font\Quicksand-Bold.otf" />
-    <EmbeddedResource Include="Resources\font\Quicksand-BoldItalic.otf" />
-    <EmbeddedResource Include="Resources\font\Quicksand-Italic.otf" />
-    <EmbeddedResource Include="Resources\font\Quicksand-Light.otf" />
-    <EmbeddedResource Include="Resources\font\Quicksand-LightItalic.otf" />
-    <EmbeddedResource Include="Resources\font\Quicksand-Regular.otf" />
-    <EmbeddedResource Include="Resources\font\Quicksand_Dash.otf" />
+    <EmbeddedResource Include="Resources\font\ptsans\PTC55F.ttf" />
+    <EmbeddedResource Include="Resources\font\ptsans\PTC75F.ttf" />
+    <EmbeddedResource Include="Resources\font\ptsans\PTN57F.ttf" />
+    <EmbeddedResource Include="Resources\font\ptsans\PTN77F.ttf" />
+    <EmbeddedResource Include="Resources\font\ptsans\PTS55F.ttf" />
+    <EmbeddedResource Include="Resources\font\ptsans\PTS56F.ttf" />
+    <EmbeddedResource Include="Resources\font\ptsans\PTS75F.ttf" />
+    <EmbeddedResource Include="Resources\font\ptsans\PTS76F.ttf" />
   </ItemGroup>
 
   <ItemGroup>
