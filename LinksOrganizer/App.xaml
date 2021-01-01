@@ -47,6 +47,24 @@
             <Setter Property="TextColor"
                     Value="{DynamicResource PrimaryTextColor}" />
             <Setter Property="FontSize"
+                    Value="25" />
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource PrimaryColor}" />
+            <Setter Property="FontFamily"
+                    Value="PTC55F" />
+            <Setter Property="Margin"
+                    Value="10" />
+            <Setter Property="TextDecorations"
+                    Value="Underline" />
+            <Setter Property="FontAttributes"
+                    Value="Italic" />
+        </Style>
+
+        <Style x:Key="ListViewLabelStyle"
+               TargetType="Label">
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}" />
+            <Setter Property="FontSize"
                     Value="20" />
             <Setter Property="BackgroundColor"
                     Value="{DynamicResource PrimaryColor}" />
@@ -54,7 +72,7 @@
                     Value="PTC55F" />
             <Setter Property="Margin"
                     Value="10" />
-            
+
         </Style>
 
         <Style x:Key="SwitchLabelStyle"
@@ -70,6 +88,21 @@
         </Style>
 
         <Style x:Key="SearchEntryStyle"
+               TargetType="Entry">
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}" />
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource PrimaryColor}" />
+            <Setter Property="FontFamily"
+                    Value="PTC55F" />
+            <Setter Property="Margin"
+                    Value="10" />
+
+        </Style>
+
+        <Style x:Key="LinkItemEntryStyle"
                TargetType="Entry">
             <Setter Property="TextColor"
                     Value="{DynamicResource PrimaryTextColor}" />

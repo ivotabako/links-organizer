@@ -68,7 +68,7 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Label Text="{Binding Name}" Style="{StaticResource SmallLabelStyle}" />
+                                <Label Text="{Binding Name}" Style="{StaticResource ListViewLabelStyle}" />
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
