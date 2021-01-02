@@ -53,7 +53,7 @@
 
                     <Label VerticalOptions="Center" Style="{StaticResource SwitchLabelStyle}">Theme</Label>
                     <Switch 
-                         IsToggled="{Binding ThemeSwitch}">
+                         IsToggled="{Binding Theme}">
                         <Switch.Behaviors>
                             <behaviors:SwitchThemeBehavior/>
                         </Switch.Behaviors>

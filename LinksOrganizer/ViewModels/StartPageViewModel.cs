@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using LinksOrganizer.Data;
 using LinksOrganizer.Models;
-using LinksOrganizer.Utils;
 using LinksOrganizer.Services.Navigation;
+using LinksOrganizer.Themes;
+using LinksOrganizer.Utils;
 using LinksOrganizer.Utils.ClipboardInfo;
+using LinksOrganizer.Utils.ResourcesProvider;
 using Microsoft.Extensions.Caching.Memory;
 using Xamarin.Forms;
-using LinksOrganizer.Themes;
-using LinksOrganizer.Utils.ResourcesProvider;
 
 namespace LinksOrganizer.ViewModels
 {
@@ -25,11 +25,38 @@ namespace LinksOrganizer.ViewModels
 
         public ICommand SetFavoriteLinksItemsCommand => new Command<string>(async (item) => await SetFavoriteLinksItemsCommandAsync(item));
 
-        public List<LinkItem> FavoriteLinks { get; private set; }
+        private List<LinkItem> _favoriteLinks;
+        public List<LinkItem> FavoriteLinks
+        {
+            get => _favoriteLinks;
+            private set
+            {
+                _favoriteLinks = value;
+                RaisePropertyChanged(() => FavoriteLinks);
+            }
+        }
 
-        public bool IsOrderedByRank { get; private set; }
+        private bool _isOrderedByRank;
+        public bool IsOrderedByRank
+        {
+            get => _isOrderedByRank;
+            private set
+            {
+                _isOrderedByRank = value;
+                RaisePropertyChanged(() => IsOrderedByRank);
+            }
+        }
 
-        public Theme Theme { get; private set; }
+        private Theme _theme;
+        public Theme Theme
+        {
+            get => _theme;
+            private set
+            {
+                _theme = value;
+                RaisePropertyChanged(() => Theme);
+            } 
+        }
 
         public StartPageViewModel(
             IClipboardInfo clipboardInfo,
@@ -79,7 +106,6 @@ namespace LinksOrganizer.ViewModels
             if (string.IsNullOrWhiteSpace(searchedText))
             {
                 FavoriteLinks = items.ToList();
-                RaisePropertyChanged(() => FavoriteLinks);
                 return;
             }
 
@@ -87,7 +113,6 @@ namespace LinksOrganizer.ViewModels
                item.Name.ToUpperInvariant().Contains(searchedText.ToUpperInvariant()) ||
                item.Info.ToUpperInvariant().Contains(searchedText.ToUpperInvariant())
             ).ToList();
-            RaisePropertyChanged(() => FavoriteLinks);
         }
 
         public async override Task InitializeAsync(object navigationData)
@@ -99,92 +124,101 @@ namespace LinksOrganizer.ViewModels
 
         private void ChangeTheme(object navigationData)
         {
-            if (!(navigationData is ValueTuple<Theme, ChangeEvents> toggleTupple 
-                && toggleTupple.Item2 == ChangeEvents.ThemeChanged))
+            var theme = GetThemeFromNavigationData(navigationData);
+            if (!theme.HasValue)
                 return;
 
-            StoreThemeInCache(toggleTupple);
-            AddThemeToResourceDictionary(toggleTupple);
-            UpdateTheme();
+            UpdateTheme(theme.Value);
         }
 
-        private void StoreThemeInCache((Theme, ChangeEvents) toggleTupple)
+        private Theme? GetThemeFromNavigationData(object navigationData)
         {
-            using var key = Cache.CreateEntry(ChangeEvents.ThemeChanged);
-            key.Value = toggleTupple.Item1;
+            Theme? theme = null;
+            if (navigationData == null)
+            {
+                Cache.TryGetValue(ChangeEvents.ThemeChanged, out object result);
+                theme = result != null && result is Theme
+                    ? (Theme)result
+                    : Theme.LightTheme;
+            }
+            else if (navigationData is ValueTuple<Theme, ChangeEvents> toggleTupple
+                && toggleTupple.Item2 == ChangeEvents.ThemeChanged)
+            {
+                theme = toggleTupple.Item1;
+            }
+
+            return theme;
         }
 
-        private void AddThemeToResourceDictionary((Theme, ChangeEvents) toggleTupple)
+        public void UpdateTheme(Theme theme)
+        {
+            AddThemeToResourceDictionary(theme);
+            StoreInCache(ChangeEvents.ThemeChanged, theme);
+            Theme = theme;
+        }
+
+        private void AddThemeToResourceDictionary(Theme theme)
         {
             ICollection<ResourceDictionary> mergedDictionaries = resourcesProvider.Resources.MergedDictionaries;
             if (mergedDictionaries != null)
             {
                 mergedDictionaries.Clear();
 
-                if (toggleTupple.Item1 == Theme.DarkTheme)
-                    mergedDictionaries.Add(new DarkTheme());
-                else
-                    mergedDictionaries.Add(new LightTheme());
+                switch (theme)
+                {
+                    case Theme.DarkTheme:
+                        mergedDictionaries.Add(new DarkTheme());
+                        return;
+                    case Theme.LightTheme:
+                    default:
+                        mergedDictionaries.Add(new LightTheme());
+                        return;
+                }
             }
-        }
-
-        private void UpdateTheme()
-        {
-            if (!(Cache.TryGetValue(ChangeEvents.ThemeChanged, out object theme) && theme is Theme))
-                return;
-
-            Theme = (Theme)theme;
-            RaisePropertyChanged(() => Theme);
         }
 
         private async Task RefreshFavoriteLinks(object navigationData)
         {
+            bool? isOrderedByRank = GetOrderTypeFromNavigationData(navigationData);
+            if (!isOrderedByRank.HasValue)
+                return;
+
+            await UpdateFavouriteLinks(isOrderedByRank.Value);
+            StoreInCache(ChangeEvents.OrderChanged, isOrderedByRank.Value);
+        }
+
+        private bool? GetOrderTypeFromNavigationData(object navigationData)
+        {
+            bool? isOrderedByRank = null;
             if (navigationData is null)
             {
-                await InitialiseLinks();
-                return;
+                Cache.TryGetValue(ChangeEvents.OrderChanged, out object result);
+                isOrderedByRank = result == null
+                    ? false
+                    : (bool)result;
             }
-
-            if (!(navigationData is ValueTuple<bool, ChangeEvents> toggleTupple && toggleTupple.Item2 == ChangeEvents.OrderChanged))
+            else if (navigationData is ValueTuple<bool, ChangeEvents> toggleTupple && toggleTupple.Item2 == ChangeEvents.OrderChanged)
             {
-                return;
+                isOrderedByRank = toggleTupple.Item1;
             }
 
-            StoreOrderInCache(toggleTupple);
-            await UpdateFavouriteLinks();
+            return isOrderedByRank;
         }
 
-        private async Task UpdateFavouriteLinks()
-        {
-            if (!Cache.TryGetValue(ChangeEvents.OrderChanged, out object isOrderedByRank))
-                return;
-
-            var items = await Database.GetItemsAsync();
-            IsOrderedByRank = (bool)isOrderedByRank;
-
-            if (IsOrderedByRank)
-                FavoriteLinks = items.OrderByDescending(link => link.Rank).ToList();
-            else
-                FavoriteLinks = items.OrderByDescending(link => link.LastUpdatedOn.Ticks).ToList();
-
-            RaisePropertyChanged(() => IsOrderedByRank);
-            RaisePropertyChanged(() => FavoriteLinks);
-        }
-
-        private void StoreOrderInCache((bool, ChangeEvents) toggleTupple)
-        {
-            using var key = Cache.CreateEntry(ChangeEvents.OrderChanged);
-            key.Value = toggleTupple.Item1;
-        }
-
-        private async Task InitialiseLinks()
+        private async Task UpdateFavouriteLinks(bool isOrderedByRank)
         {
             var items = await Database.GetItemsAsync();
-            IsOrderedByRank = false;
-            FavoriteLinks = items.OrderByDescending(link => link.LastUpdatedOn.Ticks).ToList();
+            IsOrderedByRank = isOrderedByRank;
 
-            RaisePropertyChanged(() => IsOrderedByRank);
-            RaisePropertyChanged(() => FavoriteLinks);
+            FavoriteLinks = IsOrderedByRank
+                ? items.OrderByDescending(link => link.Rank).ToList()
+                : items.OrderByDescending(link => link.LastUpdatedOn.Ticks).ToList();
+        }
+
+        private void StoreInCache(object key, object value)
+        {
+            using var entry = Cache.CreateEntry(key);
+            entry.Value = value;
         }
     }
 }
