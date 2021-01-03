@@ -61,6 +61,42 @@ namespace LinksOrganizer.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string DeleteDialogNoAnswer {
+            get {
+                return ResourceManager.GetString("DeleteDialogNoAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you really want to delete the link?.
+        /// </summary>
+        public static string DeleteDialogQuestion {
+            get {
+                return ResourceManager.GetString("DeleteDialogQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        public static string DeleteDialogTitle {
+            get {
+                return ResourceManager.GetString("DeleteDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string DeleteDialogYesAnswer {
+            get {
+                return ResourceManager.GetString("DeleteDialogYesAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Info.
         /// </summary>
         public static string InfoLabel {

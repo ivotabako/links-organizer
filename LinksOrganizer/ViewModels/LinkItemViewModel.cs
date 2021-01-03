@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using LinksOrganizer.Data;
 using LinksOrganizer.Models;
+using LinksOrganizer.Resx;
 using LinksOrganizer.Services.Navigation;
 using LinksOrganizer.Utils.ClipboardInfo;
 using LinksOrganizer.Utils.ResourcesProvider;
@@ -129,17 +130,25 @@ namespace LinksOrganizer.ViewModels
 
         async private void DeleteLinkItem()
         {
-            var linkItem = new LinkItem()
+            var flag = await ResourcesProvider.DisplayAlert(
+                AppResources.DeleteDialogTitle, 
+                AppResources.DeleteDialogQuestion, 
+                AppResources.DeleteDialogYesAnswer, 
+                AppResources.DeleteDialogNoAnswer);
+            if (flag)
             {
-                Info = this.Info,
-                Link = this.Link,
-                Name = this.Name,
-                ID = this.Id,
-                Rank = this.Rank,
-                LastUpdatedOn = this.LastUpdatedOn
-            };
-            await Database.DeleteItemAsync(linkItem);
-            await NavigationService.NavigateToAsync<StartPageViewModel>();
+                var linkItem = new LinkItem()
+                {
+                    Info = this.Info,
+                    Link = this.Link,
+                    Name = this.Name,
+                    ID = this.Id,
+                    Rank = this.Rank,
+                    LastUpdatedOn = this.LastUpdatedOn
+                };
+                await Database.DeleteItemAsync(linkItem);
+                await NavigationService.NavigateToAsync<StartPageViewModel>();
+            }
         }
 
         async private void CancelLinkItem()
