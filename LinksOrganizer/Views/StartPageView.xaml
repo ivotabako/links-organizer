@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:LinksOrganizer.ViewModels"
              xmlns:behaviors="clr-namespace:LinksOrganizer.Behaviors"
+             xmlns:resources="clr-namespace:LinksOrganizer.Resx"
              x:Class="LinksOrganizer.Views.StartPageView"
              BackgroundColor="{DynamicResource PrimaryColor}">
 
@@ -22,7 +22,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="12*"/>
                 </Grid.RowDefinitions>
-                <Entry Placeholder="Search"   
+                <Entry Placeholder="{x:Static resources:AppResources.SearchPlaceholder}"   
                        
                     Grid.Column="0"
                     Grid.Row="0" Style="{StaticResource SearchEntryStyle}" >
@@ -43,7 +43,7 @@
                 </ImageButton>
                 <StackLayout Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand"
                     Grid.Row="1" Orientation="Horizontal"  HorizontalOptions="End" >
-                    <Label VerticalOptions="Center" Style="{StaticResource SwitchLabelStyle}">Order</Label>
+                    <Label VerticalOptions="Center" Style="{StaticResource SwitchLabelStyle}" Text="{x:Static resources:AppResources.OrderLabel}" />
                     <Switch 
                         IsToggled="{Binding IsOrderedByRank}">
                         <Switch.Behaviors>
@@ -51,7 +51,7 @@
                         </Switch.Behaviors>
                     </Switch>
 
-                    <Label VerticalOptions="Center" Style="{StaticResource SwitchLabelStyle}">Theme</Label>
+                    <Label VerticalOptions="Center" Style="{StaticResource SwitchLabelStyle}" Text="{x:Static resources:AppResources.ThemeLabel}"/>
                     <Switch 
                          IsToggled="{Binding Theme}">
                         <Switch.Behaviors>
