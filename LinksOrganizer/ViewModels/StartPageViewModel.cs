@@ -17,8 +17,6 @@ namespace LinksOrganizer.ViewModels
 {
     public class StartPageViewModel : ViewModelBase
     {
-        private readonly IResourcesProvider resourcesProvider;
-
         public ICommand AddLinkItemCommand => new Command(async () => await AddLinkItemAsync());
 
         public ICommand LoadLinkItemCommand => new Command<LinkItem>(async (item) => await LoadLinkItemAsync(item));
@@ -64,9 +62,8 @@ namespace LinksOrganizer.ViewModels
             IMemoryCache memoryCache,
             ILinkItemDatabase linkItemDatabase,
             IResourcesProvider resourcesProvider)
-            : base(navigationService, memoryCache, linkItemDatabase, clipboardInfo)
+            : base(navigationService, memoryCache, linkItemDatabase, clipboardInfo, resourcesProvider)
         {
-            this.resourcesProvider = resourcesProvider;
         }
 
         private async Task AddLinkItemAsync()
@@ -136,10 +133,7 @@ namespace LinksOrganizer.ViewModels
             Theme? theme = null;
             if (navigationData == null)
             {
-                Cache.TryGetValue(ChangeEvents.ThemeChanged, out object result);
-                theme = result != null && result is Theme
-                    ? (Theme)result
-                    : Theme.LightTheme;
+                theme = Cache.TryGetValue(ChangeEvents.ThemeChanged, out Theme result) ? (Theme?)result : (Theme?)Theme.LightTheme;
             }
             else if (navigationData is ValueTuple<Theme, ChangeEvents> toggleTupple
                 && toggleTupple.Item2 == ChangeEvents.ThemeChanged)
@@ -159,7 +153,7 @@ namespace LinksOrganizer.ViewModels
 
         private void AddThemeToResourceDictionary(Theme theme)
         {
-            ICollection<ResourceDictionary> mergedDictionaries = resourcesProvider.Resources.MergedDictionaries;
+            ICollection<ResourceDictionary> mergedDictionaries = ResourcesProvider.Resources.MergedDictionaries;
             if (mergedDictionaries != null)
             {
                 mergedDictionaries.Clear();
@@ -193,9 +187,7 @@ namespace LinksOrganizer.ViewModels
             if (navigationData is null)
             {
                 Cache.TryGetValue(ChangeEvents.OrderChanged, out object result);
-                isOrderedByRank = result == null
-                    ? false
-                    : (bool)result;
+                isOrderedByRank = result != null && (bool)result;
             }
             else if (navigationData is ValueTuple<bool, ChangeEvents> toggleTupple && toggleTupple.Item2 == ChangeEvents.OrderChanged)
             {

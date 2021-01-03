@@ -81,7 +81,7 @@ namespace LinksOrganizer.ViewModels
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            if (!(bindable is Element view))
+            if (bindable is not Element view)
             {
                 return;
             }

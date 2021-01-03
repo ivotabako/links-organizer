@@ -5,6 +5,7 @@ using LinksOrganizer.Data;
 using LinksOrganizer.Models;
 using LinksOrganizer.Services.Navigation;
 using LinksOrganizer.Utils.ClipboardInfo;
+using LinksOrganizer.Utils.ResourcesProvider;
 using Microsoft.Extensions.Caching.Memory;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -99,8 +100,8 @@ namespace LinksOrganizer.ViewModels
         public LinkItemViewModel(
             INavigationService navigationService,
             IMemoryCache memoryCache,
-            ILinkItemDatabase linkItemDatabase, IClipboardInfo clipboardInfo)
-            : base(navigationService, memoryCache, linkItemDatabase, clipboardInfo)
+            ILinkItemDatabase linkItemDatabase, IClipboardInfo clipboardInfo, IResourcesProvider resourcesProvider)
+            : base(navigationService, memoryCache, linkItemDatabase, clipboardInfo, resourcesProvider)
         {
         }
 
