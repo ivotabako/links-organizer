@@ -176,7 +176,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
 
             model.SetFavoriteLinksItemsCommand.Execute(searchTerm);
 
-            Assert.NotNull(harness.Changes);
+            Assert.NotEmpty(harness.Changes);
             Assert.Single(harness.Changes);
             Assert.Equal(nameof(model.FavoriteLinks), harness.Changes[0]);
         }
@@ -216,7 +216,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
             await model.InitializeAsync(null);
 
             // Assert
-            Assert.NotNull(harness.Changes);            
+            Assert.NotEmpty(harness.Changes);
             Assert.Contains(nameof(model.IsOrderedByRank), harness.Changes);
             Assert.Contains(nameof(model.FavoriteLinks), harness.Changes);
             Assert.Equal(expectedLinks, model.FavoriteLinks);
@@ -260,7 +260,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
             await model.InitializeAsync(null);
 
             // Assert
-            Assert.NotNull(harness.Changes);
+            Assert.NotEmpty(harness.Changes);
             Assert.Contains(nameof(model.IsOrderedByRank), harness.Changes);
             Assert.Contains(nameof(model.FavoriteLinks), harness.Changes);
             Assert.Equal(expectedLinks, model.FavoriteLinks);
@@ -297,7 +297,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
             await model.InitializeAsync((false, ChangeEvents.OrderChanged));
 
             // Assert
-            Assert.NotNull(harness.Changes);
+            Assert.NotEmpty(harness.Changes);
             Assert.Equal(2, harness.Changes.Count);
             Assert.Equal(nameof(model.IsOrderedByRank), harness.Changes[0]);
             Assert.Equal(nameof(model.FavoriteLinks), harness.Changes[1]);
@@ -335,7 +335,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
             await model.InitializeAsync((true, ChangeEvents.OrderChanged));
 
             // Assert
-            Assert.NotNull(harness.Changes);
+            Assert.NotEmpty(harness.Changes);
             Assert.Equal(2, harness.Changes.Count);
             Assert.Equal(nameof(model.IsOrderedByRank), harness.Changes[0]);
             Assert.Equal(nameof(model.FavoriteLinks), harness.Changes[1]);
@@ -365,7 +365,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
             await model.InitializeAsync(((Theme)theme, ChangeEvents.ThemeChanged));
 
             // Assert
-            Assert.NotNull(harness.Changes);
+            Assert.NotEmpty(harness.Changes);
             Assert.Single(harness.Changes);
             Assert.Equal(nameof(model.Theme), harness.Changes[0]);
             Assert.Equal(theme, model.Theme);
