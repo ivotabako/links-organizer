@@ -15,43 +15,39 @@ namespace LinksOrganizer.ViewModels
 {
     public class LinkItemViewModel : ViewModelBase
     {
+        private bool _canSave;
         public bool CanSave
         {
-            get { return !string.IsNullOrWhiteSpace(this.Link) && !string.IsNullOrWhiteSpace(this.Name) && IsUrl(this.Link); }
-        }
-
-        private int _id;
-        public int Id
-        {
-            get { return _id; }
-            set
+            get { return _canSave; }
+            private set
             {
-                _id = value;
-                RaisePropertyChanged(() => Id);
+                if (_canSave == value)
+                    return;
+
+                _canSave = value;
+                RaisePropertyChanged(() => CanSave);
             }
         }
 
-        private int _rank;
-        public int Rank
+        private bool _canDelete;
+        public bool CanDelete
         {
-            get { return _rank; }
-            set
+            get { return _canDelete; }
+            private set
             {
-                _rank = value;
-                RaisePropertyChanged(() => Rank);
+                if (_canDelete == value)
+                    return;
+
+                _canDelete = value;
+                RaisePropertyChanged(() => CanDelete);
             }
         }
 
-        private DateTime _lastUpdatedOn;
-        public DateTime LastUpdatedOn
-        {
-            get { return _lastUpdatedOn; }
-            set
-            {
-                _lastUpdatedOn = value;
-                RaisePropertyChanged(() => LastUpdatedOn);
-            }
-        }
+        public int Id { get; private set; }
+
+        public int Rank { get; private set; }
+
+        public DateTime LastUpdatedOn { get; private set; }
 
         private string _name;
         public string Name
@@ -59,9 +55,12 @@ namespace LinksOrganizer.ViewModels
             get { return _name; }
             set
             {
+                if (_name == value)
+                    return;
+
                 _name = value;
                 RaisePropertyChanged(() => Name);
-                RaisePropertyChanged(() => CanSave);
+                UpdateCanSave();
             }
         }
 
@@ -71,9 +70,12 @@ namespace LinksOrganizer.ViewModels
             get { return _link; }
             set
             {
+                if (_link == value)
+                    return;
+
                 _link = value;
                 RaisePropertyChanged(() => Link);
-                RaisePropertyChanged(() => CanSave);
+                UpdateCanSave();
             }
         }
 
@@ -83,6 +85,9 @@ namespace LinksOrganizer.ViewModels
             get { return _info; }
             set
             {
+                if (_info == value)
+                    return;
+
                 _info = value;
                 RaisePropertyChanged(() => Info);
             }
@@ -101,7 +106,9 @@ namespace LinksOrganizer.ViewModels
         public LinkItemViewModel(
             INavigationService navigationService,
             IMemoryCache memoryCache,
-            ILinkItemDatabase linkItemDatabase, IClipboardInfo clipboardInfo, IResourcesProvider resourcesProvider)
+            ILinkItemDatabase linkItemDatabase,
+            IClipboardInfo clipboardInfo,
+            IResourcesProvider resourcesProvider)
             : base(navigationService, memoryCache, linkItemDatabase, clipboardInfo, resourcesProvider)
         {
         }
@@ -116,8 +123,7 @@ namespace LinksOrganizer.ViewModels
                 ID = this.Id,
                 Rank = this.Rank,
                 LastUpdatedOn = DateTime.UtcNow
-        };
-
+            };
 
             await Database.SaveItemAsync(linkItem);
             await NavigationService.NavigateToAsync<StartPageViewModel>();
@@ -131,24 +137,26 @@ namespace LinksOrganizer.ViewModels
         async private void DeleteLinkItem()
         {
             var flag = await ResourcesProvider.DisplayAlert(
-                AppResources.DeleteDialogTitle, 
-                AppResources.DeleteDialogQuestion, 
-                AppResources.DeleteDialogYesAnswer, 
+                AppResources.DeleteDialogTitle,
+                AppResources.DeleteDialogQuestion,
+                AppResources.DeleteDialogYesAnswer,
                 AppResources.DeleteDialogNoAnswer);
-            if (flag)
+
+            if (!flag)
+                return;
+
+            var linkItem = new LinkItem()
             {
-                var linkItem = new LinkItem()
-                {
-                    Info = this.Info,
-                    Link = this.Link,
-                    Name = this.Name,
-                    ID = this.Id,
-                    Rank = this.Rank,
-                    LastUpdatedOn = this.LastUpdatedOn
-                };
-                await Database.DeleteItemAsync(linkItem);
-                await NavigationService.NavigateToAsync<StartPageViewModel>();
-            }
+                Info = this.Info,
+                Link = this.Link,
+                Name = this.Name,
+                ID = this.Id,
+                Rank = this.Rank,
+                LastUpdatedOn = this.LastUpdatedOn
+            };
+
+            await Database.DeleteItemAsync(linkItem);
+            await NavigationService.NavigateToAsync<StartPageViewModel>();
         }
 
         async private void CancelLinkItem()
@@ -174,25 +182,40 @@ namespace LinksOrganizer.ViewModels
 
         public async override Task InitializeAsync(object navigationData)
         {
-            if (navigationData is LinkItem data)
-            {
-                if (data.ID > 0)
-                {
-                    data.Rank++;
-                    await Database.SaveItemAsync(data);
-                }
-                else
-                {
-                    data.LastUpdatedOn = DateTime.UtcNow;
-                }
+            if (navigationData is not LinkItem data)
+                return;
 
-                this.Name = data.Name;
-                this.Link = data.Link;
-                this.Info = data.Info;
-                this.Id = data.ID;
-                this.Rank = data.Rank;
-                this.LastUpdatedOn = data.LastUpdatedOn;
+            InitialiseBindings();
+
+            if (data.ID > 0)
+            {
+                data.Rank++;
+                await Database.SaveItemAsync(data);
+                CanDelete = true;
             }
+            else
+            {
+                data.LastUpdatedOn = DateTime.UtcNow;
+            }
+
+            Name = data.Name;
+            Link = data.Link;
+            Info = data.Info;
+            Id = data.ID;
+            Rank = data.Rank;
+            LastUpdatedOn = data.LastUpdatedOn;
+        }
+
+        private void UpdateCanSave()
+        {
+            var canSave = !string.IsNullOrWhiteSpace(this.Link) && !string.IsNullOrWhiteSpace(this.Name) && IsUrl(this.Link);
+            CanSave = canSave;
+        }
+
+        private void InitialiseBindings()
+        {
+            RaisePropertyChanged(() => CanSave);
+            RaisePropertyChanged(() => CanDelete);
         }
     }
 }

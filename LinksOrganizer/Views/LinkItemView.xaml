@@ -25,7 +25,7 @@
                Grid.Column="0"
                     Grid.Row="0"
                     Grid.RowSpan="1"
-                    Grid.ColumnSpan="1"   />
+                    Grid.ColumnSpan="1" />
         <Entry Text="{Binding Name}" Style="{StaticResource LinkItemEntryStyle}" Grid.Column="0"
                     Grid.Row="1"
                     Grid.RowSpan="1"
@@ -46,8 +46,8 @@
                     Grid.Row="5"
                     Grid.RowSpan="1"
                     Grid.ColumnSpan="1" />
-           
-        <ImageButton 
+
+        <ImageButton
                     Grid.Column="1"
                     Grid.Row="4"
                     Grid.RowSpan="1"
@@ -56,11 +56,11 @@
                     WidthRequest="55" HeightRequest="55"
                     Padding="3"
                     Margin="3"
-                    Source="copy.png" 
+                    Source="copy.png"
                     Command="{Binding CopyLinkItemCommand}">
         </ImageButton>
 
-        <ImageButton 
+        <ImageButton
                     Grid.Column="1"
                     Grid.Row="5"
                     Grid.RowSpan="1"
@@ -69,13 +69,12 @@
             WidthRequest="55" HeightRequest="55"
                     Padding="3"
                     Margin="3"
-                    Source="browse.png" 
+                    Source="browse.png"
                     Command="{Binding OpenLinkItemCommand}">
         </ImageButton>
 
-        
-                <ImageButton 
-                     Grid.Column="0"
+                <ImageButton
+                    Grid.Column="0"
                     Grid.Row="6"
                     Grid.RowSpan="1"
                     Grid.ColumnSpan="1"
@@ -84,27 +83,27 @@
                         IsEnabled="{Binding CanSave}"
                         Padding="3"
                         Margin="10"
-                        Source="save.png" 
-                HorizontalOptions="Start"
+                        Source="save.png"
+                        HorizontalOptions="Start"
                         Command="{Binding SaveLinkItemCommand}">
                 </ImageButton>
 
-                <ImageButton              
-                     Grid.Column="1"
+                <ImageButton
+                    Grid.Column="1"
                     Grid.Row="6"
                     Grid.RowSpan="1"
                     Grid.ColumnSpan="1"
-                        BackgroundColor="Transparent"
-                        WidthRequest="55" HeightRequest="55"
-                        Padding="3"
-                        Margin="10"
-               VerticalOptions="End"
-                        Source="delete.png" 
-                        Command="{Binding DeleteLinkItemCommand}">
+                    BackgroundColor="Transparent"
+                    IsEnabled="{Binding CanDelete}"
+                    WidthRequest="55" HeightRequest="55"
+                    Padding="3"
+                    Margin="10"
+                    VerticalOptions="End"
+                    Source="delete.png"
+                    Command="{Binding DeleteLinkItemCommand}">
                 </ImageButton>
-            
-        
-        <ImageButton 
+
+        <ImageButton
                     Grid.Column="1"
                     Grid.Row="0"
                     Grid.RowSpan="1"
