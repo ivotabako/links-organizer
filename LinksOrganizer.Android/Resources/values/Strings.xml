@@ -3,4 +3,5 @@
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="links_organizer">Links Organizer</string>
 	<string name="app_name">QuickKri.Solutions.Android</string>
+	<string name="name_on_car">Name on card</string>
 </resources>

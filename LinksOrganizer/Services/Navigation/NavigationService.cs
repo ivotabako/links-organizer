@@ -60,7 +60,7 @@ namespace LinksOrganizer.Services.Navigation
             return Task.FromResult(true);
         }
 
-        private async Task InternalNavigateToAsync(Type viewModelType, object parameter)
+        public async Task InternalNavigateToAsync(Type viewModelType, object parameter)
         {
             Page page = CreatePage(viewModelType);
 

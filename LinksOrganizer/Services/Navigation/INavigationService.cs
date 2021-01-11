@@ -16,5 +16,7 @@ namespace LinksOrganizer.Services.Navigation
         Task RemoveLastFromBackStackAsync();
 
         Task RemoveBackStackAsync();
+
+        
     }
 }

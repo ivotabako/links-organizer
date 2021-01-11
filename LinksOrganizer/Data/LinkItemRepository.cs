@@ -7,7 +7,7 @@ using SQLite;
 
 namespace LinksOrganizer.Data
 {
-    public class LinkItemDatabase : ILinkItemDatabase
+    public class LinkItemRepository : ILinkItemRepository
     {
         static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
         {
@@ -17,7 +17,7 @@ namespace LinksOrganizer.Data
         static SQLiteAsyncConnection Database => lazyInitializer.Value;
         static bool initialized = false;
 
-        public LinkItemDatabase()
+        public LinkItemRepository()
         {
             InitializeAsync().SafeFireAndForget(false);
         }
@@ -39,10 +39,7 @@ namespace LinksOrganizer.Data
             return Database.Table<LinkItem>().ToListAsync();
         }
 
-        public Task<List<LinkItem>> GetItemsNotDoneAsync()
-        {
-            return Database.QueryAsync<LinkItem>("SELECT * FROM [LinkItem] WHERE [Done] = 0");
-        }
+        
 
         public Task<LinkItem> GetItemAsync(int id)
         {

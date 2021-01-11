@@ -47,7 +47,9 @@ namespace LinksOrganizer.ViewModels
 
             _container.Register<IClipboardInfo, ClipboardInfo>();
 
-            _container.Register<ILinkItemDatabase, LinkItemDatabase>();
+            _container.Register<ILinkItemRepository, LinkItemRepository>();
+
+            _container.Register<IOptionsRepository, OptionsRepository>();
 
             _container.Register<IResourcesProvider, ResourcesProvider>();
         }

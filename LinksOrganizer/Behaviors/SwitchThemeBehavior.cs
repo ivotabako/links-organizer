@@ -19,7 +19,7 @@ namespace LinksOrganizer.Behaviors
 
         private async void Bindable_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "IsToggled" && sender is Switch @switch && @switch.BindingContext is StartPageViewModel vm && vm != null)
+            if (e.PropertyName == "IsToggled" && sender is Switch @switch && @switch.BindingContext is OptionsViewModel vm && vm != null)
             {
                 var theme = @switch.IsToggled
                     ? Theme.DarkTheme

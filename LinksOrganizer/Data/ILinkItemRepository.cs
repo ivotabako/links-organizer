@@ -4,12 +4,12 @@ using LinksOrganizer.Models;
 
 namespace LinksOrganizer.Data
 {
-    public interface ILinkItemDatabase
+    public interface ILinkItemRepository
     {
         Task<int> DeleteItemAsync(LinkItem item);
         Task<LinkItem> GetItemAsync(int id);
         Task<List<LinkItem>> GetItemsAsync();
-        Task<List<LinkItem>> GetItemsNotDoneAsync();
+    
         Task<int> SaveItemAsync(LinkItem item);
     }
 }

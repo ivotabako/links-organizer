@@ -17,6 +17,8 @@ namespace LinksOrganizer.ViewModels
 {
     public class StartPageViewModel : ViewModelBase
     {
+        public ICommand OptionsCommand => new Command(async () => await OptionsAsync());
+
         public ICommand AddLinkItemCommand => new Command(async () => await AddLinkItemAsync());
 
         public ICommand LoadLinkItemCommand => new Command<LinkItem>(async (item) => await LoadLinkItemAsync(item));
@@ -32,37 +34,16 @@ namespace LinksOrganizer.ViewModels
                 _favoriteLinks = value;
                 RaisePropertyChanged(() => FavoriteLinks);
             }
-        }
-
-        private bool _isOrderedByRank;
-        public bool IsOrderedByRank
-        {
-            get => _isOrderedByRank;
-            private set
-            {
-                _isOrderedByRank = value;
-                RaisePropertyChanged(() => IsOrderedByRank);
-            }
-        }
-
-        private Theme _theme;
-        public Theme Theme
-        {
-            get => _theme;
-            private set
-            {
-                _theme = value;
-                RaisePropertyChanged(() => Theme);
-            } 
-        }
+        }       
 
         public StartPageViewModel(
             IClipboardInfo clipboardInfo,
             INavigationService navigationService,
             IMemoryCache memoryCache,
-            ILinkItemDatabase linkItemDatabase,
+            ILinkItemRepository linkItemDatabase,
+            IOptionsRepository optionsRepository,
             IResourcesProvider resourcesProvider)
-            : base(navigationService, memoryCache, linkItemDatabase, clipboardInfo, resourcesProvider)
+            : base(navigationService, memoryCache, linkItemDatabase, optionsRepository, clipboardInfo, resourcesProvider)
         {
         }
 
@@ -77,6 +58,11 @@ namespace LinksOrganizer.ViewModels
             }
 
             await NavigationService.NavigateToAsync<LinkItemViewModel>(newLink);
+        }
+
+        private async Task OptionsAsync()
+        {        
+            await NavigationService.NavigateToAsync<OptionsViewModel>();
         }
 
         private async Task<(bool isUrl, string url)> CheckClipboard()
@@ -114,103 +100,17 @@ namespace LinksOrganizer.ViewModels
 
         public async override Task InitializeAsync(object navigationData)
         {
-            await RefreshFavoriteLinks(navigationData);
-
-            ChangeTheme(navigationData);
+            await UpdateFavouriteLinks();          
         }
-
-        private void ChangeTheme(object navigationData)
-        {
-            var theme = GetThemeFromNavigationData(navigationData);
-            if (!theme.HasValue)
-                return;
-
-            UpdateTheme(theme.Value);
-        }
-
-        private Theme? GetThemeFromNavigationData(object navigationData)
-        {
-            Theme? theme = null;
-            if (navigationData == null)
-            {
-                theme = Cache.TryGetValue(ChangeEvents.ThemeChanged, out Theme result) ? (Theme?)result : (Theme?)Theme.LightTheme;
-            }
-            else if (navigationData is ValueTuple<Theme, ChangeEvents> toggleTupple
-                && toggleTupple.Item2 == ChangeEvents.ThemeChanged)
-            {
-                theme = toggleTupple.Item1;
-            }
-
-            return theme;
-        }
-
-        public void UpdateTheme(Theme theme)
-        {
-            AddThemeToResourceDictionary(theme);
-            StoreInCache(ChangeEvents.ThemeChanged, theme);
-            Theme = theme;
-        }
-
-        private void AddThemeToResourceDictionary(Theme theme)
-        {
-            ICollection<ResourceDictionary> mergedDictionaries = ResourcesProvider.Resources.MergedDictionaries;
-            if (mergedDictionaries != null)
-            {
-                mergedDictionaries.Clear();
-
-                switch (theme)
-                {
-                    case Theme.DarkTheme:
-                        mergedDictionaries.Add(new DarkTheme());
-                        return;
-                    case Theme.LightTheme:
-                    default:
-                        mergedDictionaries.Add(new LightTheme());
-                        return;
-                }
-            }
-        }
-
-        private async Task RefreshFavoriteLinks(object navigationData)
-        {
-            bool? isOrderedByRank = GetOrderTypeFromNavigationData(navigationData);
-            if (!isOrderedByRank.HasValue)
-                return;
-
-            await UpdateFavouriteLinks(isOrderedByRank.Value);
-            StoreInCache(ChangeEvents.OrderChanged, isOrderedByRank.Value);
-        }
-
-        private bool? GetOrderTypeFromNavigationData(object navigationData)
-        {
-            bool? isOrderedByRank = null;
-            if (navigationData is null)
-            {
-                Cache.TryGetValue(ChangeEvents.OrderChanged, out object result);
-                isOrderedByRank = result != null && (bool)result;
-            }
-            else if (navigationData is ValueTuple<bool, ChangeEvents> toggleTupple && toggleTupple.Item2 == ChangeEvents.OrderChanged)
-            {
-                isOrderedByRank = toggleTupple.Item1;
-            }
-
-            return isOrderedByRank;
-        }
-
-        private async Task UpdateFavouriteLinks(bool isOrderedByRank)
+   
+        private async Task UpdateFavouriteLinks()
         {
             var items = await Database.GetItemsAsync();
-            IsOrderedByRank = isOrderedByRank;
+            var options = await Options.GetOptionsAsync(1);
 
-            FavoriteLinks = IsOrderedByRank
+            FavoriteLinks = options.IsOrderedByRank
                 ? items.OrderByDescending(link => link.Rank).ToList()
                 : items.OrderByDescending(link => link.LastUpdatedOn.Ticks).ToList();
-        }
-
-        private void StoreInCache(object key, object value)
-        {
-            using var entry = Cache.CreateEntry(key);
-            entry.Value = value;
         }
     }
 }

@@ -113,7 +113,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
         [InlineData("     ")]
         public void SetFavoriteLinksItemsCommand_SearchedTextIsNullOrWhitespace_FavoriteLinksIsNotFiltered(string searchTerm)
         {
-            var database = new Mock<ILinkItemDatabase>();
+            var database = new Mock<ILinkItemRepository>();
             database.Setup(d => d.GetItemsAsync()).ReturnsAsync(new List<LinkItem>
             {
                 new LinkItem{ ID = 0, Name = "Valid", Info = "", Link ="http://test.com" },
@@ -139,7 +139,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
         [Fact]
         public void SetFavoriteLinksItemsCommand_WithSearchedText_FavoriteLinksIsCorrect()
         {
-            var database = new Mock<ILinkItemDatabase>();
+            var database = new Mock<ILinkItemRepository>();
             database.Setup(d => d.GetItemsAsync()).ReturnsAsync(new List<LinkItem>
             { 
                 new LinkItem{ ID = 0, Name = "Valid", Info = "", Link ="http://test.com" },
@@ -169,7 +169,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
         [InlineData("test")]
         public void SetFavoriteLinksItemsCommand_ChangesFavoriteLinksProperty(string searchTerm)
         {
-            var database = new Mock<ILinkItemDatabase>();
+            var database = new Mock<ILinkItemRepository>();
             database.Setup(d => d.GetItemsAsync()).ReturnsAsync(new List<LinkItem>());
             var model = new StartPageViewModel(null, null, null, database.Object, null);
             var harness = new NotifyPropertyChangedHarness(model);
@@ -194,7 +194,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
                 new LinkItem{ ID = 4, Name = "E", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-1), Rank = 6 },
                 new LinkItem{ ID = 5, Name = "F", Link ="http://test.com", LastUpdatedOn = DateTime.Now, Rank = 5 },
             };
-            var database = new Mock<ILinkItemDatabase>();
+            var database = new Mock<ILinkItemRepository>();
             database.Setup(d => d.GetItemsAsync()).ReturnsAsync(links);
 
             var cache = new Mock<IMemoryCache>();
@@ -237,7 +237,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
                 new LinkItem{ ID = 4, Name = "E", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-1), Rank = 6 },
                 new LinkItem{ ID = 5, Name = "F", Link ="http://test.com", LastUpdatedOn = DateTime.Now, Rank = 5 },
             };
-            var database = new Mock<ILinkItemDatabase>();
+            var database = new Mock<ILinkItemRepository>();
             database.Setup(d => d.GetItemsAsync()).ReturnsAsync(links);
 
             var cache = new Mock<IMemoryCache>();
@@ -279,7 +279,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
                 new LinkItem{ ID = 4, Name = "E", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-1), Rank = 6 },
                 new LinkItem{ ID = 5, Name = "F", Link ="http://test.com", LastUpdatedOn = DateTime.Now, Rank = 5 },
             };
-            var database = new Mock<ILinkItemDatabase>();
+            var database = new Mock<ILinkItemRepository>();
             database.Setup(d => d.GetItemsAsync()).ReturnsAsync(links);
 
             var cache = new Mock<IMemoryCache>();
@@ -317,7 +317,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
                 new LinkItem{ ID = 4, Name = "E", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-1), Rank = 6 },
                 new LinkItem{ ID = 5, Name = "F", Link ="http://test.com", LastUpdatedOn = DateTime.Now, Rank = 5 },
             };
-            var database = new Mock<ILinkItemDatabase>();
+            var database = new Mock<ILinkItemRepository>();
             database.Setup(d => d.GetItemsAsync()).ReturnsAsync(links);
 
             var cache = new Mock<IMemoryCache>();

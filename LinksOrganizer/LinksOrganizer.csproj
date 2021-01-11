@@ -10,6 +10,45 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\font\Poppins\Poppins-Black.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-BlackItalic.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-Bold.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-BoldItalic.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-ExtraBold.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-ExtraBoldItalic.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-ExtraLight.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-ExtraLightItalic.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-Italic.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-Light.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-LightItalic.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-Medium.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-MediumItalic.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-Regular.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-SemiBold.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-SemiBoldItalic.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-Thin.ttf" />
+    <None Remove="Resources\font\Poppins\Poppins-ThinItalic.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-Black.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-BlackItalic.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-Bold.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-BoldItalic.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-ExtraBold.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-ExtraBoldItalic.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-ExtraLight.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-ExtraLightItalic.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-Italic.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-Light.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-LightItalic.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-Medium.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-MediumItalic.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-Regular.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-SemiBold.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-SemiBoldItalic.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-Thin.ttf" />
+    <EmbeddedResource Include="Resources\font\Poppins\Poppins-ThinItalic.ttf" />
     <EmbeddedResource Include="Resources\font\ptsans\PTC55F.ttf" />
     <EmbeddedResource Include="Resources\font\ptsans\PTC75F.ttf" />
     <EmbeddedResource Include="Resources\font\ptsans\PTN57F.ttf" />
@@ -51,6 +90,9 @@
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LinkItemView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\OptionsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\StartPageView.xaml">

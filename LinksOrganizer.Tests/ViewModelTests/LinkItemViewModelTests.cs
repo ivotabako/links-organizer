@@ -131,7 +131,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
         public async Task InitializeAsync_DataIdIsNotZero_UpdatesDatabase()
         {
             // Arrange
-            var database = new Mock<ILinkItemDatabase>();
+            var database = new Mock<ILinkItemRepository>();
             var model = new LinkItemViewModel(null, null, database.Object, null, null);
             var linkItem = new LinkItem
             {
@@ -149,7 +149,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
         public async Task InitializeAsync_DataIdIsZero_DoesNotUpdateDatabase  ()
         {
             // Arrange
-            var database = new Mock<ILinkItemDatabase>();
+            var database = new Mock<ILinkItemRepository>();
             var model = new LinkItemViewModel(null, null, database.Object, null, null);
             var linkItem = new LinkItem
             {
@@ -167,7 +167,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
         public async Task InitializeAsync_DataIsValid_PropertiesAreSetFromData()
         {
             // Arrange
-            var model = new LinkItemViewModel(null, null, new Mock<ILinkItemDatabase>().Object, null, null);
+            var model = new LinkItemViewModel(null, null, new Mock<ILinkItemRepository>().Object, null, null);
             var linkItem = new LinkItem
             {
                 ID = 1,
@@ -194,7 +194,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
         public async Task InitializeAsync_DataIsNotValid_PropertiesAreNotSet()
         {
             // Arrange
-            var model = new LinkItemViewModel(null, null, new Mock<ILinkItemDatabase>().Object, null, null);
+            var model = new LinkItemViewModel(null, null, new Mock<ILinkItemRepository>().Object, null, null);
 
             // Act
             await model.InitializeAsync(null);
@@ -211,7 +211,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
         [Fact]
         public async Task InitializeAsync_DataIsFromDatabase_CanSaveAndCanDelete()
         {
-            var model = new LinkItemViewModel(null, null, new Mock<ILinkItemDatabase>().Object, null, null);
+            var model = new LinkItemViewModel(null, null, new Mock<ILinkItemRepository>().Object, null, null);
             var linkItem = new LinkItem
             {
                 ID = 1,
@@ -228,7 +228,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
         [Fact]
         public async Task InitializeAsync_DataIsFromDatabase_IncrementsRank()
         {
-            var model = new LinkItemViewModel(null, null, new Mock<ILinkItemDatabase>().Object, null, null);
+            var model = new LinkItemViewModel(null, null, new Mock<ILinkItemRepository>().Object, null, null);
             var rank = 5;
             var linkItem = new LinkItem
             {
@@ -244,7 +244,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
         [Fact]
         public async Task InitializeAsync_NewData_CannotSaveCannotDelete()
         {
-            var model = new LinkItemViewModel(null, null, new Mock<ILinkItemDatabase>().Object, null, null);
+            var model = new LinkItemViewModel(null, null, new Mock<ILinkItemRepository>().Object, null, null);
             var linkItem = new LinkItem();
 
             await model.InitializeAsync(linkItem);

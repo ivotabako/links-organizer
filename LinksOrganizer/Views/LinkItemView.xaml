@@ -5,7 +5,10 @@
     xmlns:resources="clr-namespace:LinksOrganizer.Resx"
     x:Class="LinksOrganizer.Views.LinkItemView" 
     BackgroundColor="{DynamicResource PageBackgroundColor}">
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Options" Order="Primary" Text="..." Priority="1" Command="{Binding OptionsCommand}" />
+    </ContentPage.ToolbarItems>
+    
     <Grid BackgroundColor="{DynamicResource PrimaryColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"/>

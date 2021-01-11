@@ -2,73 +2,67 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:behaviors="clr-namespace:LinksOrganizer.Behaviors"
-             xmlns:resources="clr-namespace:LinksOrganizer.Resx"
+             xmlns:resources="clr-namespace:LinksOrganizer.Resx" 
+             xmlns:customcontrols="clr-namespace:LinksOrganizer.CustomControls"
              x:Class="LinksOrganizer.Views.StartPageView"
-             BackgroundColor="{DynamicResource PrimaryColor}">
-
+             BackgroundColor="White">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Options" Order="Primary" Text="..." Priority="1" Command="{Binding OptionsCommand}" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
 
         <StackLayout 
             Orientation="Vertical"
-            HorizontalOptions="Start">
+            HorizontalOptions="Start"
+            >
+            <Label                                              
+                    Text="{x:Static resources:AppResources.SearchPlaceholder}" 
+                    TextColor="#8698A8"
+                    Margin="13, 5, 10, 0"
+                    FontFamily="Poppins-Regular">
+            </Label>
 
-            <Grid BackgroundColor="{DynamicResource PrimaryColor}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="12*"/>
-                </Grid.RowDefinitions>
-                <Entry Placeholder="{x:Static resources:AppResources.SearchPlaceholder}"   
-                       
-                    Grid.Column="0"
-                    Grid.Row="0" Style="{StaticResource SearchEntryStyle}" >
-                   
+            <Grid  Margin="10, 0, 10, 0" MinimumHeightRequest="45" >
+                <customcontrols:CustomEntry
+                        FontFamily="Poppins-Italic"
+                        Placeholder="Enter link info"
+                        Margin="6, 0, 0, 0">
+
                     <Entry.Behaviors>
                         <behaviors:SearchEntryBehavior/>
                     </Entry.Behaviors>
-                </Entry>
-                <ImageButton 
-                    Grid.Column="1"
-                    Grid.Row="0"
-                    BackgroundColor="Transparent"
-                    HorizontalOptions="End"
-                    Padding="3"
-                    Margin="3"
-                    Source="add.png" 
-                    Command="{Binding AddLinkItemCommand}">
-                </ImageButton>
-                <StackLayout Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand"
-                    Grid.Row="1" Orientation="Horizontal"  HorizontalOptions="End" >
-                    <Label VerticalOptions="Center" Style="{StaticResource SwitchLabelStyle}" Text="{x:Static resources:AppResources.OrderLabel}" />
-                    <Switch 
-                        IsToggled="{Binding IsOrderedByRank}">
-                        <Switch.Behaviors>
-                            <behaviors:SwitchOrderBehavior/>
-                        </Switch.Behaviors>
-                    </Switch>
+                </customcontrols:CustomEntry>
 
-                    <Label VerticalOptions="Center" Style="{StaticResource SwitchLabelStyle}" Text="{x:Static resources:AppResources.ThemeLabel}"/>
-                    <Switch 
-                         IsToggled="{Binding Theme}">
-                        <Switch.Behaviors>
-                            <behaviors:SwitchThemeBehavior/>
-                        </Switch.Behaviors>
-                    </Switch>
-                </StackLayout>
-                <ListView 
-                    Grid.Column="0"
-                    Grid.Row="2"
-                    Grid.RowSpan="2"
-                    Grid.ColumnSpan="2"                   
+                <customcontrols:RoundedBoxView                                                      
+                            BorderColor="#8698A8"
+                            CornerRadius="5"
+                            BorderThickness="1"
+                            BackgroundColor="Transparent">
+                </customcontrols:RoundedBoxView>
+            </Grid>
+
+            <Button 
+                    Text="Add New Link" 
+                    VerticalOptions="Center" 
+                    CornerRadius="9" 
+                    BorderColor="#8698A8" 
+                    BackgroundColor="Transparent"
+                    BorderWidth="1"
+                    Margin="10, 16, 10, 5"
+                    Command="{Binding AddLinkItemCommand}">
+            </Button>
+
+            <Grid Margin="10, 16, 10, 5"  >
+                <ListView                                                        
                     ItemsSource="{Binding FavoriteLinks}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Label Text="{Binding Name}" Style="{StaticResource ListViewLabelStyle}" />
+                                <Label 
+                                    FontFamily="Poppins-Italic" 
+                                    FontSize="Medium"
+                                    Text="{Binding Name}" 
+                                    Padding="10,10,0,0" />
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -76,6 +70,12 @@
                         <behaviors:FavoriteLinksListViewBehavior/>
                     </ListView.Behaviors>
                 </ListView>
+                <customcontrols:RoundedBoxView                                                      
+                    BorderColor="#8698A8"
+                    CornerRadius="5"
+                    BorderThickness="1"
+                    BackgroundColor="Transparent">
+                </customcontrols:RoundedBoxView>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

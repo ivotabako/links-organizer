@@ -93,6 +93,8 @@ namespace LinksOrganizer.ViewModels
             }
         }
 
+        public ICommand OptionsCommand => new Command(async () => await OptionsAsync());
+
         public ICommand SaveLinkItemCommand => new Command(SaveLinkItem);
 
         public ICommand DeleteLinkItemCommand => new Command(DeleteLinkItem);
@@ -106,10 +108,11 @@ namespace LinksOrganizer.ViewModels
         public LinkItemViewModel(
             INavigationService navigationService,
             IMemoryCache memoryCache,
-            ILinkItemDatabase linkItemDatabase,
+            ILinkItemRepository linkItemDatabase,
+            IOptionsRepository optionsRepository,
             IClipboardInfo clipboardInfo,
             IResourcesProvider resourcesProvider)
-            : base(navigationService, memoryCache, linkItemDatabase, clipboardInfo, resourcesProvider)
+            : base(navigationService, memoryCache, linkItemDatabase, optionsRepository, clipboardInfo, resourcesProvider)
         {
         }
 
@@ -216,6 +219,11 @@ namespace LinksOrganizer.ViewModels
         {
             RaisePropertyChanged(() => CanSave);
             RaisePropertyChanged(() => CanDelete);
+        }
+
+        private async Task OptionsAsync()
+        {
+            await NavigationService.NavigateToAsync<OptionsViewModel>();
         }
     }
 }
