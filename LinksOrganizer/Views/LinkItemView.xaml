@@ -80,7 +80,7 @@
                 <Label                                              
                         Text="{x:Static resources:AppResources.TitleLabel}" 
                         TextColor="#8698A8"
-                        Margin="13, 0, 10, 0"
+                        Margin="13, 10, 10, 0"
                         FontFamily="Poppins-Regular">
                 </Label>
                 <Grid  Margin="10, 0, 10, 0" MinimumHeightRequest="45" >
@@ -104,7 +104,7 @@
                 <Label                                              
                             Text="{x:Static resources:AppResources.InfoLabel}" 
                             TextColor="#8698A8"
-                            Margin="13, 5, 10, 0"
+                            Margin="13, 10, 10, 0"
                             FontFamily="Poppins-Regular">
                 </Label>
                 <Grid  Margin="10, 0, 10, 0" MinimumHeightRequest="45" >
@@ -126,7 +126,7 @@
                 <Label                                              
                             Text="{x:Static resources:AppResources.LinkLabel}" 
                             TextColor="#8698A8"
-                            Margin="13, 5, 10, 0"
+                            Margin="13, 10, 10, 0"
                             FontFamily="Poppins-Regular">
                 </Label>
             <Grid  Margin="10, 0, 10, 0" MinimumHeightRequest="45" >
