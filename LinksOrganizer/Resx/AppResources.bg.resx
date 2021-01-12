@@ -136,13 +136,13 @@
     <value>Връзка</value>
   </data>
   <data name="OrderLabel" xml:space="preserve">
-    <value>Подредба</value>
+    <value>Подреди по ранг</value>
   </data>
   <data name="SearchPlaceholder" xml:space="preserve">
     <value>Търси</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Тема</value>
+    <value>Смени темата</value>
   </data>
   <data name="TitleLabel" xml:space="preserve">
     <value>Заглавие</value>

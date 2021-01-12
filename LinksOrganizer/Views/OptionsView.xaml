@@ -3,25 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:behaviors="clr-namespace:LinksOrganizer.Behaviors"
              xmlns:resources="clr-namespace:LinksOrganizer.Resx" 
-             x:Class="LinksOrganizer.Views.OptionsView">
+             xmlns:customcontrols="clr-namespace:LinksOrganizer.CustomControls"
+             x:Class="LinksOrganizer.Views.OptionsView"
+             NavigationPage.HasNavigationBar="false">
     <ContentPage.Content>
-        <StackLayout Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand"
-                    Grid.Row="1" Orientation="Horizontal"  HorizontalOptions="End" >
-            <Label VerticalOptions="Center" Style="{StaticResource SwitchLabelStyle}" Text="{x:Static resources:AppResources.OrderLabel}" />
-            <Switch 
-                        IsToggled="{Binding IsOrderedByRank}">
-                <Switch.Behaviors>
-                    <behaviors:SwitchOrderBehavior/>
-                </Switch.Behaviors>
-            </Switch>
-
-            <Label VerticalOptions="Center" Style="{StaticResource SwitchLabelStyle}" Text="{x:Static resources:AppResources.ThemeLabel}"/>
-            <Switch 
-                         IsToggled="{Binding Theme}">
-                <Switch.Behaviors>
-                    <behaviors:SwitchThemeBehavior/>
-                </Switch.Behaviors>
-            </Switch>
+        <StackLayout  VerticalOptions="FillAndExpand" Margin="10, 10, 0, 10"
+                  Orientation="Vertical"  HorizontalOptions="Start" >
+            <Label                                              
+                    Text="Options" 
+                    TextColor="#8698A8"
+                    Margin="15, 5, 0, 0"
+                    FontFamily="Poppins-Regular">
+            </Label>
+            <Grid Margin="10, 0, 20, 20"  >
+                <StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal" Margin="20, 20, 20, 15">
+                        <Label VerticalOptions="Center"  Text="{x:Static resources:AppResources.OrderLabel}" />
+                        <Switch 
+                                    IsToggled="{Binding IsOrderedByRank}">
+                            <Switch.Behaviors>
+                                <behaviors:SwitchOrderBehavior/>
+                            </Switch.Behaviors>
+                        </Switch>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="20, 10, 20, 15">
+                        <Label VerticalOptions="Center"  Text="{x:Static resources:AppResources.ThemeLabel}"/>
+                        <Switch 
+                                     IsToggled="{Binding Theme}">
+                            <Switch.Behaviors>
+                                <behaviors:SwitchThemeBehavior/>
+                            </Switch.Behaviors>
+                        </Switch>
+                    </StackLayout>
+                </StackLayout>
+                <customcontrols:RoundedBoxView                                                      
+                    BorderColor="#8698A8"
+                    CornerRadius="5"
+                    BorderThickness="1"
+                    BackgroundColor="Transparent">
+                </customcontrols:RoundedBoxView>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

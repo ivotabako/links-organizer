@@ -115,7 +115,7 @@ namespace LinksOrganizer.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Order.
+        ///   Looks up a localized string similar to Links Order.
         /// </summary>
         public static string OrderLabel {
             get {
@@ -133,7 +133,7 @@ namespace LinksOrganizer.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Theme.
+        ///   Looks up a localized string similar to Switch Theme .
         /// </summary>
         public static string ThemeLabel {
             get {

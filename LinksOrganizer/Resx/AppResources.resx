@@ -136,13 +136,13 @@
     <value>Link</value>
   </data>
   <data name="OrderLabel" xml:space="preserve">
-    <value>Order</value>
+    <value>Links Order</value>
   </data>
   <data name="SearchPlaceholder" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme</value>
+    <value>Switch Theme </value>
   </data>
   <data name="TitleLabel" xml:space="preserve">
     <value>Title</value>
