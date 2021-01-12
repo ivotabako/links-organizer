@@ -2,121 +2,149 @@
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    xmlns:resources="clr-namespace:LinksOrganizer.Resx"
+    xmlns:resources="clr-namespace:LinksOrganizer.Resx" xmlns:customcontrols="clr-namespace:LinksOrganizer.CustomControls"
     x:Class="LinksOrganizer.Views.LinkItemView" 
-    BackgroundColor="{DynamicResource PageBackgroundColor}">
+    BackgroundColor="#FFFFFF">
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Options" Order="Primary" Text="..." Priority="1" Command="{Binding OptionsCommand}" />
     </ContentPage.ToolbarItems>
-    
-    <Grid BackgroundColor="{DynamicResource PrimaryColor}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <ContentPage.Content>
+        <StackLayout 
+            Orientation="Vertical"
+            HorizontalOptions="Start"
+            >
+                <Label                                              
+                        Text="Manage" 
+                        TextColor="#8698A8"
+                        Margin="13, 5, 10, 0"
+                        FontFamily="Poppins-Regular">
+                </Label>
+                <Grid  Margin="10, 0, 10, 0"  >
 
-        <Label Text="{x:Static resources:AppResources.TitleLabel}" Style="{StaticResource SmallLabelStyle}"  
-               Grid.Column="0"
-                    Grid.Row="0"
-                    Grid.RowSpan="1"
-                    Grid.ColumnSpan="1" />
-        <Entry Text="{Binding Name}" Style="{StaticResource LinkItemEntryStyle}" Grid.Column="0"
-                    Grid.Row="1"
-                    Grid.RowSpan="1"
-                    Grid.ColumnSpan="1" />
-        <Label Text="{x:Static resources:AppResources.InfoLabel}" Style="{StaticResource SmallLabelStyle}" Grid.Column="0"
-                    Grid.Row="2"
-                    Grid.RowSpan="1"
-                    Grid.ColumnSpan="1" />
-        <Entry Text="{Binding Info}" Style="{StaticResource LinkItemEntryStyle}" Grid.Column="0"
-                    Grid.Row="3"
-                    Grid.RowSpan="1"
-                    Grid.ColumnSpan="1" />
-        <Label Text="{x:Static resources:AppResources.LinkLabel}"  Style="{StaticResource SmallLabelStyle}" Grid.Column="0"
-                    Grid.Row="4"
-                    Grid.RowSpan="1"
-                    Grid.ColumnSpan="1" />
-        <Entry Text="{Binding Link}" Style="{StaticResource LinkItemEntryStyle}" Grid.Column="0"
-                    Grid.Row="5"
-                    Grid.RowSpan="1"
-                    Grid.ColumnSpan="1" />
+                    <StackLayout Orientation="Horizontal">
+                        <Button 
+                            Text="Copy" 
+                            VerticalOptions="Center" 
+                            CornerRadius="9" 
+                            BorderColor="#8698A8" 
+                            BackgroundColor="#07122A"
+                            TextColor="#FFFFFF"
+                            BorderWidth="1"
+                            Margin="6, 16, 0, 14"
+                            Command="{Binding CopyLinkItemCommand}">
+                        </Button>
+                        <Button 
+                            Text="Open" 
+                            VerticalOptions="Center" 
+                            CornerRadius="9" 
+                            BorderColor="#8698A8" 
+                            BackgroundColor="#07122A"
+                            TextColor="#FFFFFF"
+                            BorderWidth="1"
+                            Margin="3, 16, 0, 14"
+                            Command="{Binding OpenLinkItemCommand}">
+                        </Button>
+                        <Button 
+                            Text="Save" 
+                            VerticalOptions="Center" 
+                            CornerRadius="9" 
+                            BorderColor="#8698A8" 
+                            IsEnabled="{Binding CanSave}"
+                            BackgroundColor="#07122A"
+                            TextColor="#FFFFFF"
+                            BorderWidth="1"
+                            Margin="3, 16, 0, 14"
+                            Command="{Binding SaveLinkItemCommand}">
+                        </Button>
+                        <Button 
+                            Text="Delete" 
+                            VerticalOptions="Center" 
+                            CornerRadius="9" 
+                            BorderColor="#8698A8" 
+                            IsEnabled="{Binding CanDelete}"
+                            BackgroundColor="#07122A"
+                            TextColor="#FFFFFF"
+                            BorderWidth="1"
+                            Margin="3, 16, 0, 14"
+                            Command="{Binding DeleteLinkItemCommand}">
+                        </Button>
+                </StackLayout>
+                    <customcontrols:RoundedBoxView                                                      
+                                    BorderColor="#8698A8"
+                                    CornerRadius="5"
+                                    BorderThickness="1"
+                                    BackgroundColor="Transparent">
+                    </customcontrols:RoundedBoxView>
+                </Grid>
+            
+                <Label                                              
+                        Text="{x:Static resources:AppResources.TitleLabel}" 
+                        TextColor="#8698A8"
+                        Margin="13, 0, 10, 0"
+                        FontFamily="Poppins-Regular">
+                </Label>
+                <Grid  Margin="10, 0, 10, 0" MinimumHeightRequest="45" >
+                    <customcontrols:CustomEntry
+                                FontFamily="Poppins-Italic"
+                                Placeholder="Enter link title"
+                                Margin="6, 0, 0, 0"
+                        Text="{Binding Name}">
 
-        <ImageButton
-                    Grid.Column="1"
-                    Grid.Row="4"
-                    Grid.RowSpan="1"
-                    Grid.ColumnSpan="1"
-                    BackgroundColor="Transparent"
-                    WidthRequest="55" HeightRequest="55"
-                    Padding="3"
-                    Margin="3"
-                    Source="copy.png"
-                    Command="{Binding CopyLinkItemCommand}">
-        </ImageButton>
+                
+                    </customcontrols:CustomEntry>
 
-        <ImageButton
-                    Grid.Column="1"
-                    Grid.Row="5"
-                    Grid.RowSpan="1"
-                    Grid.ColumnSpan="1"
-                    BackgroundColor="Transparent"
-            WidthRequest="55" HeightRequest="55"
-                    Padding="3"
-                    Margin="3"
-                    Source="browse.png"
-                    Command="{Binding OpenLinkItemCommand}">
-        </ImageButton>
+                    <customcontrols:RoundedBoxView                                                      
+                                    BorderColor="#8698A8"
+                                    CornerRadius="5"
+                                    BorderThickness="1"
+                                    BackgroundColor="Transparent">
+                    </customcontrols:RoundedBoxView>
+                </Grid>
 
-                <ImageButton
-                    Grid.Column="0"
-                    Grid.Row="6"
-                    Grid.RowSpan="1"
-                    Grid.ColumnSpan="1"
-                        WidthRequest="55" HeightRequest="55"
-                        BackgroundColor="Transparent"
-                        IsEnabled="{Binding CanSave}"
-                        Padding="3"
-                        Margin="10"
-                        Source="save.png"
-                        HorizontalOptions="Start"
-                        Command="{Binding SaveLinkItemCommand}">
-                </ImageButton>
+                <Label                                              
+                            Text="{x:Static resources:AppResources.InfoLabel}" 
+                            TextColor="#8698A8"
+                            Margin="13, 5, 10, 0"
+                            FontFamily="Poppins-Regular">
+                </Label>
+                <Grid  Margin="10, 0, 10, 0" MinimumHeightRequest="45" >
+                    <customcontrols:CustomEntry
+                                            FontFamily="Poppins-Italic"
+                                            Placeholder="Enter link info"
+                                            Margin="6, 0, 0, 0"
+                                    Text="{Binding Info}">
+                    </customcontrols:CustomEntry>
 
-                <ImageButton
-                    Grid.Column="1"
-                    Grid.Row="6"
-                    Grid.RowSpan="1"
-                    Grid.ColumnSpan="1"
-                    BackgroundColor="Transparent"
-                    IsEnabled="{Binding CanDelete}"
-                    WidthRequest="55" HeightRequest="55"
-                    Padding="3"
-                    Margin="10"
-                    VerticalOptions="End"
-                    Source="delete.png"
-                    Command="{Binding DeleteLinkItemCommand}">
-                </ImageButton>
+                    <customcontrols:RoundedBoxView                                                      
+                                            BorderColor="#8698A8"
+                                            CornerRadius="5"
+                                            BorderThickness="1"
+                                            BackgroundColor="Transparent">
+                    </customcontrols:RoundedBoxView>
+                </Grid>
 
-        <ImageButton
-                    Grid.Column="1"
-                    Grid.Row="0"
-                    Grid.RowSpan="1"
-                    Grid.ColumnSpan="1"
-                    BackgroundColor="Transparent"
-                    WidthRequest="55" HeightRequest="55"
-                    Padding="3"
-                    Margin="3"
-                    Source="close.png" 
-                    Command="{Binding CancelLinkItemCommand}">
-        </ImageButton>
-    </Grid>
+                <Label                                              
+                            Text="{x:Static resources:AppResources.LinkLabel}" 
+                            TextColor="#8698A8"
+                            Margin="13, 5, 10, 0"
+                            FontFamily="Poppins-Regular">
+                </Label>
+            <Grid  Margin="10, 0, 10, 0" MinimumHeightRequest="45" >
+                <customcontrols:CustomEntry
+                                            FontFamily="Poppins-Italic"
+                                            Placeholder="Enter link info"
+                                            Margin="6, 0, 0, 0"
+                                    Text="{Binding Link}">
+                </customcontrols:CustomEntry>
+
+                <customcontrols:RoundedBoxView                                                      
+                                            BorderColor="#8698A8"
+                                            CornerRadius="5"
+                                            BorderThickness="1"
+                                            BackgroundColor="Transparent">
+                </customcontrols:RoundedBoxView>
+            </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
