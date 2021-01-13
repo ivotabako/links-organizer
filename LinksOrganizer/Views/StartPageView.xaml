@@ -5,7 +5,7 @@
              xmlns:resources="clr-namespace:LinksOrganizer.Resx" 
              xmlns:customcontrols="clr-namespace:LinksOrganizer.CustomControls"
              x:Class="LinksOrganizer.Views.StartPageView"
-             BackgroundColor="White">
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Options" Order="Primary" Text="..." Priority="1" Command="{Binding OptionsCommand}" />
     </ContentPage.ToolbarItems>
@@ -17,16 +17,12 @@
             >
             <Label                                              
                     Text="{x:Static resources:AppResources.SearchPlaceholder}" 
-                    TextColor="#8698A8"
-                    Margin="13, 5, 10, 0"
-                    FontFamily="Poppins-Regular">
+                    Style="{StaticResource SearchLabelStyle}">
             </Label>
 
             <Grid  Margin="10, 0, 10, 0" MinimumHeightRequest="45" >
                 <customcontrols:CustomEntry
-                        FontFamily="Poppins-Italic"
-                        Placeholder="Enter link info"
-                        Margin="6, 0, 0, 0">
+                        Style="{StaticResource SearchEntryStyle}">
 
                     <Entry.Behaviors>
                         <behaviors:SearchEntryBehavior/>
@@ -34,21 +30,12 @@
                 </customcontrols:CustomEntry>
 
                 <customcontrols:RoundedBoxView                                                      
-                            BorderColor="#8698A8"
-                            CornerRadius="5"
-                            BorderThickness="1"
-                            BackgroundColor="Transparent">
+                           Style="{StaticResource RoundedBoxViewStyle}" >
                 </customcontrols:RoundedBoxView>
             </Grid>
 
-            <Button 
-                    Text="Add New Link" 
-                    VerticalOptions="Center" 
-                    CornerRadius="9" 
-                    BorderColor="#8698A8" 
-                    BackgroundColor="Transparent"
-                    BorderWidth="1"
-                    Margin="10, 16, 10, 5"
+            <Button Style="{StaticResource AddNewLinkStyle}"   
+                    
                     Command="{Binding AddLinkItemCommand}">
             </Button>
 

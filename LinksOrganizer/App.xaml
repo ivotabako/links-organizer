@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customcontrols="clr-namespace:LinksOrganizer.CustomControls"
+             xmlns:resources="clr-namespace:LinksOrganizer.Resx" 
              x:Class="LinksOrganizer.App">
     <Application.Resources>
         <ResourceDictionary Source="Themes/LightTheme.xaml" />
@@ -12,7 +14,17 @@
                     Value="{DynamicResource SecondaryColor}" />
         </Style>
 
-        
+        <Style x:Key="RoundedBoxViewStyle"
+               TargetType="customcontrols:RoundedBoxView">
+            <Setter Property="BorderColor"
+                    Value="{DynamicResource PrimaryTextColor}" />
+            <Setter Property="CornerRadius"
+                    Value="5" />
+            <Setter Property="BorderThickness"
+                    Value="1"/>
+            <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+        </Style>
 
         <Style x:Key="LargeLabelStyle"
                TargetType="Label">
@@ -76,32 +88,26 @@
         </Style>
 
         <Style x:Key="SearchLabelStyle"
-               TargetType="Entry">
+               TargetType="Label">
             <Setter Property="TextColor"
                     Value="{DynamicResource PrimaryTextColor}" />
-            <Setter Property="FontSize"
-                    Value="20" />
-            <Setter Property="BackgroundColor"
-                    Value="{DynamicResource PrimaryColor}" />
             <Setter Property="FontFamily"
-                    Value="PTC55F" />
+                    Value="Poppins-Regular" />
             <Setter Property="Margin"
-                    Value="10" />
+                    Value="13, 5, 10, 0" />
 
         </Style>
         
         <Style x:Key="SearchEntryStyle"
-               TargetType="Entry">
-            <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}" />
-            <Setter Property="FontSize"
-                    Value="20" />
-            <Setter Property="BackgroundColor"
-                    Value="{DynamicResource PrimaryColor}" />
+               TargetType="customcontrols:CustomEntry">
+            <Setter Property="Placeholder"
+                    Value="{x:Static resources:AppResources.SearchEntryText}" />
             <Setter Property="FontFamily"
-                    Value="PTC55F" />
+                    Value="Poppins-Italic" />
+            <Setter Property="VerticalOptions"
+                    Value="Center" />
             <Setter Property="Margin"
-                    Value="10" />
+                    Value="6, 1, 0, 0" />
 
         </Style>
 
@@ -118,6 +124,23 @@
             <Setter Property="Margin"
                     Value="10" />
 
+        </Style>
+        <Style x:Key="AddNewLinkStyle"
+               TargetType="Button">
+            <Setter Property="Text"
+                    Value="Add New Link" />
+            <Setter Property="BorderColor"
+                    Value="{DynamicResource SecondaryTextColor}" />
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource TransparentColor}" />
+            <Setter Property="CornerRadius"
+                    Value="9" />
+            <Setter Property="VerticalOptions"
+                    Value="Center" />
+            <Setter Property="BorderWidth"
+                    Value="1" />
+            <Setter Property="Margin"
+                    Value="10, 16, 10, 5" />
         </Style>
 
     </Application.Resources>

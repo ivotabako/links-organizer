@@ -138,6 +138,9 @@
   <data name="OrderLabel" xml:space="preserve">
     <value>Links Order</value>
   </data>
+  <data name="SearchEntryText" xml:space="preserve">
+    <value>Enter link info</value>
+  </data>
   <data name="SearchPlaceholder" xml:space="preserve">
     <value>Search</value>
   </data>

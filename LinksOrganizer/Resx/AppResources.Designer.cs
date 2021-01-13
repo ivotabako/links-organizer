@@ -124,6 +124,15 @@ namespace LinksOrganizer.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter link info.
+        /// </summary>
+        public static string SearchEntryText {
+            get {
+                return ResourceManager.GetString("SearchEntryText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string SearchPlaceholder {
