@@ -61,6 +61,15 @@ namespace LinksOrganizer.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New Link.
+        /// </summary>
+        public static string AddNewLink {
+            get {
+                return ResourceManager.GetString("AddNewLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string DeleteDialogNoAnswer {
@@ -102,6 +111,33 @@ namespace LinksOrganizer.Resx {
         public static string InfoLabel {
             get {
                 return ResourceManager.GetString("InfoLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter link info.
+        /// </summary>
+        public static string LinkItemPlaceholderInfo {
+            get {
+                return ResourceManager.GetString("LinkItemPlaceholderInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the link.
+        /// </summary>
+        public static string LinkItemPlaceholderLink {
+            get {
+                return ResourceManager.GetString("LinkItemPlaceholderLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter link title.
+        /// </summary>
+        public static string LinkItemPlaceholderTitle {
+            get {
+                return ResourceManager.GetString("LinkItemPlaceholderTitle", resourceCulture);
             }
         }
         

@@ -14,67 +14,6 @@
                     Value="{DynamicResource SecondaryColor}" />
         </Style>
 
-        <Style x:Key="RoundedBoxViewStyle"
-               TargetType="customcontrols:RoundedBoxView">
-            <Setter Property="BorderColor"
-                    Value="{DynamicResource PrimaryTextColor}" />
-            <Setter Property="CornerRadius"
-                    Value="5" />
-            <Setter Property="BorderThickness"
-                    Value="1"/>
-            <Setter Property="BackgroundColor"
-                    Value="Transparent"/>
-        </Style>
-
-        <Style x:Key="LargeLabelStyle"
-               TargetType="Label">
-            <Setter Property="TextColor"
-                    Value="{DynamicResource SecondaryTextColor}" />
-            <Setter Property="FontSize"
-                    Value="30" />
-        </Style>
-
-        <Style x:Key="MediumLabelStyle"
-               TargetType="Label">
-            <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}" />
-            <Setter Property="FontSize"
-                    Value="25" />
-        </Style>
-
-        <Style x:Key="SmallLabelStyle"
-               TargetType="Label">
-            <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}" />
-            <Setter Property="FontSize"
-                    Value="25" />
-            <Setter Property="BackgroundColor"
-                    Value="{DynamicResource PrimaryColor}" />
-            <Setter Property="FontFamily"
-                    Value="PTC55F" />
-            <Setter Property="Margin"
-                    Value="10" />
-            <Setter Property="TextDecorations"
-                    Value="Underline" />
-            <Setter Property="FontAttributes"
-                    Value="Italic" />
-        </Style>
-
-        <Style x:Key="ListViewLabelStyle"
-               TargetType="Label">
-            <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}" />
-            <Setter Property="FontSize"
-                    Value="20" />
-            <Setter Property="BackgroundColor"
-                    Value="{DynamicResource PrimaryColor}" />
-            <Setter Property="FontFamily"
-                    Value="PTC55F" />
-            <Setter Property="Margin"
-                    Value="10" />
-
-        </Style>
-
         <Style x:Key="SwitchLabelStyle"
                TargetType="Label">
             <Setter Property="TextColor"
@@ -87,61 +26,8 @@
                     Value="PTC55F" />
         </Style>
 
-        <Style x:Key="SearchLabelStyle"
-               TargetType="Label">
-            <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}" />
-            <Setter Property="FontFamily"
-                    Value="Poppins-Regular" />
-            <Setter Property="Margin"
-                    Value="13, 5, 10, 0" />
-
-        </Style>
         
-        <Style x:Key="SearchEntryStyle"
-               TargetType="customcontrols:CustomEntry">
-            <Setter Property="Placeholder"
-                    Value="{x:Static resources:AppResources.SearchEntryText}" />
-            <Setter Property="FontFamily"
-                    Value="Poppins-Italic" />
-            <Setter Property="VerticalOptions"
-                    Value="Center" />
-            <Setter Property="Margin"
-                    Value="6, 1, 0, 0" />
-
-        </Style>
-
-        <Style x:Key="LinkItemEntryStyle"
-               TargetType="Entry">
-            <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}" />
-            <Setter Property="FontSize"
-                    Value="20" />
-            <Setter Property="BackgroundColor"
-                    Value="{DynamicResource PrimaryColor}" />
-            <Setter Property="FontFamily"
-                    Value="PTC55F" />
-            <Setter Property="Margin"
-                    Value="10" />
-
-        </Style>
-        <Style x:Key="AddNewLinkStyle"
-               TargetType="Button">
-            <Setter Property="Text"
-                    Value="Add New Link" />
-            <Setter Property="BorderColor"
-                    Value="{DynamicResource SecondaryTextColor}" />
-            <Setter Property="BackgroundColor"
-                    Value="{DynamicResource TransparentColor}" />
-            <Setter Property="CornerRadius"
-                    Value="9" />
-            <Setter Property="VerticalOptions"
-                    Value="Center" />
-            <Setter Property="BorderWidth"
-                    Value="1" />
-            <Setter Property="Margin"
-                    Value="10, 16, 10, 5" />
-        </Style>
+        
 
     </Application.Resources>
 </Application>

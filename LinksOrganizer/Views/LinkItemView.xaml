@@ -2,9 +2,54 @@
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    xmlns:resources="clr-namespace:LinksOrganizer.Resx" xmlns:customcontrols="clr-namespace:LinksOrganizer.CustomControls"
+    xmlns:resources="clr-namespace:LinksOrganizer.Resx" 
+    xmlns:customcontrols="clr-namespace:LinksOrganizer.CustomControls"
     x:Class="LinksOrganizer.Views.LinkItemView" 
-    BackgroundColor="#FFFFFF">
+    BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <ContentPage.Resources>
+        <Style x:Key="LinkItemLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily"
+                    Value="Poppins-Regular" />
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+            <Setter Property="Margin"
+                    Value="13, 5, 10, 0" />
+        </Style>
+        <Style x:Key="LinkItemManageButtonStyle" TargetType="Button">
+            <Setter Property="CornerRadius"
+                    Value="9" />
+            <Setter Property="VerticalOptions"
+                    Value="Center" />
+            <Setter Property="BorderColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource SecondaryColor}"/>
+            <Setter Property="TextColor"
+                    Value="{DynamicResource SecondaryTextColor}"/>
+            <Setter Property="Margin"
+                    Value="4, 16, 0, 10" />
+        </Style>
+        <Style x:Key="RoundedBoxViewStyle"
+               TargetType="customcontrols:RoundedBoxView">
+            <Setter Property="BorderColor"
+                    Value="{DynamicResource PrimaryTextColor}" />
+            <Setter Property="CornerRadius"
+                    Value="5" />
+            <Setter Property="BorderThickness"
+                    Value="1"/>
+            <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+        </Style>
+        <Style x:Key="LinkItemEntryStyle"
+               TargetType="customcontrols:CustomEntry">
+            
+            <Setter Property="FontFamily"
+                    Value="Poppins-Italic" />
+            <Setter Property="Margin"
+                    Value="6, 0, 0, 0" />
+
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Options" Order="Primary" Text="..." Priority="1" Command="{Binding OptionsCommand}" />
     </ContentPage.ToolbarItems>
@@ -15,133 +60,85 @@
             >
                 <Label                                              
                         Text="Manage" 
-                        TextColor="#8698A8"
-                        Margin="13, 5, 10, 0"
-                        FontFamily="Poppins-Regular">
+                        Style="{StaticResource LinkItemLabelStyle}">
                 </Label>
                 <Grid  Margin="10, 0, 10, 0"  >
 
                     <StackLayout Orientation="Horizontal">
                         <Button 
                             Text="Copy" 
-                            VerticalOptions="Center" 
-                            CornerRadius="9" 
-                            BorderColor="#8698A8" 
-                            BackgroundColor="#07122A"
-                            TextColor="#FFFFFF"
-                            BorderWidth="1"
-                            Margin="6, 16, 0, 14"
+                            Style="{StaticResource LinkItemManageButtonStyle}"
                             Command="{Binding CopyLinkItemCommand}">
                         </Button>
                         <Button 
                             Text="Open" 
-                            VerticalOptions="Center" 
-                            CornerRadius="9" 
-                            BorderColor="#8698A8" 
-                            BackgroundColor="#07122A"
-                            TextColor="#FFFFFF"
-                            BorderWidth="1"
-                            Margin="3, 16, 0, 14"
+                            Style="{StaticResource LinkItemManageButtonStyle}"
                             Command="{Binding OpenLinkItemCommand}">
                         </Button>
                         <Button 
                             Text="Save" 
-                            VerticalOptions="Center" 
-                            CornerRadius="9" 
-                            BorderColor="#8698A8" 
-                            IsEnabled="{Binding CanSave}"
-                            BackgroundColor="#07122A"
-                            TextColor="#FFFFFF"
-                            BorderWidth="1"
-                            Margin="3, 16, 0, 14"
+                           Style="{StaticResource LinkItemManageButtonStyle}"
                             Command="{Binding SaveLinkItemCommand}">
                         </Button>
                         <Button 
                             Text="Delete" 
-                            VerticalOptions="Center" 
-                            CornerRadius="9" 
-                            BorderColor="#8698A8" 
-                            IsEnabled="{Binding CanDelete}"
-                            BackgroundColor="#07122A"
-                            TextColor="#FFFFFF"
-                            BorderWidth="1"
-                            Margin="3, 16, 0, 14"
+                            Style="{StaticResource LinkItemManageButtonStyle}"
                             Command="{Binding DeleteLinkItemCommand}">
                         </Button>
                 </StackLayout>
-                    <customcontrols:RoundedBoxView                                                      
-                                    BorderColor="#8698A8"
-                                    CornerRadius="5"
-                                    BorderThickness="1"
-                                    BackgroundColor="Transparent">
-                    </customcontrols:RoundedBoxView>
-                </Grid>
+                <customcontrols:RoundedBoxView                                                      
+                           Style="{StaticResource RoundedBoxViewStyle}" >
+                </customcontrols:RoundedBoxView>
+            </Grid>
             
                 <Label                                              
                         Text="{x:Static resources:AppResources.TitleLabel}" 
-                        TextColor="#8698A8"
-                        Margin="13, 10, 10, 0"
-                        FontFamily="Poppins-Regular">
+                        Style="{StaticResource LinkItemLabelStyle}">
                 </Label>
                 <Grid  Margin="10, 0, 10, 0" MinimumHeightRequest="45" >
                     <customcontrols:CustomEntry
-                                FontFamily="Poppins-Italic"
-                                Placeholder="Enter link title"
-                                Margin="6, 0, 0, 0"
+                                Style="{StaticResource LinkItemEntryStyle}"
+                                Placeholder="{x:Static resources:AppResources.LinkItemPlaceholderTitle}"
+                                
                         Text="{Binding Name}">
 
                 
                     </customcontrols:CustomEntry>
 
-                    <customcontrols:RoundedBoxView                                                      
-                                    BorderColor="#8698A8"
-                                    CornerRadius="5"
-                                    BorderThickness="1"
-                                    BackgroundColor="Transparent">
-                    </customcontrols:RoundedBoxView>
-                </Grid>
+                <customcontrols:RoundedBoxView                                                      
+                           Style="{StaticResource RoundedBoxViewStyle}" >
+                </customcontrols:RoundedBoxView>
+            </Grid>
 
                 <Label                                              
                             Text="{x:Static resources:AppResources.InfoLabel}" 
-                            TextColor="#8698A8"
-                            Margin="13, 10, 10, 0"
-                            FontFamily="Poppins-Regular">
+                            Style="{StaticResource LinkItemLabelStyle}">
                 </Label>
                 <Grid  Margin="10, 0, 10, 0" MinimumHeightRequest="45" >
                     <customcontrols:CustomEntry
-                                            FontFamily="Poppins-Italic"
-                                            Placeholder="Enter link info"
-                                            Margin="6, 0, 0, 0"
+                                           Style="{StaticResource LinkItemEntryStyle}"
+                                Placeholder="{x:Static resources:AppResources.LinkItemPlaceholderInfo}"
                                     Text="{Binding Info}">
                     </customcontrols:CustomEntry>
 
-                    <customcontrols:RoundedBoxView                                                      
-                                            BorderColor="#8698A8"
-                                            CornerRadius="5"
-                                            BorderThickness="1"
-                                            BackgroundColor="Transparent">
-                    </customcontrols:RoundedBoxView>
-                </Grid>
+                <customcontrols:RoundedBoxView                                                      
+                           Style="{StaticResource RoundedBoxViewStyle}" >
+                </customcontrols:RoundedBoxView>
+            </Grid>
 
                 <Label                                              
                             Text="{x:Static resources:AppResources.LinkLabel}" 
-                            TextColor="#8698A8"
-                            Margin="13, 10, 10, 0"
-                            FontFamily="Poppins-Regular">
+                            Style="{StaticResource LinkItemLabelStyle}">
                 </Label>
             <Grid  Margin="10, 0, 10, 0" MinimumHeightRequest="45" >
                 <customcontrols:CustomEntry
-                                            FontFamily="Poppins-Italic"
-                                            Placeholder="Enter link info"
-                                            Margin="6, 0, 0, 0"
+                                            Style="{StaticResource LinkItemEntryStyle}"
+                                Placeholder="{x:Static resources:AppResources.LinkItemPlaceholderLink}"
                                     Text="{Binding Link}">
                 </customcontrols:CustomEntry>
 
                 <customcontrols:RoundedBoxView                                                      
-                                            BorderColor="#8698A8"
-                                            CornerRadius="5"
-                                            BorderThickness="1"
-                                            BackgroundColor="Transparent">
+                           Style="{StaticResource RoundedBoxViewStyle}" >
                 </customcontrols:RoundedBoxView>
             </Grid>
 
