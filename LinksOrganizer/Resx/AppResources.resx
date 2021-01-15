@@ -147,6 +147,9 @@
   <data name="LinkLabel" xml:space="preserve">
     <value>Link</value>
   </data>
+  <data name="OptionsLabel" xml:space="preserve">
+    <value>Options</value>
+  </data>
   <data name="OrderLabel" xml:space="preserve">
     <value>Links Order</value>
   </data>

@@ -6,14 +6,33 @@
              xmlns:customcontrols="clr-namespace:LinksOrganizer.CustomControls"
              x:Class="LinksOrganizer.Views.OptionsView"
              NavigationPage.HasNavigationBar="false">
+    <ContentPage.Resources>
+        <Style x:Key="OptionsLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily"
+                    Value="Poppins-Regular" />
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+            <Setter Property="Margin"
+                    Value="15,5,0,0" />
+        </Style>
+        <Style x:Key="RoundedBoxViewStyle"
+               TargetType="customcontrols:RoundedBoxView">
+            <Setter Property="BorderColor"
+                    Value="{DynamicResource PrimaryTextColor}" />
+            <Setter Property="CornerRadius"
+                    Value="5" />
+            <Setter Property="BorderThickness"
+                    Value="1"/>
+            <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout  VerticalOptions="FillAndExpand" Margin="10, 10, 0, 10"
                   Orientation="Vertical"  HorizontalOptions="Start" >
-            <Label                                              
-                    Text="Options" 
-                    TextColor="#8698A8"
-                    Margin="15, 5, 0, 0"
-                    FontFamily="Poppins-Regular">
+            <Label Style="{StaticResource OptionsLabelStyle}"                                            
+                    Text="{x:Static resources:AppResources.OptionsLabel}" 
+                    >
             </Label>
             <Grid Margin="10, 0, 20, 20"  >
                 <StackLayout Orientation="Vertical">
@@ -36,11 +55,9 @@
                         </Switch>
                     </StackLayout>
                 </StackLayout>
+                
                 <customcontrols:RoundedBoxView                                                      
-                    BorderColor="#8698A8"
-                    CornerRadius="5"
-                    BorderThickness="1"
-                    BackgroundColor="Transparent">
+                    Style="{StaticResource RoundedBoxViewStyle}" >
                 </customcontrols:RoundedBoxView>
             </Grid>
         </StackLayout>
