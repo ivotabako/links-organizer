@@ -105,6 +105,8 @@ namespace LinksOrganizer.ViewModels
 
         public ICommand OpenLinkItemCommand => new Command(async () => await OpenLinkItem());
 
+        public ICommand ShareLinkItemCommand => new Command(async () => await ShareLinkItem());
+
         public LinkItemViewModel(
             INavigationService navigationService,
             IMemoryCache memoryCache,
@@ -170,6 +172,15 @@ namespace LinksOrganizer.ViewModels
         private async Task CopyLinkItem()
         {
             await ClipboardInfo.SetTextAsync(this.Link);
+        }
+
+        private async Task ShareLinkItem()
+        {
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Uri = this.Link,
+                Title = "Share Web Link"
+            });           
         }
 
         private async Task OpenLinkItem()

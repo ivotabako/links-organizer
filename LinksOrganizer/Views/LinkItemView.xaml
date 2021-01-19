@@ -49,6 +49,15 @@
                     Value="6, 0, 0, 0" />
 
         </Style>
+        <Style x:Key="ManageButtonLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily"
+                    Value="Poppins-Regular" />
+            
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+            <Setter Property="Margin"
+                    Value="15, 0, 10, 0" />
+        </Style>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Options" Order="Primary" Text="..." Priority="1" Command="{Binding OptionsCommand}" />
@@ -64,27 +73,72 @@
                 </Label>
                 <Grid  Margin="10, 0, 10, 0"  >
 
-                    <StackLayout Orientation="Horizontal">
-                        <Button 
-                            Text="Copy" 
-                            Style="{StaticResource LinkItemManageButtonStyle}"
-                            Command="{Binding CopyLinkItemCommand}">
-                        </Button>
-                        <Button 
-                            Text="Open" 
-                            Style="{StaticResource LinkItemManageButtonStyle}"
-                            Command="{Binding OpenLinkItemCommand}">
-                        </Button>
-                        <Button 
-                            Text="Save" 
-                           Style="{StaticResource LinkItemManageButtonStyle}"
-                            Command="{Binding SaveLinkItemCommand}">
-                        </Button>
-                        <Button 
-                            Text="Delete" 
-                            Style="{StaticResource LinkItemManageButtonStyle}"
-                            Command="{Binding DeleteLinkItemCommand}">
-                        </Button>
+                    <StackLayout Orientation="Horizontal" Padding="20 0 0 10">
+                        <StackLayout Orientation="Vertical">
+                            <ImageButton 
+                                    Source="copy_1.png" 
+                                    WidthRequest="50" 
+                                    HeightRequest="50"
+                                   
+                                    Margin="10,10, 5, 0"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding CopyLinkItemCommand}">
+                            </ImageButton>
+                        <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
+                                    >copy</Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical">
+                            <ImageButton 
+                                    Source="share.png" 
+                                    WidthRequest="50" 
+                                    HeightRequest="50"
+                                   
+                                    Margin="10,10, 5, 5"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding ShareLinkItemCommand}">
+                            </ImageButton>
+                            <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
+                                    >share</Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical">
+                            <ImageButton 
+                                    Source="witness.png" 
+                                    WidthRequest="50" 
+                                    HeightRequest="50"
+                                   
+                                    Margin="10,10, 5, 5"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding OpenLinkItemCommand}">
+                            </ImageButton>
+                            <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
+                                    >open</Label>
+                        </StackLayout>
+                    <StackLayout Orientation="Vertical">
+                        <ImageButton 
+                                    Source="save_1.png" 
+                                    WidthRequest="50" 
+                                    HeightRequest="50"
+                                   
+                                    Margin="10,10, 5, 5"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding SaveLinkItemCommand}">
+                        </ImageButton>
+                        <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
+                                    >save</Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical">
+                        <ImageButton 
+                                    Source="trash.png" 
+                                    WidthRequest="50" 
+                                    HeightRequest="50"
+                                   
+                                    Margin="10,10, 5, 5"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding DeleteLinkItemCommand}">
+                        </ImageButton>
+                        <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
+                                    >delete</Label>
+                    </StackLayout>
                 </StackLayout>
                 <customcontrols:RoundedBoxView                                                      
                            Style="{StaticResource RoundedBoxViewStyle}" >
