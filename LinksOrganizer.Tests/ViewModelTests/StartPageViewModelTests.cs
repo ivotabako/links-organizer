@@ -5,12 +5,9 @@ using LinksOrganizer.Data;
 using LinksOrganizer.Models;
 using LinksOrganizer.Services.Navigation;
 using LinksOrganizer.Tests.Utils;
-using LinksOrganizer.Themes;
-using LinksOrganizer.Utils;
 using LinksOrganizer.Utils.ClipboardInfo;
 using LinksOrganizer.Utils.ResourcesProvider;
 using LinksOrganizer.ViewModels;
-using Microsoft.Extensions.Caching.Memory;
 using Moq;
 using Xamarin.Forms;
 using Xunit;
@@ -124,7 +121,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
                 new LinkItem{ ID = 5, Name = "test test", Info = "", Link ="http://test.com" },
             });
 
-            var model = new StartPageViewModel(null, null, null, database.Object, null);
+            var model = new StartPageViewModel(null, null, database.Object, null, null);
             var expectedIds = new List<int> { 0, 1, 2, 3, 4, 5 };
 
             model.SetFavoriteLinksItemsCommand.Execute(searchTerm);
@@ -150,7 +147,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
                 new LinkItem{ ID = 5, Name = "test test", Info = "", Link ="http://test.com" },
             });
 
-            var model = new StartPageViewModel(null, null, null, database.Object, null);
+            var model = new StartPageViewModel(null, null, database.Object, null, null);
             var expectedIds = new List<int> { 0, 1, 2, 4 };
 
             model.SetFavoriteLinksItemsCommand.Execute("valid");
@@ -171,7 +168,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
         {
             var database = new Mock<ILinkItemRepository>();
             database.Setup(d => d.GetItemsAsync()).ReturnsAsync(new List<LinkItem>());
-            var model = new StartPageViewModel(null, null, null, database.Object, null);
+            var model = new StartPageViewModel(null, null, database.Object, null, null);
             var harness = new NotifyPropertyChangedHarness(model);
 
             model.SetFavoriteLinksItemsCommand.Execute(searchTerm);
@@ -181,51 +178,10 @@ namespace LinksOrganizer.Tests.ViewModelTests
             Assert.Equal(nameof(model.FavoriteLinks), harness.Changes[0]);
         }
 
-        [Fact]
-        public async void InitializeAsync_NavigationDataIsNullAndNoCache_OrdersFavouritesByLastUpdate()
-        {
-            // Arrange
-            var links = new List<LinkItem>
-            {
-                new LinkItem{ ID = 0, Name = "A", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-5), Rank = 3 },
-                new LinkItem{ ID = 1, Name = "B", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-4), Rank = 2 },
-                new LinkItem{ ID = 2, Name = "C", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-3), Rank = 1 },
-                new LinkItem{ ID = 3, Name = "D", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-2), Rank = 4 },
-                new LinkItem{ ID = 4, Name = "E", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-1), Rank = 6 },
-                new LinkItem{ ID = 5, Name = "F", Link ="http://test.com", LastUpdatedOn = DateTime.Now, Rank = 5 },
-            };
-            var database = new Mock<ILinkItemRepository>();
-            database.Setup(d => d.GetItemsAsync()).ReturnsAsync(links);
-
-            var cache = new Mock<IMemoryCache>();
-            cache.Setup(c => c.CreateEntry(It.IsAny<object>()))
-                .Returns(new Mock<ICacheEntry>().Object);
-            object isOrderedByRank = false;
-            cache.Setup(c => c.TryGetValue(It.IsAny<object>(), out isOrderedByRank))
-                .Returns(true);
-
-            var resourcesProvider = new Mock<IResourcesProvider>();
-            resourcesProvider.Setup(rp => rp.Resources)
-                .Returns(new ResourceDictionary());
-
-            var model = new StartPageViewModel(null, null, cache.Object, database.Object, resourcesProvider.Object);
-            var harness = new NotifyPropertyChangedHarness(model);
-            var expectedLinks = links.OrderByDescending(l => l.LastUpdatedOn);
-
-            // Act
-            await model.InitializeAsync(null);
-
-            // Assert
-            Assert.NotEmpty(harness.Changes);
-            Assert.Contains(nameof(model.IsOrderedByRank), harness.Changes);
-            Assert.Contains(nameof(model.FavoriteLinks), harness.Changes);
-            Assert.Equal(expectedLinks, model.FavoriteLinks);
-        }
-
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public async void InitializeAsync_NavigationDataIsNullAndOrderIsReadFromCache_OrdersFavouritesByCacheProperty(object isOrderedByRank)
+        public async void InitializeAsync_OrderReadFromOptions_OrdersFavouritesByLastUpdate(bool isOrderedByRank)
         {
             // Arrange
             var links = new List<LinkItem>
@@ -240,19 +196,18 @@ namespace LinksOrganizer.Tests.ViewModelTests
             var database = new Mock<ILinkItemRepository>();
             database.Setup(d => d.GetItemsAsync()).ReturnsAsync(links);
 
-            var cache = new Mock<IMemoryCache>();
-            cache.Setup(c => c.CreateEntry(It.IsAny<object>()))
-                .Returns(new Mock<ICacheEntry>().Object);
-            cache.Setup(c => c.TryGetValue(It.IsAny<object>(), out isOrderedByRank))
-                .Returns(true);
+            var option = new Options { IsOrderedByRank = isOrderedByRank };
+            var optionsRepository = new Mock<IOptionsRepository>();
+            optionsRepository.Setup(o => o.GetOptionsAsync(It.IsAny<int>()))
+                .ReturnsAsync(option);
 
             var resourcesProvider = new Mock<IResourcesProvider>();
             resourcesProvider.Setup(rp => rp.Resources)
                 .Returns(new ResourceDictionary());
 
-            var model = new StartPageViewModel(null, null, cache.Object, database.Object, resourcesProvider.Object);
+            var model = new StartPageViewModel(null, null, database.Object, optionsRepository.Object, resourcesProvider.Object);
             var harness = new NotifyPropertyChangedHarness(model);
-            var expectedLinks = (bool)isOrderedByRank
+            var expectedLinks = isOrderedByRank
                 ? links.OrderByDescending(l => l.Rank)
                 : links.OrderByDescending(l => l.LastUpdatedOn);
 
@@ -261,114 +216,8 @@ namespace LinksOrganizer.Tests.ViewModelTests
 
             // Assert
             Assert.NotEmpty(harness.Changes);
-            Assert.Contains(nameof(model.IsOrderedByRank), harness.Changes);
             Assert.Contains(nameof(model.FavoriteLinks), harness.Changes);
             Assert.Equal(expectedLinks, model.FavoriteLinks);
-        }
-
-        [Fact]
-        public async void InitializeAsyncFromOrderChangeEvent_IsNotOrderedByRank_OrdersFavouritesByLastUpdate()
-        {
-            // Arrange
-            var links = new List<LinkItem>
-            {
-                new LinkItem{ ID = 0, Name = "A", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-5), Rank = 3 },
-                new LinkItem{ ID = 1, Name = "B", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-4), Rank = 2 },
-                new LinkItem{ ID = 2, Name = "C", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-3), Rank = 1 },
-                new LinkItem{ ID = 3, Name = "D", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-2), Rank = 4 },
-                new LinkItem{ ID = 4, Name = "E", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-1), Rank = 6 },
-                new LinkItem{ ID = 5, Name = "F", Link ="http://test.com", LastUpdatedOn = DateTime.Now, Rank = 5 },
-            };
-            var database = new Mock<ILinkItemRepository>();
-            database.Setup(d => d.GetItemsAsync()).ReturnsAsync(links);
-
-            var cache = new Mock<IMemoryCache>();
-            cache.Setup(c => c.CreateEntry(It.IsAny<object>()))
-                .Returns(new Mock<ICacheEntry>().Object);
-            object isOrderedByRank = false;
-            cache.Setup(c => c.TryGetValue(It.IsAny<object>(), out isOrderedByRank))
-                .Returns(true);
-
-            var model = new StartPageViewModel(null, null, cache.Object, database.Object, null);
-            var harness = new NotifyPropertyChangedHarness(model);
-            var expectedLinks = links.OrderByDescending(l => l.LastUpdatedOn);
-
-            // Act
-            await model.InitializeAsync((false, ChangeEvents.OrderChanged));
-
-            // Assert
-            Assert.NotEmpty(harness.Changes);
-            Assert.Equal(2, harness.Changes.Count);
-            Assert.Equal(nameof(model.IsOrderedByRank), harness.Changes[0]);
-            Assert.Equal(nameof(model.FavoriteLinks), harness.Changes[1]);
-            Assert.Equal(expectedLinks, model.FavoriteLinks);
-        }
-
-        [Fact]
-        public async void InitializeAsyncFromOrderChangeEvent_IsOrderedByRank_OrdersFavouritesByRank()
-        {
-            // Arrange
-            var links = new List<LinkItem>
-            {
-                new LinkItem{ ID = 0, Name = "A", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-5), Rank = 3 },
-                new LinkItem{ ID = 1, Name = "B", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-4), Rank = 2 },
-                new LinkItem{ ID = 2, Name = "C", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-3), Rank = 1 },
-                new LinkItem{ ID = 3, Name = "D", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-2), Rank = 4 },
-                new LinkItem{ ID = 4, Name = "E", Link ="http://test.com", LastUpdatedOn = DateTime.Now.AddDays(-1), Rank = 6 },
-                new LinkItem{ ID = 5, Name = "F", Link ="http://test.com", LastUpdatedOn = DateTime.Now, Rank = 5 },
-            };
-            var database = new Mock<ILinkItemRepository>();
-            database.Setup(d => d.GetItemsAsync()).ReturnsAsync(links);
-
-            var cache = new Mock<IMemoryCache>();
-            cache.Setup(c => c.CreateEntry(It.IsAny<object>()))
-                .Returns(new Mock<ICacheEntry>().Object);
-            object isOrderedByRank = true;
-            cache.Setup(c => c.TryGetValue(It.IsAny<object>(), out isOrderedByRank))
-                .Returns(true);
-
-            var model = new StartPageViewModel(null, null, cache.Object, database.Object, null);
-            var harness = new NotifyPropertyChangedHarness(model);
-            var expectedLinks = links.OrderByDescending(l => l.Rank);
-
-            // Act
-            await model.InitializeAsync((true, ChangeEvents.OrderChanged));
-
-            // Assert
-            Assert.NotEmpty(harness.Changes);
-            Assert.Equal(2, harness.Changes.Count);
-            Assert.Equal(nameof(model.IsOrderedByRank), harness.Changes[0]);
-            Assert.Equal(nameof(model.FavoriteLinks), harness.Changes[1]);
-            Assert.Equal(expectedLinks, model.FavoriteLinks);
-        }
-
-        [Theory]
-        [InlineData(Theme.LightTheme)]
-        [InlineData(Theme.DarkTheme)]
-        public async void InitializeAsyncFromThemeChangeEvent_RaisesUpdateTheme(object theme)
-        {
-            // Arrange
-            var cache = new Mock<IMemoryCache>();
-            cache.Setup(c => c.CreateEntry(It.IsAny<object>()))
-                .Returns(new Mock<ICacheEntry>().Object);
-            cache.Setup(c => c.TryGetValue(It.IsAny<object>(), out theme))
-                .Returns(true);
-
-            var resourcesProvider = new Mock<IResourcesProvider>();
-            resourcesProvider.Setup(rp => rp.Resources)
-                .Returns(new ResourceDictionary());
-
-            var model = new StartPageViewModel(null, null, cache.Object, null, resourcesProvider.Object);
-            var harness = new NotifyPropertyChangedHarness(model);
-
-            // Act
-            await model.InitializeAsync(((Theme)theme, ChangeEvents.ThemeChanged));
-
-            // Assert
-            Assert.NotEmpty(harness.Changes);
-            Assert.Single(harness.Changes);
-            Assert.Equal(nameof(model.Theme), harness.Changes[0]);
-            Assert.Equal(theme, model.Theme);
         }
     }
 }

@@ -3,8 +3,6 @@ using LinksOrganizer.Services.Navigation;
 using LinksOrganizer.Utils;
 using LinksOrganizer.Utils.ClipboardInfo;
 using LinksOrganizer.Utils.ResourcesProvider;
-using Microsoft.Extensions.Caching.Memory;
-using System;
 using System.Threading.Tasks;
 
 namespace LinksOrganizer.ViewModels
@@ -13,14 +11,12 @@ namespace LinksOrganizer.ViewModels
     {
         private readonly ILinkItemRepository database;
         private readonly IOptionsRepository options;
-        private readonly IMemoryCache cache;
         private readonly INavigationService navigationService;
         private readonly IClipboardInfo clipboardInfo;
         private readonly IResourcesProvider resourcesProvider;
 
         protected ILinkItemRepository Database => database;
         protected IOptionsRepository Options => options;
-        protected IMemoryCache Cache => cache;
         public INavigationService NavigationService => navigationService;
         protected IClipboardInfo ClipboardInfo => clipboardInfo;
         protected IResourcesProvider ResourcesProvider => resourcesProvider;
@@ -43,15 +39,13 @@ namespace LinksOrganizer.ViewModels
 
 
         public ViewModelBase(
-            INavigationService navigationService, 
-            IMemoryCache memoryCache, 
+            INavigationService navigationService,
             ILinkItemRepository linkItemDatabase,
             IOptionsRepository optionsDatabase,
             IClipboardInfo clipboardInfo,
             IResourcesProvider resourcesProvider)
         {
             this.navigationService = navigationService;
-            this.cache = memoryCache;
             this.database = linkItemDatabase;
             this.options = optionsDatabase;
             this.clipboardInfo = clipboardInfo;

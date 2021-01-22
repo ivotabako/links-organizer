@@ -6,11 +6,8 @@ using System.Windows.Input;
 using LinksOrganizer.Data;
 using LinksOrganizer.Models;
 using LinksOrganizer.Services.Navigation;
-using LinksOrganizer.Themes;
-using LinksOrganizer.Utils;
 using LinksOrganizer.Utils.ClipboardInfo;
 using LinksOrganizer.Utils.ResourcesProvider;
-using Microsoft.Extensions.Caching.Memory;
 using Xamarin.Forms;
 
 namespace LinksOrganizer.ViewModels
@@ -39,11 +36,10 @@ namespace LinksOrganizer.ViewModels
         public StartPageViewModel(
             IClipboardInfo clipboardInfo,
             INavigationService navigationService,
-            IMemoryCache memoryCache,
             ILinkItemRepository linkItemDatabase,
             IOptionsRepository optionsRepository,
             IResourcesProvider resourcesProvider)
-            : base(navigationService, memoryCache, linkItemDatabase, optionsRepository, clipboardInfo, resourcesProvider)
+            : base(navigationService, linkItemDatabase, optionsRepository, clipboardInfo, resourcesProvider)
         {
         }
 
@@ -100,7 +96,7 @@ namespace LinksOrganizer.ViewModels
 
         public async override Task InitializeAsync(object navigationData)
         {
-            await UpdateFavouriteLinks();          
+            await UpdateFavouriteLinks();
         }
    
         private async Task UpdateFavouriteLinks()

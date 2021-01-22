@@ -71,9 +71,9 @@
                         Text="Manage" 
                         Style="{StaticResource LinkItemLabelStyle}">
                 </Label>
-                <Grid  Margin="10, 0, 10, 0"  >
+                <Grid  Margin="10, 0, 10, 0">
 
-                    <StackLayout Orientation="Horizontal" Padding="20 0 0 10">
+                    <StackLayout Orientation="Horizontal" Padding="20, 0, 0, 10">
                         <StackLayout Orientation="Vertical">
                             <ImageButton 
                                     Source="copy_1.png" 
