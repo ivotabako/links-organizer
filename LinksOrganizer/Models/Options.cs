@@ -13,7 +13,7 @@ namespace LinksOrganizer.Models
         public bool IsOrderedByRank { get; set; }
 
         [NotNull]
-        public Theme Theme { get; set; }      
+        public Theme Theme { get; set; }
     }
 }
 

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using LinksOrganizer.Data;
 using LinksOrganizer.Models;
 using LinksOrganizer.Services.Navigation;
@@ -10,13 +8,12 @@ using LinksOrganizer.Themes;
 using LinksOrganizer.Utils;
 using LinksOrganizer.Utils.ClipboardInfo;
 using LinksOrganizer.Utils.ResourcesProvider;
-using Microsoft.Extensions.Caching.Memory;
 using Xamarin.Forms;
 
 namespace LinksOrganizer.ViewModels
 {
     public class OptionsViewModel : ViewModelBase
-    {      
+    {
         private bool _isOrderedByRank;
         public bool IsOrderedByRank
         {
@@ -24,7 +21,7 @@ namespace LinksOrganizer.ViewModels
             private set
             {
                 _isOrderedByRank = value;
-                
+
                 RaisePropertyChanged(() => IsOrderedByRank);
             }
         }
@@ -36,19 +33,18 @@ namespace LinksOrganizer.ViewModels
             private set
             {
                 _theme = value;
-                
+
                 RaisePropertyChanged(() => Theme);
-            } 
+            }
         }
 
         public OptionsViewModel(
             IClipboardInfo clipboardInfo,
             INavigationService navigationService,
-            IMemoryCache memoryCache,
             ILinkItemRepository linkItemDatabase,
             IOptionsRepository optionsRepository,
             IResourcesProvider resourcesProvider)
-            : base(navigationService, memoryCache, linkItemDatabase, optionsRepository, clipboardInfo, resourcesProvider)
+            : base(navigationService, linkItemDatabase, optionsRepository, clipboardInfo, resourcesProvider)
         {
         }
 
@@ -64,20 +60,18 @@ namespace LinksOrganizer.ViewModels
             }
 
             await GetOrderTypeFromNavigationData(navigationData);
-            await GetThemeFromNavigationData(navigationData);           
+            await GetThemeFromNavigationData(navigationData);
         }
 
         private async Task GetThemeFromNavigationData(object navigationData)
         {
-            
-            
             if (navigationData is ValueTuple<Theme, ChangeEvents> toggleTupple
                 && toggleTupple.Item2 == ChangeEvents.ThemeChanged)
             {
-                await Options.SaveAsync(new Models.Options() { IsOrderedByRank = _isOrderedByRank, Theme = toggleTupple.Item1, ID = 1 });
+                await Options.SaveAsync(new Options() { IsOrderedByRank = _isOrderedByRank, Theme = toggleTupple.Item1, ID = 1 });
                 AddThemeToResourceDictionary(toggleTupple.Item1);
             }
-        }       
+        }
 
         private void AddThemeToResourceDictionary(Theme theme)
         {
@@ -100,7 +94,7 @@ namespace LinksOrganizer.ViewModels
         }
 
         private async Task GetOrderTypeFromNavigationData(object navigationData)
-        {                     
+        {
             if (navigationData is ValueTuple<bool, ChangeEvents> toggleTupple && toggleTupple.Item2 == ChangeEvents.OrderChanged)
             {
                 await Options.SaveAsync(new Models.Options() { IsOrderedByRank = toggleTupple.Item1, Theme = _theme, ID = 1 });

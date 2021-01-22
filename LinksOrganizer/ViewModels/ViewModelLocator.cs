@@ -2,7 +2,6 @@
 using LinksOrganizer.Services.Navigation;
 using LinksOrganizer.Utils.ClipboardInfo;
 using LinksOrganizer.Utils.ResourcesProvider;
-using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Globalization;
 using System.Reflection;
@@ -42,8 +41,6 @@ namespace LinksOrganizer.ViewModels
 
             // Services - by default, TinyIoC will register interface registrations as singletons.
             _container.Register<INavigationService, NavigationService>();
-
-            _container.Register<IMemoryCache>(new MemoryCache(new MemoryCacheOptions() {}));
 
             _container.Register<IClipboardInfo, ClipboardInfo>();
 
