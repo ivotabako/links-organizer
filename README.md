@@ -1,4 +1,4 @@
-# The Future of Link Management!!!!
+# The Future of Links Management!!!!
 * How to get clipboard?
 * On details page create a copy button, that sends the url in to the clipboard.
 * On select url asks you if you want to open it in the default browser
