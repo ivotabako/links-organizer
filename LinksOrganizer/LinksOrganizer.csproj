@@ -10,6 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\font\Material\MaterialIcons-Regular.ttf" />
+    <None Remove="Resources\font\Material\MaterialIconsOutlined-Regular.otf" />
+    <None Remove="Resources\font\Material\MaterialIconsRound-Regular.otf" />
+    <None Remove="Resources\font\Material\MaterialIconsSharp-Regular.otf" />
+    <None Remove="Resources\font\Material\MaterialIconsTwoTone-Regular.otf" />
     <None Remove="Resources\font\Poppins\Poppins-Black.ttf" />
     <None Remove="Resources\font\Poppins\Poppins-BlackItalic.ttf" />
     <None Remove="Resources\font\Poppins\Poppins-Bold.ttf" />
@@ -31,6 +36,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\font\Material\MaterialIcons-Regular.ttf" />
+    <EmbeddedResource Include="Resources\font\Material\MaterialIconsOutlined-Regular.otf" />
+    <EmbeddedResource Include="Resources\font\Material\MaterialIconsRound-Regular.otf" />
+    <EmbeddedResource Include="Resources\font\Material\MaterialIconsSharp-Regular.otf" />
+    <EmbeddedResource Include="Resources\font\Material\MaterialIconsTwoTone-Regular.otf" />
     <EmbeddedResource Include="Resources\font\Poppins\Poppins-Black.ttf" />
     <EmbeddedResource Include="Resources\font\Poppins\Poppins-BlackItalic.ttf" />
     <EmbeddedResource Include="Resources\font\Poppins\Poppins-Bold.ttf" />
@@ -63,6 +73,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1821" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+    <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.8.0.1821" />
   </ItemGroup>
 
   <ItemGroup>

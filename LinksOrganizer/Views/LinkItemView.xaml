@@ -52,11 +52,10 @@
         <Style x:Key="ManageButtonLabelStyle" TargetType="Label">
             <Setter Property="FontFamily"
                     Value="Poppins-Regular" />
-            
             <Setter Property="TextColor"
                     Value="{DynamicResource PrimaryTextColor}"/>
             <Setter Property="Margin"
-                    Value="15, 0, 10, 0" />
+                    Value="1, 0, 1, 0" />
         </Style>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -73,69 +72,63 @@
                 </Label>
                 <Grid  Margin="10, 0, 10, 0">
 
-                    <StackLayout Orientation="Horizontal" Padding="20, 0, 0, 10">
-                        <StackLayout Orientation="Vertical">
-                            <ImageButton 
-                                    Source="copy_1.png" 
-                                    WidthRequest="50" 
-                                    HeightRequest="50"
-                                   
-                                    Margin="10,10, 5, 0"
-                                    BackgroundColor="Transparent"
-                                    Command="{Binding CopyLinkItemCommand}">
-                            </ImageButton>
-                        <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
-                                    >copy</Label>
+                    <StackLayout Orientation="Horizontal" Padding="1, 0, 0, 1">
+                        <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -10, 5">
+                            <Button 
+                                Text="&#xe14d;" 
+                                FontSize="50" 
+                                TextColor="Black" 
+                                FontFamily="MaterialIcons-Regular"                                                                                              
+                                BackgroundColor="Transparent"
+                                Command="{Binding CopyLinkItemCommand}">
+                            </Button>
+                            <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center">copy</Label>
                         </StackLayout>
-                        <StackLayout Orientation="Vertical">
-                            <ImageButton 
-                                    Source="share.png" 
-                                    WidthRequest="50" 
-                                    HeightRequest="50"
-                                   
-                                    Margin="10,10, 5, 5"
-                                    BackgroundColor="Transparent"
-                                    Command="{Binding ShareLinkItemCommand}">
-                            </ImageButton>
+                    <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -10, 5">
+                            <Button 
+                                Text="&#xe80d;" 
+                                FontSize="50" 
+                                TextColor="Black" 
+                                FontFamily="MaterialIcons-Regular"                                                                                              
+                                BackgroundColor="Transparent"
+                                Command="{Binding ShareLinkItemCommand}">
+                            </Button>
                             <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
                                     >share</Label>
                         </StackLayout>
-                        <StackLayout Orientation="Vertical">
-                            <ImageButton 
-                                    Source="witness.png" 
-                                    WidthRequest="50" 
-                                    HeightRequest="50"
-                                   
-                                    Margin="10,10, 5, 5"
-                                    BackgroundColor="Transparent"
+                    <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -10, 5">
+                            <Button 
+                                Text="&#xe89d;" 
+                                FontSize="50" 
+                                TextColor="Black" 
+                                FontFamily="MaterialIcons-Regular"                                                                                              
+                                BackgroundColor="Transparent"
                                     Command="{Binding OpenLinkItemCommand}">
-                            </ImageButton>
+                            </Button>
                             <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
                                     >open</Label>
                         </StackLayout>
-                    <StackLayout Orientation="Vertical">
-                        <ImageButton 
-                                    Source="save_1.png" 
-                                    WidthRequest="50" 
-                                    HeightRequest="50"
-                                   
-                                    Margin="10,10, 5, 5"
-                                    BackgroundColor="Transparent"
+                    <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -15, 5">
+                        <Button 
+                                Text="&#xe171;" 
+                                FontSize="50" 
+                                TextColor="Black" 
+                                FontFamily="MaterialIcons-Regular"                                                                                              
+                                BackgroundColor="Transparent"
                                     Command="{Binding SaveLinkItemCommand}">
-                        </ImageButton>
+                        </Button>
                         <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
                                     >save</Label>
                     </StackLayout>
-                    <StackLayout Orientation="Vertical">
-                        <ImageButton 
-                                    Source="trash.png" 
-                                    WidthRequest="50" 
-                                    HeightRequest="50"
-                                   
-                                    Margin="10,10, 5, 5"
-                                    BackgroundColor="Transparent"
+                    <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -15, 5">
+                        <Button 
+                                Text="&#xe92e;" 
+                                FontSize="50" 
+                                TextColor="Black" 
+                                FontFamily="MaterialIcons-Regular"                                                                                              
+                                BackgroundColor="Transparent"
                                     Command="{Binding DeleteLinkItemCommand}">
-                        </ImageButton>
+                        </Button>
                         <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
                                     >delete</Label>
                     </StackLayout>

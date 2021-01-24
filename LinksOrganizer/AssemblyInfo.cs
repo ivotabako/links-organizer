@@ -26,5 +26,13 @@ using Xamarin.Forms.Xaml;
 [assembly: ExportFont("Poppins-SemiBoldItalic.ttf", Alias = "Poppins-SemiBoldItalic")]
 [assembly: ExportFont("Poppins-Thin.ttf", Alias = "Poppins-Thin")]
 [assembly: ExportFont("Poppins-ThinItalic.ttf", Alias = "Poppins-ThinItalic")]
+
+
+[assembly: ExportFont("MaterialIconsOutlined-Regular.otf", Alias = "MaterialIconsOutlined-Regular")]
+[assembly: ExportFont("MaterialIcons-Regular.ttf", Alias = "MaterialIcons-Regular")]
+[assembly: ExportFont("MaterialIconsRound-Regular.otf", Alias = "MaterialIconsRound-Regular")]
+[assembly: ExportFont("MaterialIconsSharp-Regular.otf", Alias = "MaterialIconsSharp-Regular")]
+[assembly: ExportFont("MaterialIconsTwoTone-Regular.otf", Alias = "MaterialIconsTwoTone-Regular")]
+
 [assembly: NeutralResourcesLanguage("en-US")]
 
