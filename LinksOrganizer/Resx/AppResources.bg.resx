@@ -135,10 +135,13 @@
   <data name="LinkLabel" xml:space="preserve">
     <value>Връзка</value>
   </data>
+  <data name="ManageLabel" xml:space="preserve">
+    <value>Опции</value>
+  </data>
   <data name="OrderLabel" xml:space="preserve">
     <value>Подреди по ранг</value>
   </data>
-  <data name="SearchPlaceholder" xml:space="preserve">
+  <data name="Search" xml:space="preserve">
     <value>Търси</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">

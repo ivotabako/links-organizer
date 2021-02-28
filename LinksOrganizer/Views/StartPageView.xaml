@@ -5,7 +5,8 @@
              xmlns:resources="clr-namespace:LinksOrganizer.Resx" 
              xmlns:customcontrols="clr-namespace:LinksOrganizer.CustomControls"
              x:Class="LinksOrganizer.Views.StartPageView"
-             BackgroundColor="{DynamicResource PageBackgroundColor}">
+             BackgroundColor="{DynamicResource PageBackgroundColor}"
+             NavigationPage.HasNavigationBar="false">
     <ContentPage.Resources>
         <ResourceDictionary Source="../Themes/LightTheme.xaml" />
 
@@ -31,9 +32,9 @@
             <Setter Property="FontFamily"
                     Value="Poppins-Italic" />
             <Setter Property="VerticalOptions"
-                    Value="Center" />
+                    Value="End" />
             <Setter Property="Margin"
-                    Value="6, 1, 0, 0" />
+                    Value="10, 0, 10, 0" />
         </Style>
         <Style x:Key="RoundedBoxViewStyle"
                TargetType="customcontrols:RoundedBoxView">
@@ -56,30 +57,49 @@
         </Style>
         <Style x:Key="SearchLabelStyle"
                TargetType="Label">
-            <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}" />
             <Setter Property="FontFamily"
                     Value="Poppins-Regular" />
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
             <Setter Property="Margin"
                     Value="13, 5, 10, 0" />
+            <Setter Property="Text"
+                    Value="{x:Static resources:AppResources.SearchLabel}" />
+        </Style>
+        <Style x:Key="OptionsStyle"
+               TargetType="Button">
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource TransparentColor}" />
+            <Setter Property="Text"
+                    Value="{x:Static resources:AppResources.OptionsMenuLabel}" />
+            <Setter Property="HeightRequest"
+                    Value="70" />
         </Style>
     </ContentPage.Resources>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Name="Options" Order="Primary" Text="..." Priority="1" Command="{Binding OptionsCommand}" />
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
 
         <StackLayout 
             Orientation="Vertical"
             HorizontalOptions="Start"
             >
-            <Label  Style="{StaticResource SearchLabelStyle}"                             
-                    Text="{x:Static resources:AppResources.SearchPlaceholder}" 
-                   >
-            </Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <Grid  Margin="10, 0, 10, 0" MinimumHeightRequest="45" >
-                <customcontrols:CustomEntry
+                <Label  Grid.Column="0"                                                        
+                        Style="{StaticResource SearchLabelStyle}" VerticalOptions="End">
+                </Label>
+
+                <Button Grid.Column="1" Style="{StaticResource OptionsStyle}" 
+                         HorizontalOptions="End"  
+                    Command="{Binding OptionsCommand}">
+                </Button>
+            </Grid>
+            
+            <Grid  Margin="10, 0, 10, 0" >
+                <customcontrols:CustomEntry HeightRequest="80"
                         Style="{StaticResource SearchEntryStyle}">
 
                     <Entry.Behaviors>

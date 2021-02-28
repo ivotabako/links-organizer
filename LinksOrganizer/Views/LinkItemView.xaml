@@ -5,8 +5,11 @@
     xmlns:resources="clr-namespace:LinksOrganizer.Resx" 
     xmlns:customcontrols="clr-namespace:LinksOrganizer.CustomControls"
     x:Class="LinksOrganizer.Views.LinkItemView" 
-    BackgroundColor="{DynamicResource PageBackgroundColor}">
+    BackgroundColor="{DynamicResource PageBackgroundColor}"
+    NavigationPage.HasNavigationBar="false">
     <ContentPage.Resources>
+        <ResourceDictionary Source="../Themes/LightTheme.xaml" />
+
         <Style x:Key="LinkItemLabelStyle" TargetType="Label">
             <Setter Property="FontFamily"
                     Value="Poppins-Regular" />
@@ -42,7 +45,7 @@
         </Style>
         <Style x:Key="LinkItemEntryStyle"
                TargetType="customcontrols:CustomEntry">
-            
+
             <Setter Property="FontFamily"
                     Value="Poppins-Italic" />
             <Setter Property="Margin"
@@ -57,28 +60,57 @@
             <Setter Property="Margin"
                     Value="1, 0, 1, 0" />
         </Style>
+        <Style x:Key="ManageLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily"
+                    Value="Poppins-Regular" />
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+            <Setter Property="Margin"
+                    Value="13, 5, 10, 0" />
+            <Setter Property="Text"
+                    Value="{x:Static resources:AppResources.ManageLabel}"/>
+        </Style>
+        <Style x:Key="OptionsStyle"
+               TargetType="Button">
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource TransparentColor}" />
+            <Setter Property="Text"
+                    Value="{x:Static resources:AppResources.OptionsMenuLabel}" />
+        </Style>
     </ContentPage.Resources>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Name="Options" Order="Primary" Text="..." Priority="1" Command="{Binding OptionsCommand}" />
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout 
             Orientation="Vertical"
             HorizontalOptions="Start"
             >
-                <Label                                              
-                        Text="Manage" 
-                        Style="{StaticResource LinkItemLabelStyle}">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+
+                <Label  Grid.Column="0"                                      
+                        
+                        Style="{StaticResource ManageLabelStyle}" VerticalOptions="End">
                 </Label>
+
+                <Button  Grid.Column="1" Style="{StaticResource OptionsStyle}" 
+                         HorizontalOptions="End"
+                    Command="{Binding OptionsCommand}">
+                </Button>
+            </Grid>
+            
                 <Grid  Margin="10, 0, 10, 0">
 
                     <StackLayout Orientation="Horizontal" Padding="1, 0, 0, 1">
                         <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -10, 5">
                             <Button 
                                 Text="&#xe14d;" 
-                                FontSize="50" 
+                                FontSize="45" 
                                 TextColor="Black" 
-                                FontFamily="MaterialIcons-Regular"                                                                                              
+                                FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                 Command="{Binding CopyLinkItemCommand}">
                             </Button>
@@ -87,9 +119,9 @@
                     <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -10, 5">
                             <Button 
                                 Text="&#xe80d;" 
-                                FontSize="50" 
+                                FontSize="45" 
                                 TextColor="Black" 
-                                FontFamily="MaterialIcons-Regular"                                                                                              
+                                FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                 Command="{Binding ShareLinkItemCommand}">
                             </Button>
@@ -101,7 +133,7 @@
                                 Text="&#xe89d;" 
                                 FontSize="50" 
                                 TextColor="Black" 
-                                FontFamily="MaterialIcons-Regular"                                                                                              
+                                FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                     Command="{Binding OpenLinkItemCommand}">
                             </Button>
@@ -113,7 +145,7 @@
                                 Text="&#xe171;" 
                                 FontSize="50" 
                                 TextColor="Black" 
-                                FontFamily="MaterialIcons-Regular"                                                                                              
+                                FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                     Command="{Binding SaveLinkItemCommand}">
                         </Button>
@@ -125,7 +157,7 @@
                                 Text="&#xe92e;" 
                                 FontSize="50" 
                                 TextColor="Black" 
-                                FontFamily="MaterialIcons-Regular"                                                                                              
+                                FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                     Command="{Binding DeleteLinkItemCommand}">
                         </Button>

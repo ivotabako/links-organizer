@@ -147,8 +147,14 @@
   <data name="LinkLabel" xml:space="preserve">
     <value>Link</value>
   </data>
+  <data name="ManageLabel" xml:space="preserve">
+    <value>Manage</value>
+  </data>
   <data name="OptionsLabel" xml:space="preserve">
     <value>Options</value>
+  </data>
+  <data name="OptionsMenuLabel" xml:space="preserve">
+    <value>...</value>
   </data>
   <data name="OrderLabel" xml:space="preserve">
     <value>Links Order</value>
@@ -156,7 +162,7 @@
   <data name="SearchEntryText" xml:space="preserve">
     <value>Enter link info</value>
   </data>
-  <data name="SearchPlaceholder" xml:space="preserve">
+  <data name="SearchLabel" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">

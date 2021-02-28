@@ -151,11 +151,29 @@ namespace LinksOrganizer.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manage.
+        /// </summary>
+        public static string ManageLabel {
+            get {
+                return ResourceManager.GetString("ManageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Options.
         /// </summary>
         public static string OptionsLabel {
             get {
                 return ResourceManager.GetString("OptionsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ....
+        /// </summary>
+        public static string OptionsMenuLabel {
+            get {
+                return ResourceManager.GetString("OptionsMenuLabel", resourceCulture);
             }
         }
         
@@ -180,9 +198,9 @@ namespace LinksOrganizer.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
-        public static string SearchPlaceholder {
+        public static string SearchLabel {
             get {
-                return ResourceManager.GetString("SearchPlaceholder", resourceCulture);
+                return ResourceManager.GetString("SearchLabel", resourceCulture);
             }
         }
         
