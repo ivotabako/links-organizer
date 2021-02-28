@@ -114,7 +114,7 @@
                                 IsEnabled="{Binding CanSave}"
                                 Text="&#xe14d;" 
                                 FontSize="45" 
-                                TextColor="Black" 
+                                TextColor="{DynamicResource PrimaryTextColor}" 
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                 Command="{Binding CopyLinkItemCommand}">
@@ -126,7 +126,7 @@
                                 IsEnabled="{Binding CanSave}"
                                 Text="&#xe80d;" 
                                 FontSize="45" 
-                                TextColor="Black" 
+                                TextColor="{DynamicResource PrimaryTextColor}" 
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                 Command="{Binding ShareLinkItemCommand}">
@@ -134,12 +134,12 @@
                             <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
                                     >share</Label>
                         </StackLayout>
-                    <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -10, 5">
+                    <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 0, -15, 5">
                             <Button 
                                 IsEnabled="{Binding CanSave}"
                                 Text="&#xe89d;" 
                                 FontSize="50" 
-                                TextColor="Black" 
+                                TextColor="{DynamicResource PrimaryTextColor}" 
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                     Command="{Binding OpenLinkItemCommand}">
@@ -147,12 +147,12 @@
                             <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
                                     >open</Label>
                         </StackLayout>
-                    <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -15, 5">
+                    <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 0, -15, 5">
                         <Button 
                             IsEnabled="{Binding CanSave}"
                                 Text="&#xe171;" 
                                 FontSize="50" 
-                                TextColor="Black" 
+                                TextColor="{DynamicResource PrimaryTextColor}"
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                     Command="{Binding SaveLinkItemCommand}">
@@ -160,12 +160,12 @@
                         <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
                                     >save</Label>
                     </StackLayout>
-                    <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -15, 5">
+                    <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 0, -15, 5">
                         <Button 
                             IsEnabled="{Binding CanDelete}"
                                 Text="&#xe92e;" 
                                 FontSize="50" 
-                                TextColor="Black" 
+                                TextColor="{DynamicResource PrimaryTextColor}"
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                     Command="{Binding DeleteLinkItemCommand}">
