@@ -76,6 +76,8 @@
                TargetType="Button">
             <Setter Property="BackgroundColor"
                     Value="{DynamicResource TransparentColor}" />
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
             <Setter Property="Text"
                     Value="{x:Static resources:AppResources.OptionsMenuLabel}" />
             <Setter Property="HeightRequest"

@@ -47,6 +47,8 @@
                TargetType="customcontrols:CustomEntry">
             <Setter Property="PlaceholderColor"
                     Value="{DynamicResource PrimaryTextColor}" />
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
             <Setter Property="FontFamily"
                     Value="Poppins-Italic" />
             <Setter Property="Margin"
@@ -75,6 +77,8 @@
                TargetType="Button">
             <Setter Property="BackgroundColor"
                     Value="{DynamicResource TransparentColor}" />
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
             <Setter Property="Text"
                     Value="{x:Static resources:AppResources.OptionsMenuLabel}" />
         </Style>
