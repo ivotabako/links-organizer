@@ -98,8 +98,6 @@ namespace LinksOrganizer.ViewModels
 
         public ICommand DeleteLinkItemCommand => new Command(DeleteLinkItem);
 
-        public ICommand CancelLinkItemCommand => new Command(CancelLinkItem);
-
         public ICommand CopyLinkItemCommand => new Command(async () => await CopyLinkItem());
 
         public ICommand OpenLinkItemCommand => new Command(async () => await OpenLinkItem());
@@ -162,11 +160,6 @@ namespace LinksOrganizer.ViewModels
             await NavigationService.NavigateToAsync<StartPageViewModel>();
         }
 
-        async private void CancelLinkItem()
-        {
-            await NavigationService.NavigateToAsync<StartPageViewModel>();
-        }
-
         private async Task CopyLinkItem()
         {
             await ClipboardInfo.SetTextAsync(this.Link);
@@ -194,10 +187,10 @@ namespace LinksOrganizer.ViewModels
 
         public async override Task InitializeAsync(object navigationData)
         {
+            InitialiseBindings();
+
             if (navigationData is not LinkItem data)
                 return;
-
-            InitialiseBindings();
 
             if (data.ID > 0)
             {

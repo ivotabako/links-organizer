@@ -36,9 +36,7 @@ namespace LinksOrganizer.Extensions
             }
             if (propertyChanged == VisualElement.BackgroundColorProperty.PropertyName)
             {
-                var background = nativeControl.Background as GradientDrawable;
-
-                if (background != null)
+                if (nativeControl.Background is GradientDrawable background)
                 {
                     background.SetColor(formsControl.BackgroundColor.ToAndroid());
                 }
@@ -57,9 +55,7 @@ namespace LinksOrganizer.Extensions
 
         public static void UpdateBorder(this View nativeControl, Color color, int thickness)
         {
-            var backgroundGradient = nativeControl.Background as GradientDrawable;
-
-            if (backgroundGradient != null)
+            if (nativeControl.Background is GradientDrawable backgroundGradient)
             {
                 var relativeBorderThickness = thickness * 3;
                 backgroundGradient.SetStroke(relativeBorderThickness, color.ToAndroid());
@@ -68,9 +64,7 @@ namespace LinksOrganizer.Extensions
 
         public static void UpdateCornerRadius(this View nativeControl, double cornerRadius)
         {
-            var backgroundGradient = nativeControl.Background as GradientDrawable;
-
-            if (backgroundGradient != null)
+            if (nativeControl.Background is GradientDrawable backgroundGradient)
             {
                 var relativeCornerRadius = (float)(cornerRadius * 3.7);
                 backgroundGradient.SetCornerRadius(relativeCornerRadius);

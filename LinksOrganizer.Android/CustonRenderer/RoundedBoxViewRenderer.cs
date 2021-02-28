@@ -24,23 +24,18 @@ namespace LinksOrganizer.CustonRenderer
         {
         }
 
-        private RoundedBoxView _formControl
-        {
-            get { return Element; }
-        }
-
         protected override void OnElementChanged(ElementChangedEventArgs<RoundedBoxView> e)
         {
             base.OnElementChanged(e);
 
-            this.InitializeFrom(_formControl);
+            this.InitializeFrom(Element);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
 
-            this.UpdateFrom(_formControl, e.PropertyName);
+            this.UpdateFrom(Element, e.PropertyName);
         }
     }
 }
