@@ -1,4 +1,5 @@
 ﻿using LinksOrganizer.Data;
+using LinksOrganizer.Models;
 using LinksOrganizer.Services.Navigation;
 using LinksOrganizer.Utils;
 using LinksOrganizer.Utils.ClipboardInfo;
@@ -68,9 +69,16 @@ namespace LinksOrganizer.ViewModels
                 // if we were before in options do not return again to it, instead go to start page
                 await NavigationService.NavigateToAsync<StartPageViewModel>();
             }
-            if (viewModel is LinkItemViewModel)
+            if (viewModel is LinkItemViewModel linkItemViewModel)
             {
-                await NavigationService.NavigateToAsync<LinkItemViewModel>();
+                await NavigationService.NavigateToAsync<LinkItemViewModel>(new LinkItem() { 
+                    ID = linkItemViewModel.Id,
+                    Info = linkItemViewModel.Info,
+                    Link = linkItemViewModel.Link,
+                    Name = linkItemViewModel.Name,
+                    Rank = linkItemViewModel.Rank,
+                    LastUpdatedOn = linkItemViewModel.LastUpdatedOn
+                });
             }
             return true;
         }
