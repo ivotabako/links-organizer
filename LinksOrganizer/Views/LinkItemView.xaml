@@ -107,6 +107,7 @@
                     <StackLayout Orientation="Horizontal" Padding="1, 0, 0, 1">
                         <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -10, 5">
                             <Button 
+                                IsEnabled="{Binding CanSave}"
                                 Text="&#xe14d;" 
                                 FontSize="45" 
                                 TextColor="Black" 
@@ -118,6 +119,7 @@
                         </StackLayout>
                     <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -10, 5">
                             <Button 
+                                IsEnabled="{Binding CanSave}"
                                 Text="&#xe80d;" 
                                 FontSize="45" 
                                 TextColor="Black" 
@@ -130,6 +132,7 @@
                         </StackLayout>
                     <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -10, 5">
                             <Button 
+                                IsEnabled="{Binding CanSave}"
                                 Text="&#xe89d;" 
                                 FontSize="50" 
                                 TextColor="Black" 
@@ -142,6 +145,7 @@
                         </StackLayout>
                     <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -15, 5">
                         <Button 
+                            IsEnabled="{Binding CanSave}"
                                 Text="&#xe171;" 
                                 FontSize="50" 
                                 TextColor="Black" 
@@ -154,6 +158,7 @@
                     </StackLayout>
                     <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -15, 5">
                         <Button 
+                            IsEnabled="{Binding CanDelete}"
                                 Text="&#xe92e;" 
                                 FontSize="50" 
                                 TextColor="Black" 
