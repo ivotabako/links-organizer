@@ -18,20 +18,7 @@
             <Setter Property="Margin"
                     Value="13, 5, 10, 0" />
         </Style>
-        <Style x:Key="LinkItemManageButtonStyle" TargetType="Button">
-            <Setter Property="CornerRadius"
-                    Value="9" />
-            <Setter Property="VerticalOptions"
-                    Value="Center" />
-            <Setter Property="BorderColor"
-                    Value="{DynamicResource PrimaryTextColor}"/>
-            <Setter Property="BackgroundColor"
-                    Value="{DynamicResource SecondaryColor}"/>
-            <Setter Property="TextColor"
-                    Value="{DynamicResource SecondaryTextColor}"/>
-            <Setter Property="Margin"
-                    Value="4, 16, 0, 10" />
-        </Style>
+        
         <Style x:Key="RoundedBoxViewStyle"
                TargetType="customcontrols:RoundedBoxView">
             <Setter Property="BorderColor"
@@ -114,7 +101,7 @@
                                 IsEnabled="{Binding CanSave}"
                                 Text="&#xe14d;" 
                                 FontSize="45" 
-                                TextColor="{DynamicResource PrimaryTextColor}" 
+                                TextColor="{DynamicResource SecondaryTextColor}" 
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                 Command="{Binding CopyLinkItemCommand}">
@@ -126,7 +113,7 @@
                                 IsEnabled="{Binding CanSave}"
                                 Text="&#xe80d;" 
                                 FontSize="45" 
-                                TextColor="{DynamicResource PrimaryTextColor}" 
+                                TextColor="{DynamicResource SecondaryTextColor}" 
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                 Command="{Binding ShareLinkItemCommand}">
@@ -139,7 +126,7 @@
                                 IsEnabled="{Binding CanSave}"
                                 Text="&#xe89d;" 
                                 FontSize="50" 
-                                TextColor="{DynamicResource PrimaryTextColor}" 
+                                TextColor="{DynamicResource SecondaryTextColor}" 
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                     Command="{Binding OpenLinkItemCommand}">
@@ -152,7 +139,7 @@
                             IsEnabled="{Binding CanSave}"
                                 Text="&#xe171;" 
                                 FontSize="50" 
-                                TextColor="{DynamicResource PrimaryTextColor}"
+                                TextColor="{DynamicResource SecondaryTextColor}"
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                     Command="{Binding SaveLinkItemCommand}">
@@ -165,7 +152,7 @@
                             IsEnabled="{Binding CanDelete}"
                                 Text="&#xe92e;" 
                                 FontSize="50" 
-                                TextColor="{DynamicResource PrimaryTextColor}"
+                                TextColor="{DynamicResource SecondaryTextColor}"
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                     Command="{Binding DeleteLinkItemCommand}">
