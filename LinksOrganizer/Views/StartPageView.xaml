@@ -33,6 +33,8 @@
                     Value="{x:Static resources:AppResources.SearchEntryText}" />
             <Setter Property="FontFamily"
                     Value="Poppins-Italic" />
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
             <Setter Property="PlaceholderColor"
                     Value="{DynamicResource PrimaryTextColor}" />
             <Setter Property="VerticalOptions"
