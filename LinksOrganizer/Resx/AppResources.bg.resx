@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddNewLink" xml:space="preserve">
+    <value>Добави нова връзка</value>
+  </data>
   <data name="DeleteDialogNoAnswer" xml:space="preserve">
     <value>Не</value>
   </data>
@@ -132,16 +135,34 @@
   <data name="InfoLabel" xml:space="preserve">
     <value>Информация</value>
   </data>
+  <data name="LinkItemPlaceholderInfo" xml:space="preserve">
+    <value>Въведи информация</value>
+  </data>
+  <data name="LinkItemPlaceholderLink" xml:space="preserve">
+    <value>Въведи връзка</value>
+  </data>
+  <data name="LinkItemPlaceholderTitle" xml:space="preserve">
+    <value>Въведи заглавие</value>
+  </data>
   <data name="LinkLabel" xml:space="preserve">
     <value>Връзка</value>
   </data>
   <data name="ManageLabel" xml:space="preserve">
     <value>Опции</value>
   </data>
+  <data name="OptionsLabel" xml:space="preserve">
+    <value>Опции</value>
+  </data>
+  <data name="OptionsMenuLabel" xml:space="preserve">
+    <value>...</value>
+  </data>
   <data name="OrderLabel" xml:space="preserve">
     <value>Подреди по ранг</value>
   </data>
-  <data name="Search" xml:space="preserve">
+  <data name="SearchEntryText" xml:space="preserve">
+    <value>Търси връзка</value>
+  </data>
+  <data name="SearchLabel" xml:space="preserve">
     <value>Търси</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
