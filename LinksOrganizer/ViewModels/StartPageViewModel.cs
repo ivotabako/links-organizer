@@ -102,7 +102,7 @@ namespace LinksOrganizer.ViewModels
         private async Task UpdateFavouriteLinks()
         {
             var items = await Database.GetItemsAsync();
-            var options = await Options.GetOptionsAsync(1);
+            var options = await Options.GetOptionsAsync();
 
             FavoriteLinks = options.IsOrderedByRank
                 ? items.OrderByDescending(link => link.Rank).ToList()

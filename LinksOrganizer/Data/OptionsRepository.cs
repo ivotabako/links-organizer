@@ -34,21 +34,23 @@ namespace LinksOrganizer.Data
             }
         }
 
-        public async Task<Options> GetOptionsAsync(int id)
+        public async Task<Options> GetOptionsAsync()
         {
-            var options = await Database.Table<Options>().Where(i => i.ID == id).FirstOrDefaultAsync();
-            return options ?? new Options() { ID = id, IsOrderedByRank = false, Theme = Themes.Theme.LightTheme };
+            var options = await Database.Table<Options>().ToListAsync();
+            return options.FirstOrDefault() ?? new Options() { ID = 1, IsOrderedByRank = false, Theme = Themes.Theme.LightTheme };
         }
 
-        public Task<int> SaveAsync(Options options)
+        public async Task<int> SaveAsync(Options options)
         {
-            if (options.ID != 0)
+            var exists = await Database.Table<Options>().ToListAsync();
+
+            if (exists.Any())
             {
-                return Database.UpdateAsync(options);
+                return await Database.UpdateAsync(options, typeof(Options));
             }
             else
             {
-                return Database.InsertAsync(options);
+                return await Database.InsertAsync(options, typeof(Options));
             }
         }
     }

@@ -52,7 +52,7 @@ namespace LinksOrganizer.ViewModels
         {
             if (navigationData is null)
             {
-                var options = await Options.GetOptionsAsync(1);
+                var options = await Options.GetOptionsAsync();
                 _theme = options != null ? options.Theme : Theme.LightTheme;
                 _isOrderedByRank = options != null && options.IsOrderedByRank;
                 RaisePropertyChanged(() => Theme);

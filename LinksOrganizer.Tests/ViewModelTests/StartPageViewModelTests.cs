@@ -198,7 +198,7 @@ namespace LinksOrganizer.Tests.ViewModelTests
 
             var option = new Options { IsOrderedByRank = isOrderedByRank };
             var optionsRepository = new Mock<IOptionsRepository>();
-            optionsRepository.Setup(o => o.GetOptionsAsync(It.IsAny<int>()))
+            optionsRepository.Setup(o => o.GetOptionsAsync())
                 .ReturnsAsync(option);
 
             var resourcesProvider = new Mock<IResourcesProvider>();
