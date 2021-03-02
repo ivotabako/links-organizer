@@ -76,6 +76,7 @@
                     Value="{DynamicResource TransparentColor}" />
             <Setter Property="TextColor"
                     Value="{DynamicResource PrimaryTextColor}"/>
+            <Setter Property="FontSize" Value="Title"/>
             <Setter Property="Text"
                     Value="{x:Static resources:AppResources.OptionsMenuLabel}" />
             <Setter Property="HeightRequest"
