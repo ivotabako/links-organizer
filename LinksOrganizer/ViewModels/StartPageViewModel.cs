@@ -6,6 +6,7 @@ using System.Windows.Input;
 using LinksOrganizer.Data;
 using LinksOrganizer.Models;
 using LinksOrganizer.Services.Navigation;
+using LinksOrganizer.Themes;
 using LinksOrganizer.Utils.ClipboardInfo;
 using LinksOrganizer.Utils.ResourcesProvider;
 using Xamarin.Forms;
@@ -103,10 +104,31 @@ namespace LinksOrganizer.ViewModels
         {
             var items = await Database.GetItemsAsync();
             var options = await Options.GetOptionsAsync();
+            AddThemeToResourceDictionary(options.Theme);
 
             FavoriteLinks = options.IsOrderedByRank
                 ? items.OrderByDescending(link => link.Rank).ToList()
                 : items.OrderByDescending(link => link.LastUpdatedOn.Ticks).ToList();
+        }
+
+        private void AddThemeToResourceDictionary(Theme theme)
+        {
+            ICollection<ResourceDictionary> mergedDictionaries = ResourcesProvider.Resources.MergedDictionaries;
+            if (mergedDictionaries != null)
+            {
+                mergedDictionaries.Clear();
+
+                switch (theme)
+                {
+                    case Theme.DarkTheme:
+                        mergedDictionaries.Add(new DarkTheme());
+                        return;
+                    case Theme.LightTheme:
+                    default:
+                        mergedDictionaries.Add(new LightTheme());
+                        return;
+                }
+            }
         }
     }
 }
