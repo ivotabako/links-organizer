@@ -107,8 +107,8 @@
                                 BackgroundColor="Transparent"
                                 Command="{Binding CopyLinkItemCommand}">
                             </Button>
-                            <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center">copy</Label>
-                        </StackLayout>
+                        <Label Text="{x:Static resources:AppResources.CopyLabel}"  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"/> 
+                    </StackLayout>
                     <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -10, 5">
                             <Button 
                                 IsEnabled="{Binding CanSave}"
@@ -119,9 +119,9 @@
                                 BackgroundColor="Transparent"
                                 Command="{Binding ShareLinkItemCommand}">
                             </Button>
-                            <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
-                                    >share</Label>
-                        </StackLayout>
+                        <Label Text="{x:Static resources:AppResources.ShareLabel}"  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
+                                    />
+                    </StackLayout>
                     <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 0, -15, 5">
                             <Button 
                                 IsEnabled="{Binding CanSave}"
@@ -132,9 +132,9 @@
                                 BackgroundColor="Transparent"
                                     Command="{Binding OpenLinkItemCommand}">
                             </Button>
-                            <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
-                                    >open</Label>
-                        </StackLayout>
+                        <Label Text="{x:Static resources:AppResources.OpenLabel}"  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
+                                    />
+                    </StackLayout>
                     <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 0, -15, 5">
                         <Button 
                             IsEnabled="{Binding CanSave}"
@@ -145,8 +145,8 @@
                                 BackgroundColor="Transparent"
                                     Command="{Binding SaveLinkItemCommand}">
                         </Button>
-                        <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
-                                    >save</Label>
+                        <Label Text="{x:Static resources:AppResources.SaveLabel}"  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"/>
+
                     </StackLayout>
                     <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 0, -15, 5">
                         <Button 
@@ -158,8 +158,8 @@
                                 BackgroundColor="Transparent"
                                     Command="{Binding DeleteLinkItemCommand}">
                         </Button>
-                        <Label  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
-                                    >delete</Label>
+                        <Label Text="{x:Static resources:AppResources.DeleteLabel}"  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"/>
+
                     </StackLayout>
                 </StackLayout>
                 <customcontrols:RoundedBoxView                                                      

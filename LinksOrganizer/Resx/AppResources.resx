@@ -120,6 +120,9 @@
   <data name="AddNewLink" xml:space="preserve">
     <value>Add New Link</value>
   </data>
+  <data name="CopyLabel" xml:space="preserve">
+    <value>copy</value>
+  </data>
   <data name="DeleteDialogNoAnswer" xml:space="preserve">
     <value>No</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="DeleteDialogYesAnswer" xml:space="preserve">
     <value>Yes</value>
+  </data>
+  <data name="DeleteLabel" xml:space="preserve">
+    <value>delete</value>
   </data>
   <data name="InfoLabel" xml:space="preserve">
     <value>Info</value>
@@ -150,6 +156,9 @@
   <data name="ManageLabel" xml:space="preserve">
     <value>Manage</value>
   </data>
+  <data name="OpenLabel" xml:space="preserve">
+    <value>open</value>
+  </data>
   <data name="OptionsLabel" xml:space="preserve">
     <value>Options</value>
   </data>
@@ -159,11 +168,17 @@
   <data name="OrderLabel" xml:space="preserve">
     <value>Links Order</value>
   </data>
+  <data name="SaveLabel" xml:space="preserve">
+    <value>save</value>
+  </data>
   <data name="SearchEntryText" xml:space="preserve">
     <value>Enter link info</value>
   </data>
   <data name="SearchLabel" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="ShareLabel" xml:space="preserve">
+    <value>share</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
     <value>Switch Theme </value>

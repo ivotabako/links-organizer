@@ -120,6 +120,9 @@
   <data name="AddNewLink" xml:space="preserve">
     <value>Добави нова връзка</value>
   </data>
+  <data name="CopyLabel" xml:space="preserve">
+    <value>копирай</value>
+  </data>
   <data name="DeleteDialogNoAnswer" xml:space="preserve">
     <value>Не</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="DeleteDialogYesAnswer" xml:space="preserve">
     <value>Да</value>
+  </data>
+  <data name="DeleteLabel" xml:space="preserve">
+    <value>изтрий</value>
   </data>
   <data name="InfoLabel" xml:space="preserve">
     <value>Информация</value>
@@ -150,6 +156,9 @@
   <data name="ManageLabel" xml:space="preserve">
     <value>Опции</value>
   </data>
+  <data name="OpenLabel" xml:space="preserve">
+    <value>отвори</value>
+  </data>
   <data name="OptionsLabel" xml:space="preserve">
     <value>Опции</value>
   </data>
@@ -159,11 +168,17 @@
   <data name="OrderLabel" xml:space="preserve">
     <value>Подреди по ранг</value>
   </data>
+  <data name="SaveLabel" xml:space="preserve">
+    <value>запази</value>
+  </data>
   <data name="SearchEntryText" xml:space="preserve">
     <value>Търси връзка</value>
   </data>
   <data name="SearchLabel" xml:space="preserve">
     <value>Търси</value>
+  </data>
+  <data name="ShareLabel" xml:space="preserve">
+    <value>сподели</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
     <value>Смени темата</value>

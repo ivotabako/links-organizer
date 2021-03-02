@@ -70,6 +70,15 @@ namespace LinksOrganizer.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to copy.
+        /// </summary>
+        public static string CopyLabel {
+            get {
+                return ResourceManager.GetString("CopyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string DeleteDialogNoAnswer {
@@ -102,6 +111,15 @@ namespace LinksOrganizer.Resx {
         public static string DeleteDialogYesAnswer {
             get {
                 return ResourceManager.GetString("DeleteDialogYesAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to delete.
+        /// </summary>
+        public static string DeleteLabel {
+            get {
+                return ResourceManager.GetString("DeleteLabel", resourceCulture);
             }
         }
         
@@ -160,6 +178,15 @@ namespace LinksOrganizer.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to open.
+        /// </summary>
+        public static string OpenLabel {
+            get {
+                return ResourceManager.GetString("OpenLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Options.
         /// </summary>
         public static string OptionsLabel {
@@ -187,6 +214,15 @@ namespace LinksOrganizer.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to save.
+        /// </summary>
+        public static string SaveLabel {
+            get {
+                return ResourceManager.GetString("SaveLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter link info.
         /// </summary>
         public static string SearchEntryText {
@@ -201,6 +237,15 @@ namespace LinksOrganizer.Resx {
         public static string SearchLabel {
             get {
                 return ResourceManager.GetString("SearchLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to share.
+        /// </summary>
+        public static string ShareLabel {
+            get {
+                return ResourceManager.GetString("ShareLabel", resourceCulture);
             }
         }
         
