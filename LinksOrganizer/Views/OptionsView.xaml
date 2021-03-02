@@ -7,7 +7,7 @@
              x:Class="LinksOrganizer.Views.OptionsView"
              NavigationPage.HasNavigationBar="false">
     <ContentPage.Resources>
-        <ResourceDictionary Source="../Themes/LightTheme.xaml" />
+        
         
         <Style x:Key="OptionsLabelStyle" TargetType="Label">
             <Setter Property="FontFamily"

@@ -8,7 +8,7 @@
     BackgroundColor="{DynamicResource PageBackgroundColor}"
     NavigationPage.HasNavigationBar="false">
     <ContentPage.Resources>
-        <ResourceDictionary Source="../Themes/LightTheme.xaml" />
+        
 
         <Style x:Key="LinkItemLabelStyle" TargetType="Label">
             <Setter Property="FontFamily"
