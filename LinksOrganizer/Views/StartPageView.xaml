@@ -121,7 +121,8 @@
                 </customcontrols:RoundedBoxView>
             </Grid>
 
-            <Button Style="{StaticResource AddNewLinkStyle}"   
+            <Button Style="{StaticResource AddNewLinkStyle}"  
+                    IsEnabled="{Binding IsAddEnabled}"
                     Text="{x:Static resources:AppResources.AddNewLink}" 
                     Command="{Binding AddLinkItemCommand}">
             </Button>
@@ -131,7 +132,7 @@
                     ItemsSource="{Binding FavoriteLinks}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
+                            <ViewCell IsEnabled="{Binding IsListItemEnabled}">
                                 <Label 
                                     Style="{StaticResource FavoriteLinksLabelStyle}"
                                     Text="{Binding Name}" TextColor="{DynamicResource PrimaryTextColor}"

@@ -15,6 +15,34 @@ namespace LinksOrganizer.ViewModels
 {
     public class StartPageViewModel : ViewModelBase
     {
+        private bool _isAddEnabled = true;
+        public bool IsAddEnabled
+        {
+            get { return _isAddEnabled; }
+            private set
+            {
+                if (_isAddEnabled == value)
+                    return;
+
+                _isAddEnabled = value;
+                RaisePropertyChanged(() => IsAddEnabled);
+            }
+        }
+
+        private bool _isListItemEnabled = true;
+        public bool IsListItemEnabled
+        {
+            get { return _isListItemEnabled; }
+            private set
+            {
+                if (_isListItemEnabled == value)
+                    return;
+
+                _isListItemEnabled = value;
+                RaisePropertyChanged(() => IsListItemEnabled);
+            }
+        }
+
         public ICommand OptionsCommand => new Command(async () => await OptionsAsync());
 
         public ICommand AddLinkItemCommand => new Command(async () => await AddLinkItemAsync());
@@ -46,6 +74,11 @@ namespace LinksOrganizer.ViewModels
 
         private async Task AddLinkItemAsync()
         {
+            if (!IsAddEnabled)
+                return;
+
+            IsAddEnabled = false;
+
             var newLink = new LinkItem();
 
             (bool isUrl, string url) = await CheckClipboard();
@@ -77,6 +110,11 @@ namespace LinksOrganizer.ViewModels
 
         private async Task LoadLinkItemAsync(LinkItem item)
         {
+            if (!IsListItemEnabled)
+                return;
+
+            IsListItemEnabled = false;
+
             await NavigationService.NavigateToAsync<LinkItemViewModel>(item);
         }
 
