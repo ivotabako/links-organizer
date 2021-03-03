@@ -98,66 +98,71 @@
 
                     <StackLayout Orientation="Horizontal" Padding="1, 0, 0, 1">
                         <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -10, 5">
-                            <Button 
+                            <customcontrols:CustomButton 
                                 IsEnabled="{Binding CanSave}"
                                 Text="&#xe14d;" 
                                 FontSize="45" 
                                 TextColor="{DynamicResource SecondaryTextColor}" 
+                                DisabledTextColor="{DynamicResource TertiaryTextColor}"
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                 Command="{Binding CopyLinkItemCommand}">
-                            </Button>
+                            </customcontrols:CustomButton>
                         <Label Text="{x:Static resources:AppResources.CopyLabel}"  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"/> 
                     </StackLayout>
                     <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -10, 5">
-                            <Button 
+                        <customcontrols:CustomButton  
                                 IsEnabled="{Binding CanSave}"
                                 Text="&#xe80d;" 
                                 FontSize="45" 
                                 TextColor="{DynamicResource SecondaryTextColor}" 
+                                DisabledTextColor="{DynamicResource TertiaryTextColor}"
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                 Command="{Binding ShareLinkItemCommand}">
-                            </Button>
+                            </customcontrols:CustomButton>
                         <Label Text="{x:Static resources:AppResources.ShareLabel}"  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
                                     />
                     </StackLayout>
                     <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 0, -15, 5">
-                            <Button 
+                        <customcontrols:CustomButton  
                                 IsEnabled="{Binding CanSave}"
                                 Text="&#xe89d;" 
                                 FontSize="50" 
                                 TextColor="{DynamicResource SecondaryTextColor}" 
+                                DisabledTextColor="{DynamicResource TertiaryTextColor}"
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                     Command="{Binding OpenLinkItemCommand}">
-                            </Button>
+                            </customcontrols:CustomButton>
                         <Label Text="{x:Static resources:AppResources.OpenLabel}"  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"
                                     />
                     </StackLayout>
                     <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 0, -15, 5">
-                        <Button 
+                        <customcontrols:CustomButton  
                             IsEnabled="{Binding CanSave}"
                                 Text="&#xe171;" 
                                 FontSize="50" 
                                 TextColor="{DynamicResource SecondaryTextColor}"
+                                DisabledTextColor="{DynamicResource TertiaryTextColor}"
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                     Command="{Binding SaveLinkItemCommand}">
-                        </Button>
+                        </customcontrols:CustomButton>
                         <Label Text="{x:Static resources:AppResources.SaveLabel}"  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"/>
 
                     </StackLayout>
                     <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 0, -15, 5">
-                        <Button 
+                        <customcontrols:CustomButton  
                             IsEnabled="{Binding CanDelete}"
                                 Text="&#xe92e;" 
                                 FontSize="50" 
                                 TextColor="{DynamicResource SecondaryTextColor}"
+                                DisabledTextColor="{DynamicResource TertiaryTextColor}"
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                     Command="{Binding DeleteLinkItemCommand}">
-                        </Button>
+                        </customcontrols:CustomButton>
                         <Label Text="{x:Static resources:AppResources.DeleteLabel}"  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"/>
 
                     </StackLayout>

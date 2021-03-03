@@ -63,18 +63,17 @@ namespace LinksOrganizer.Services.Navigation
         public async Task InternalNavigateToAsync(Type viewModelType, object parameter)
         {
             Page page = CreatePage(viewModelType);
-
+            
             if (Application.Current.MainPage is CustomNavigationView navigationPage)
             {
+                await (page.BindingContext as ViewModelBase).InitializeAsync(parameter);
                 await navigationPage.PushAsync(page);
             }
             else
             {
                 Application.Current.MainPage = new CustomNavigationView(page);
+                await (page.BindingContext as ViewModelBase).InitializeAsync(parameter);
             }
-
-
-            await (page.BindingContext as ViewModelBase).InitializeAsync(parameter);
         }
 
         private Page CreatePage(Type viewModelType)
