@@ -14,6 +14,9 @@ namespace LinksOrganizer.Models
 
         [NotNull]
         public Theme Theme { get; set; }
+
+        [NotNull]
+        public bool UseSecureLinksOnly { get; set; }
     }
 }
 

@@ -241,6 +241,15 @@ namespace LinksOrganizer.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use Secure Links only.
+        /// </summary>
+        public static string SecureLinksLabel {
+            get {
+                return ResourceManager.GetString("SecureLinksLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to share.
         /// </summary>
         public static string ShareLabel {

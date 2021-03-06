@@ -98,16 +98,18 @@
 
                     <StackLayout Orientation="Horizontal" Padding="1, 0, 0, 1">
                         <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -10, 5">
-                            <customcontrols:CustomButton 
-                                IsEnabled="{Binding CanSave}"
+                        <customcontrols:CustomButton 
+                                
                                 Text="&#xe14d;" 
                                 FontSize="45" 
                                 TextColor="{DynamicResource SecondaryTextColor}" 
                                 DisabledTextColor="{DynamicResource TertiaryTextColor}"
+                                EnabledTextColor="{DynamicResource SecondaryTextColor}"
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
-                                Command="{Binding CopyLinkItemCommand}">
-                            </customcontrols:CustomButton>
+                                Command="{Binding CopyLinkItemCommand}"
+                                IsEnabled="{Binding CanSave}">
+                        </customcontrols:CustomButton>
                         <Label Text="{x:Static resources:AppResources.CopyLabel}"  Style="{StaticResource ManageButtonLabelStyle}" HorizontalOptions="Center"/> 
                     </StackLayout>
                     <StackLayout Orientation="Vertical" Spacing="0" Margin="-5, 5, -10, 5">
@@ -117,6 +119,7 @@
                                 FontSize="45" 
                                 TextColor="{DynamicResource SecondaryTextColor}" 
                                 DisabledTextColor="{DynamicResource TertiaryTextColor}"
+                                EnabledTextColor="{DynamicResource SecondaryTextColor}"
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                 Command="{Binding ShareLinkItemCommand}">
@@ -131,6 +134,7 @@
                                 FontSize="50" 
                                 TextColor="{DynamicResource SecondaryTextColor}" 
                                 DisabledTextColor="{DynamicResource TertiaryTextColor}"
+                            EnabledTextColor="{DynamicResource SecondaryTextColor}"
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                     Command="{Binding OpenLinkItemCommand}">
@@ -145,6 +149,7 @@
                                 FontSize="50" 
                                 TextColor="{DynamicResource SecondaryTextColor}"
                                 DisabledTextColor="{DynamicResource TertiaryTextColor}"
+                            EnabledTextColor="{DynamicResource SecondaryTextColor}"
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                     Command="{Binding SaveLinkItemCommand}">
@@ -159,6 +164,7 @@
                                 FontSize="50" 
                                 TextColor="{DynamicResource SecondaryTextColor}"
                                 DisabledTextColor="{DynamicResource TertiaryTextColor}"
+                            EnabledTextColor="{DynamicResource SecondaryTextColor}"
                                 FontFamily="MaterialIconsOutlined-Regular"                                                                                              
                                 BackgroundColor="Transparent"
                                     Command="{Binding DeleteLinkItemCommand}">

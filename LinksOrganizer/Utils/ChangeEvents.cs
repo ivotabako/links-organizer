@@ -7,6 +7,7 @@ namespace LinksOrganizer.Utils
     public enum ChangeEvents
     {
         OrderChanged,
-        ThemeChanged
+        ThemeChanged,
+        SecureLinksChanged
     }
 }

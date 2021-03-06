@@ -39,6 +39,15 @@
             <Grid Margin="10, 0, 20, 20"  >
                 <StackLayout Orientation="Vertical">
                     <StackLayout Orientation="Horizontal" Margin="20, 20, 20, 15">
+                        <Label VerticalOptions="Center" TextColor="{DynamicResource PrimaryTextColor}" Text="{x:Static resources:AppResources.SecureLinksLabel}" />
+                        <Switch 
+                                    IsToggled="{Binding UseSecureLinksOnly}">
+                            <Switch.Behaviors>
+                                <behaviors:SwitchSecureLinksBehavior/>
+                            </Switch.Behaviors>
+                        </Switch>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="20, 20, 20, 15">
                         <Label VerticalOptions="Center" TextColor="{DynamicResource PrimaryTextColor}" Text="{x:Static resources:AppResources.OrderLabel}" />
                         <Switch 
                                     IsToggled="{Binding IsOrderedByRank}">

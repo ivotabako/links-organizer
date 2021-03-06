@@ -177,6 +177,9 @@
   <data name="SearchLabel" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="SecureLinksLabel" xml:space="preserve">
+    <value>Use Secure Links only</value>
+  </data>
   <data name="ShareLabel" xml:space="preserve">
     <value>share</value>
   </data>

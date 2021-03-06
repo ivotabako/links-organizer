@@ -177,6 +177,9 @@
   <data name="SearchLabel" xml:space="preserve">
     <value>Търси</value>
   </data>
+  <data name="SecureLinksLabel" xml:space="preserve">
+    <value>Само сигурни връзки</value>
+  </data>
   <data name="ShareLabel" xml:space="preserve">
     <value>сподели</value>
   </data>

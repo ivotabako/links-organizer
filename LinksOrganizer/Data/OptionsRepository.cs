@@ -28,7 +28,15 @@ namespace LinksOrganizer.Data
             {
                 if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(Options).Name))
                 {
-                    await Database.CreateTablesAsync(CreateFlags.None, typeof(Options)).ConfigureAwait(false);
+                    try
+                    {
+                        await Database.CreateTablesAsync(CreateFlags.None, typeof(Options)).ConfigureAwait(false);
+                    }
+                    catch (Exception)
+                    {
+                        await Database.DropTableAsync<Options>().ConfigureAwait(false);
+                        await Database.CreateTablesAsync(CreateFlags.None, typeof(Options)).ConfigureAwait(false);
+                    }
                 }
                 initialized = true;
             }
@@ -37,7 +45,7 @@ namespace LinksOrganizer.Data
         public async Task<Options> GetOptionsAsync()
         {
             var options = await Database.Table<Options>().ToListAsync();
-            return options.FirstOrDefault() ?? new Options() { ID = 1, IsOrderedByRank = false, Theme = Themes.Theme.LightTheme };
+            return options.FirstOrDefault() ?? new Options() { ID = 1, IsOrderedByRank = false, Theme = Themes.Theme.LightTheme, UseSecureLinksOnly = false };
         }
 
         public async Task<int> SaveAsync(Options options)

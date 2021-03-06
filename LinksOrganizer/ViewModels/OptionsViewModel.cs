@@ -26,6 +26,18 @@ namespace LinksOrganizer.ViewModels
             }
         }
 
+        private bool _useSecureLinksOnly;
+        public bool UseSecureLinksOnly
+        {
+            get => _useSecureLinksOnly;
+            private set
+            {
+                _useSecureLinksOnly = value;
+
+                RaisePropertyChanged(() => UseSecureLinksOnly);
+            }
+        }
+
         private Theme _theme;
         public Theme Theme
         {
@@ -55,12 +67,15 @@ namespace LinksOrganizer.ViewModels
                 var options = await Options.GetOptionsAsync();
                 _theme = options != null ? options.Theme : Theme.LightTheme;
                 _isOrderedByRank = options != null && options.IsOrderedByRank;
+                _useSecureLinksOnly = options != null && options.UseSecureLinksOnly;
                 RaisePropertyChanged(() => Theme);
                 RaisePropertyChanged(() => IsOrderedByRank);
+                RaisePropertyChanged(() => UseSecureLinksOnly);
             }
 
             await GetOrderTypeFromNavigationData(navigationData);
             await GetThemeFromNavigationData(navigationData);
+            await GetSecureLinksFromNavigationData(navigationData);
         }
 
         private async Task GetThemeFromNavigationData(object navigationData)
@@ -68,7 +83,7 @@ namespace LinksOrganizer.ViewModels
             if (navigationData is ValueTuple<Theme, ChangeEvents> toggleTupple
                 && toggleTupple.Item2 == ChangeEvents.ThemeChanged)
             {
-                await Options.SaveAsync(new Options() { IsOrderedByRank = _isOrderedByRank, Theme = toggleTupple.Item1, ID = 1 });
+                await Options.SaveAsync(new Options() { IsOrderedByRank = _isOrderedByRank, Theme = toggleTupple.Item1, ID = 1, UseSecureLinksOnly = _useSecureLinksOnly });
                 AddThemeToResourceDictionary(toggleTupple.Item1);
             }
         }
@@ -97,7 +112,15 @@ namespace LinksOrganizer.ViewModels
         {
             if (navigationData is ValueTuple<bool, ChangeEvents> toggleTupple && toggleTupple.Item2 == ChangeEvents.OrderChanged)
             {
-                await Options.SaveAsync(new Models.Options() { IsOrderedByRank = toggleTupple.Item1, Theme = _theme, ID = 1 });
+                await Options.SaveAsync(new Models.Options() { IsOrderedByRank = toggleTupple.Item1, Theme = _theme, ID = 1, UseSecureLinksOnly = _useSecureLinksOnly });
+            }
+        }
+
+        private async Task GetSecureLinksFromNavigationData(object navigationData)
+        {
+            if (navigationData is ValueTuple<bool, ChangeEvents> toggleTupple && toggleTupple.Item2 == ChangeEvents.SecureLinksChanged)
+            {
+                await Options.SaveAsync(new Models.Options() { IsOrderedByRank = _isOrderedByRank, Theme = _theme, ID = 1, UseSecureLinksOnly = toggleTupple.Item1 });
             }
         }
     }

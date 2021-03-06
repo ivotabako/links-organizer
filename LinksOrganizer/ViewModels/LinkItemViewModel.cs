@@ -79,6 +79,8 @@ namespace LinksOrganizer.ViewModels
         }
 
         private string _info;
+        private bool _useSecureLinksOnly;
+
         public string Info
         {
             get { return _info; }
@@ -112,6 +114,7 @@ namespace LinksOrganizer.ViewModels
             IResourcesProvider resourcesProvider)
             : base(navigationService, linkItemDatabase, optionsRepository, clipboardInfo, resourcesProvider)
         {
+
         }
 
         async private void SaveLinkItem()
@@ -132,7 +135,10 @@ namespace LinksOrganizer.ViewModels
 
         private bool IsUrl(string uriName)
         {
-            return Uri.TryCreate(uriName, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+            if (_useSecureLinksOnly)
+                return Uri.TryCreate(uriName, UriKind.Absolute, out Uri uriResult) && uriResult.Scheme == Uri.UriSchemeHttps;
+
+            return true;
         }
 
         async private void DeleteLinkItem()
@@ -187,6 +193,9 @@ namespace LinksOrganizer.ViewModels
 
         public async override Task InitializeAsync(object navigationData)
         {
+            var options = await Options.GetOptionsAsync();
+            _useSecureLinksOnly = options.UseSecureLinksOnly;
+
             InitialiseBindings();
 
             if (navigationData is not LinkItem data)
