@@ -22,16 +22,16 @@ namespace LinksOrganizer.CustonRenderer
                 // Cleanup
             }
 
-            if (e.NewElement != null && !e.NewElement.IsEnabled && e.NewElement is CustomButton btnOff)
-            {
-                var color = btnOff.DisabledTextColor;
-                Control.SetTextColor(color.ToAndroid());
-            }
-            if (e.NewElement != null && e.NewElement.IsEnabled && e.NewElement is CustomButton btnOn)
-            {
-                var color = btnOn.EnabledTextColor;
-                Control.SetTextColor(color.ToAndroid());
-            }
+            //if (e.NewElement != null && !e.NewElement.IsEnabled && e.NewElement is CustomButton btnOff)
+            //{
+            //    var color = btnOff.DisabledTextColor;
+            //    Control.SetTextColor(color.ToAndroid());
+            //}
+            //if (e.NewElement != null && e.NewElement.IsEnabled && e.NewElement is CustomButton btnOn)
+            //{
+            //    var color = btnOn.EnabledTextColor;
+            //    Control.SetTextColor(color.ToAndroid());
+            //}
         }
     }
 }
