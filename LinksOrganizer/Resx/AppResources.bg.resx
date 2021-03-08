@@ -138,6 +138,9 @@
   <data name="DeleteLabel" xml:space="preserve">
     <value>изтрий</value>
   </data>
+  <data name="ExportLabel" xml:space="preserve">
+    <value>Експорт на данните</value>
+  </data>
   <data name="InfoLabel" xml:space="preserve">
     <value>Информация</value>
   </data>

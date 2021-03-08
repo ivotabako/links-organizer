@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using LinksOrganizer.Data;
 using LinksOrganizer.Models;
 using LinksOrganizer.Services.Navigation;
@@ -8,6 +10,8 @@ using LinksOrganizer.Themes;
 using LinksOrganizer.Utils;
 using LinksOrganizer.Utils.ClipboardInfo;
 using LinksOrganizer.Utils.ResourcesProvider;
+using Newtonsoft.Json;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LinksOrganizer.ViewModels
@@ -48,6 +52,16 @@ namespace LinksOrganizer.ViewModels
 
                 RaisePropertyChanged(() => Theme);
             }
+        }
+
+        public ICommand ExportCommand => new Command(async () => await ExportAsync());
+
+        private async Task ExportAsync()
+        {
+            var data = await Database.GetItemsAsync();
+            string output = JsonConvert.SerializeObject(data.Select(d=> new { d.Name, d.Link }));
+
+            await Share.RequestAsync(new ShareTextRequest(output));
         }
 
         public OptionsViewModel(

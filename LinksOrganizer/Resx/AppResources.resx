@@ -138,6 +138,9 @@
   <data name="DeleteLabel" xml:space="preserve">
     <value>delete</value>
   </data>
+  <data name="ExportLabel" xml:space="preserve">
+    <value>Export data</value>
+  </data>
   <data name="InfoLabel" xml:space="preserve">
     <value>Info</value>
   </data>

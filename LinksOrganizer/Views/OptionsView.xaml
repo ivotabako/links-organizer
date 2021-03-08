@@ -65,6 +65,10 @@
                             </Switch.Behaviors>
                         </Switch>
                     </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Margin="20, 0, 30, 20">
+                        <Button Text="{x:Static resources:AppResources.ExportLabel}" Command="{Binding ExportCommand}" />
+                    </StackLayout>
                 </StackLayout>
                 
                 <customcontrols:RoundedBoxView                                                      

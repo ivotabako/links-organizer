@@ -124,6 +124,15 @@ namespace LinksOrganizer.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export data.
+        /// </summary>
+        public static string ExportLabel {
+            get {
+                return ResourceManager.GetString("ExportLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Info.
         /// </summary>
         public static string InfoLabel {
