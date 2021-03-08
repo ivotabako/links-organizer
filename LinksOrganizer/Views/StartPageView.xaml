@@ -39,8 +39,7 @@
                     Value="{DynamicResource PrimaryTextColor}" />
             <Setter Property="VerticalOptions"
                     Value="End" />
-            <Setter Property="HeightRequest"
-                    Value="120" />
+            
             <Setter Property="Margin"
                     Value="10, 0, 10, 0" />
         </Style>
@@ -49,7 +48,7 @@
             <Setter Property="BorderColor"
                     Value="{DynamicResource PrimaryTextColor}" />
             <Setter Property="CornerRadius"
-                    Value="5" />
+                    Value="2" />
             <Setter Property="BorderThickness"
                     Value="1"/>
             <Setter Property="BackgroundColor"
@@ -118,9 +117,9 @@
                     Command="{Binding OptionsCommand}">
                 </Button>
             </Grid>
-            
+
             <Grid  Margin="10, 0, 10, 0" >
-                <customcontrols:CustomEntry 
+                <customcontrols:CustomEntry HeightRequest="{OnIdiom 100, Phone=70, Tablet=120}"
                         Style="{StaticResource SearchEntryStyle}">
 
                     <Entry.Behaviors>
