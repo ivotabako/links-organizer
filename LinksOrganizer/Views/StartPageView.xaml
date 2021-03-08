@@ -23,7 +23,7 @@
             <Setter Property="VerticalOptions"
                     Value="Center" />
             <Setter Property="BorderWidth"
-                    Value="1" />
+                    Value="3" />
             <Setter Property="Margin"
                     Value="10, 16, 10, 5" />
         </Style>
@@ -39,6 +39,8 @@
                     Value="{DynamicResource PrimaryTextColor}" />
             <Setter Property="VerticalOptions"
                     Value="End" />
+            <Setter Property="HeightRequest"
+                    Value="120" />
             <Setter Property="Margin"
                     Value="10, 0, 10, 0" />
         </Style>
@@ -76,13 +78,21 @@
                TargetType="Button">
             <Setter Property="BackgroundColor"
                     Value="{DynamicResource TransparentColor}" />
+            
+            <Setter Property="HorizontalOptions"
+                    Value="End" />
+        </Style>
+        <Style x:Key="OptionsLabelStyle"
+               TargetType="Label">
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource TransparentColor}" />
             <Setter Property="TextColor"
                     Value="{DynamicResource PrimaryTextColor}"/>
             <Setter Property="FontSize" Value="Title"/>
             <Setter Property="Text"
                     Value="{x:Static resources:AppResources.OptionsMenuLabel}" />
-            <Setter Property="HeightRequest"
-                    Value="70" />
+            <Setter Property="HorizontalOptions"
+                    Value="End" />
         </Style>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -91,7 +101,7 @@
             Orientation="Vertical"
             HorizontalOptions="Start"
             >
-            <Grid>
+            <Grid  HeightRequest="80">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -101,14 +111,16 @@
                         Style="{StaticResource SearchLabelStyle}" VerticalOptions="End">
                 </Label>
 
-                <Button Grid.Column="1" Style="{StaticResource OptionsStyle}" 
-                         HorizontalOptions="End"  
+                <Label  Grid.Column="1" WidthRequest="50"                                          
+                        Style="{StaticResource OptionsLabelStyle}">
+                </Label>
+                <Button Grid.Column="1" Style="{StaticResource OptionsStyle}"                        
                     Command="{Binding OptionsCommand}">
                 </Button>
             </Grid>
             
             <Grid  Margin="10, 0, 10, 0" >
-                <customcontrols:CustomEntry HeightRequest="80"
+                <customcontrols:CustomEntry 
                         Style="{StaticResource SearchEntryStyle}">
 
                     <Entry.Behaviors>
