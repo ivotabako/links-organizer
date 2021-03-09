@@ -70,6 +70,18 @@
             <Setter Property="Text"
                     Value="{x:Static resources:AppResources.OptionsMenuLabel}" />
         </Style>
+        <Style x:Key="OptionsLabelStyle"
+               TargetType="Label">
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource TransparentColor}" />
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+            <Setter Property="FontSize" Value="Title"/>
+            <Setter Property="Text"
+                    Value="{x:Static resources:AppResources.OptionsMenuLabel}" />
+            <Setter Property="HorizontalOptions"
+                    Value="End" />
+        </Style>
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout 
@@ -88,6 +100,9 @@
                         Style="{StaticResource ManageLabelStyle}" VerticalOptions="End">
                 </Label>
 
+                <Label  Grid.Column="1" WidthRequest="{OnIdiom 40, Phone=40, Tablet=50}"                                          
+                        Style="{StaticResource OptionsLabelStyle}">
+                </Label>
                 <Button  Grid.Column="1" Style="{StaticResource OptionsStyle}" 
                          HorizontalOptions="End"
                     Command="{Binding OptionsCommand}">
