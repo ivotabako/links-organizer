@@ -11,7 +11,8 @@ namespace LinksOrganizer
     [Activity(Label = "LinksOrganizer", Icon = "@drawable/icon",
         Theme = "@style/MainTheme",
         MainLauncher = true,
-        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+        ScreenOrientation = ScreenOrientation.Portrait,
+        ConfigurationChanges = ConfigChanges.ScreenSize)]
     public class MainActivity :  global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
