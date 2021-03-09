@@ -100,7 +100,7 @@
             Orientation="Vertical"
             HorizontalOptions="Start"
             >
-            <Grid  HeightRequest="80">
+            <Grid  HeightRequest="{OnIdiom 50, Phone=50, Tablet=80}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -110,7 +110,7 @@
                         Style="{StaticResource SearchLabelStyle}" VerticalOptions="End">
                 </Label>
 
-                <Label  Grid.Column="1" WidthRequest="50"                                          
+                <Label  Grid.Column="1" WidthRequest="{OnIdiom 40, Phone=40, Tablet=50}"                                          
                         Style="{StaticResource OptionsLabelStyle}">
                 </Label>
                 <Button Grid.Column="1" Style="{StaticResource OptionsStyle}"                        
