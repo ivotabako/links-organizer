@@ -23,7 +23,7 @@
             <Setter Property="VerticalOptions"
                     Value="Center" />
             <Setter Property="BorderWidth"
-                    Value="3" />
+                    Value="1" />
             <Setter Property="Margin"
                     Value="10, 16, 10, 5" />
         </Style>
