@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Android.Content;
 using LinksOrganizer.CustonRenderer;
 using LinksOrganizer.CustomControls;
+using System.ComponentModel;
 
 [assembly: ExportRenderer(typeof(CustomButton), typeof(CustomButtonRenderer))]
 namespace LinksOrganizer.CustonRenderer
@@ -13,25 +14,26 @@ namespace LinksOrganizer.CustonRenderer
         {
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<Button> e)
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            base.OnElementChanged(e);
+            base.OnElementPropertyChanged(sender, e);
 
-            if (e.OldElement != null)
+            if ( sender is CustomButton btn)
             {
-                // Cleanup
-            }
+                if (btn.IsEnabled)
+                {
 
-            //if (e.NewElement != null && !e.NewElement.IsEnabled && e.NewElement is CustomButton btnOff)
-            //{
-            //    var color = btnOff.DisabledTextColor;
-            //    Control.SetTextColor(color.ToAndroid());
-            //}
-            //if (e.NewElement != null && e.NewElement.IsEnabled && e.NewElement is CustomButton btnOn)
-            //{
-            //    var color = btnOn.EnabledTextColor;
-            //    Control.SetTextColor(color.ToAndroid());
-            //}
+                var color = btn.EnabledTextColor;
+                Control.SetTextColor(color.ToAndroid());
+                }
+                else
+                {
+
+                var color = btn.DisabledTextColor;
+                Control.SetTextColor(color.ToAndroid());
+           
+                }
+            }
         }
     }
 }
