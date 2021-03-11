@@ -120,6 +120,9 @@
   <data name="AddNewLink" xml:space="preserve">
     <value>Добави нова връзка</value>
   </data>
+  <data name="ClipboardLabel" xml:space="preserve">
+    <value>Ползвай Клипборд-а</value>
+  </data>
   <data name="CopyLabel" xml:space="preserve">
     <value>копирай</value>
   </data>

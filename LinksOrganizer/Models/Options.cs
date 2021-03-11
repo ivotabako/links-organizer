@@ -17,6 +17,9 @@ namespace LinksOrganizer.Models
 
         [NotNull]
         public bool UseSecureLinksOnly { get; set; }
+
+        [NotNull]
+        public bool CanUseClipboard { get; set; }
     }
 }
 

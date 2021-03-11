@@ -120,6 +120,9 @@
   <data name="AddNewLink" xml:space="preserve">
     <value>Add New Link</value>
   </data>
+  <data name="ClipboardLabel" xml:space="preserve">
+    <value>Use Clipboard</value>
+  </data>
   <data name="CopyLabel" xml:space="preserve">
     <value>copy</value>
   </data>

@@ -97,7 +97,8 @@ namespace LinksOrganizer.ViewModels
 
         private async Task<(bool isUrl, string url)> CheckClipboard()
         {
-            if (ClipboardInfo.HasText)
+            var options = await Options.GetOptionsAsync();
+            if (ClipboardInfo.HasText && options.CanUseClipboard)
             {
                 string uriName = await ClipboardInfo.GetTextAsync();
                 bool result = Uri.TryCreate(uriName, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);

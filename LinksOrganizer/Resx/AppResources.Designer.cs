@@ -70,6 +70,15 @@ namespace LinksOrganizer.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use Clipboard.
+        /// </summary>
+        public static string ClipboardLabel {
+            get {
+                return ResourceManager.GetString("ClipboardLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to copy.
         /// </summary>
         public static string CopyLabel {

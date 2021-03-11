@@ -29,6 +29,18 @@ namespace LinksOrganizer.ViewModels
                 RaisePropertyChanged(() => IsOrderedByRank);
             }
         }
+       
+        private bool _canUseClipboard;
+        public bool CanUseClipboard
+        {
+            get => _canUseClipboard;
+            private set
+            {
+                _canUseClipboard = value;
+
+                RaisePropertyChanged(() => CanUseClipboard);
+            }
+        }
 
         private bool _useSecureLinksOnly;
         public bool UseSecureLinksOnly
@@ -82,25 +94,15 @@ namespace LinksOrganizer.ViewModels
                 _theme = options != null ? options.Theme : Theme.LightTheme;
                 _isOrderedByRank = options != null && options.IsOrderedByRank;
                 _useSecureLinksOnly = options != null && options.UseSecureLinksOnly;
+                _canUseClipboard = options != null && options.CanUseClipboard;
                 RaisePropertyChanged(() => Theme);
                 RaisePropertyChanged(() => IsOrderedByRank);
                 RaisePropertyChanged(() => UseSecureLinksOnly);
+                RaisePropertyChanged(() => CanUseClipboard);
             }
-
-            await GetOrderTypeFromNavigationData(navigationData);
-            await GetThemeFromNavigationData(navigationData);
-            await GetSecureLinksFromNavigationData(navigationData);
-        }
-
-        private async Task GetThemeFromNavigationData(object navigationData)
-        {
-            if (navigationData is ValueTuple<Theme, ChangeEvents> toggleTupple
-                && toggleTupple.Item2 == ChangeEvents.ThemeChanged)
-            {
-                await Options.SaveAsync(new Options() { IsOrderedByRank = _isOrderedByRank, Theme = toggleTupple.Item1, ID = 1, UseSecureLinksOnly = _useSecureLinksOnly });
-                AddThemeToResourceDictionary(toggleTupple.Item1);
-            }
-        }
+            if(navigationData is ValueTuple<bool,ChangeEvents> pair)
+                await SaveFromNavigationData(pair);          
+        }       
 
         private void AddThemeToResourceDictionary(Theme theme)
         {
@@ -122,20 +124,26 @@ namespace LinksOrganizer.ViewModels
             }
         }
 
-        private async Task GetOrderTypeFromNavigationData(object navigationData)
+        private async Task SaveFromNavigationData(ValueTuple<bool,ChangeEvents> navigationData)
         {
-            if (navigationData is ValueTuple<bool, ChangeEvents> toggleTupple && toggleTupple.Item2 == ChangeEvents.OrderChanged)
+            switch (navigationData.Item2)
             {
-                await Options.SaveAsync(new Models.Options() { IsOrderedByRank = toggleTupple.Item1, Theme = _theme, ID = 1, UseSecureLinksOnly = _useSecureLinksOnly });
+                case ChangeEvents.OrderChanged:
+                    _isOrderedByRank = navigationData.Item1;
+                    break;
+                case ChangeEvents.ThemeChanged:
+                    _theme = navigationData.Item1 ? Theme.DarkTheme : Theme.LightTheme;
+                    AddThemeToResourceDictionary(_theme);
+                    break;
+                case ChangeEvents.SecureLinksChanged:
+                    _useSecureLinksOnly = navigationData.Item1;
+                    break;
+                case ChangeEvents.UseClipboardChanged:
+                    _canUseClipboard = navigationData.Item1;
+                    break;
             }
-        }
-
-        private async Task GetSecureLinksFromNavigationData(object navigationData)
-        {
-            if (navigationData is ValueTuple<bool, ChangeEvents> toggleTupple && toggleTupple.Item2 == ChangeEvents.SecureLinksChanged)
-            {
-                await Options.SaveAsync(new Models.Options() { IsOrderedByRank = _isOrderedByRank, Theme = _theme, ID = 1, UseSecureLinksOnly = toggleTupple.Item1 });
-            }
+            
+            await Options.SaveAsync(new Models.Options() { IsOrderedByRank = _isOrderedByRank, Theme = _theme, ID = 1, UseSecureLinksOnly = _useSecureLinksOnly, CanUseClipboard = _canUseClipboard });
         }
     }
 }
